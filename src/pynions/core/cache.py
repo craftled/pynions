@@ -1,3 +1,7 @@
+"""
+Simple file-based cache with TTL.
+"""
+
 import json
 import time
 from pathlib import Path
@@ -5,17 +9,6 @@ from typing import Any, Optional
 
 
 class Cache:
-    """
-    Simple file-based cache with TTL.
-
-    Example:
-        ```python
-        cache = Cache(ttl=3600)
-        cache.set("key", {"data": "value"})
-        data = cache.get("key")
-        ```
-    """
-
     def __init__(self, ttl: int = 3600, directory: str = ".cache"):
         self.ttl = ttl
         self.directory = Path(directory)

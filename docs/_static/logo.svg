@@ -1,6 +1,0 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <path d="M50 5 L90 30 L90 70 L50 95 L10 70 L10 30 Z" 
-        fill="#4B8BBE" stroke="#306998" stroke-width="2"/>
-  <text x="50" y="60" font-family="Arial" font-size="40" 
-        text-anchor="middle" fill="white">Py</text>
-</svg>

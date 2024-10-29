@@ -4,13 +4,14 @@ pynions/
 │       ├── __init__.py
 │       ├── core/              # Core framework (unchangeable)
 │       │   ├── __init__.py
-│       │   ├── flow.py       # Base Flow class
+│       │   ├── workflow.py       # Base Workflow class
 │       │   └── tool.py       # Base Tool class
+│       │   └── rate_limit.py  # Rate limiter for API calls
 │       ├── tools/            # Built-in tools (plugins)
 │       │   ├── __init__.py
 │       │   └── llm.py        # LLM integration
 │       └── cli.py            # Simple CLI
 ├── examples/
 │   └── simple_test.py        # Single clear example
-├── pyproject.toml
-└── README.md
+├── pyproject.toml           # Build config and dependencies
+└── README.md                # Documentation and user guide

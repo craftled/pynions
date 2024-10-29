@@ -14,27 +14,27 @@ Pynions is a lean Python framework for building AI-powered automation flows that
 - 📦 Zero bloat, minimal dependencies
 - 🛠 Built for real marketing workflows
 - ⚡ Quick to prototype and iterate
+- 🌐 Local-first, no cloud dependencies
 
 ## Quick Example
 
 ```python
-from pynions import Flow
+from pynions import Workflow, AskLLM
 
-# Connect your favorite marketing tools in minutes
-class LinkedInLeadFlow(Flow):
-    async def run(self):
-        # Pull leads from LinkedIn
-        leads = await self.call_api("linkedin", self.get_new_leads)
+# Create a simple content workflow
+workflow = Workflow("Tweet Generator")
 
-        # Enrich with Clearbit
-        enriched = await self.call_api("clearbit", self.enrich_leads, leads)
+# Add AI tool
+workflow.add(
+    AskLLM(
+        prompt="Write a tweet about {topic}. Make it engaging and include relevant hashtags.",
+        model="gpt-4o-mini"
+    )
+)
 
-        # Push to HubSpot
-        await self.call_api("hubspot", self.add_to_crm, enriched)
-
-# Run it
-flow = LinkedInLeadFlow()
-await flow.run()
+# Run workflow
+result = await workflow.run({"topic": "AI tools for marketers"})
+print(result["llm_response"])
 ```
 
 ## Why Marketers Love This
@@ -62,38 +62,6 @@ await flow.run()
    - Easy to measure and modify
    - Built for experimentation
 
-## Real Marketing Examples
-
-1. **Quick LinkedIn Lead Generator**
-
-```python
-class LeadGen(Flow):
-    async def run(self):
-        # Search LinkedIn
-        prospects = await self.search_linkedin()
-
-        # Generate personalized messages with AI
-        messages = await self.personalize_messages(prospects)
-
-        # Schedule connection requests
-        await self.schedule_connections(messages)
-```
-
-2. **Rapid Landing Page Tester**
-
-```python
-class ABTester(Flow):
-    async def run(self):
-        # Create variants with AI
-        variants = await self.generate_variants()
-
-        # Deploy via Vercel API
-        pages = await self.deploy_variants(variants)
-
-        # Track with existing analytics
-        await self.setup_tracking(pages)
-```
-
 ## Getting Started (2-Minute Setup)
 
 1. Install:
@@ -105,19 +73,22 @@ pip install pynions
 2. Create your first pynion:
 
 ```python
-from pynions import Flow
+from pynions import Workflow, AskLLM
 
-class QuickTest(Flow):
-    async def run(self):
-        # Connect to your tools
-        twitter = await self.connect_api("twitter")
-        gpt = await self.connect_api("openai")
+# Create a simple content workflow
+workflow = Workflow("Tweet Generator")
 
-        # Do marketing stuff
-        tweets = await twitter.get_competitor_tweets()
-        analysis = await gpt.analyze_sentiment(tweets)
+# Add AI tool
+workflow.add(
+    AskLLM(
+        prompt="Write a tweet about {topic}. Make it engaging and include relevant hashtags.",
+        model="gpt-4o-mini"
+    )
+)
 
-        return analysis
+# Run workflow
+result = await workflow.run({"topic": "AI tools for marketers"})
+print(result["llm_response"])
 ```
 
 3. Run it:
@@ -152,7 +123,6 @@ python -m pynions run quick_test.py
   - [Key Features](#key-features)
   - [Quick Example](#quick-example)
   - [Why Marketers Love This](#why-marketers-love-this)
-  - [Real Marketing Examples](#real-marketing-examples)
   - [Getting Started (2-Minute Setup)](#getting-started-2-minute-setup)
   - [Design Principles](#design-principles)
   - [Table of Contents](#table-of-contents)
@@ -341,18 +311,18 @@ mypy src/pynions
 
 ## Comparison with Alternatives
 
-| Feature          | Pynions     | n8n/Zapier   | Custom Scripts |
-| ---------------- | ----------- | ------------ | -------------- |
-| Setup Time       | Minutes     | Hours        | Variable       |
-| Flexibility      | Full Python | Limited      | Full           |
-| AI Integration   | Built-in    | Limited      | Manual         |
-| Maintenance      | Simple      | Complex      | Variable       |
-| Cost             | Free        | Subscription | Free           |
-| Learning Curve   | Low         | Medium       | High           |
-| Local Execution  | Yes         | No           | Yes            |
-| Caching          | Built-in    | Limited      | Manual         |
-| Rate Limiting    | Built-in    | Yes          | Manual         |
-| State Management | Built-in    | Limited      | Manual         |
+| Feature          | Pynions     | n8n/Zapier   | Custom Scripts | LangChain |
+| ---------------- | ----------- | ------------ | -------------- | --------- |
+| Setup Time       | Minutes     | Hours        | Variable       | Variable  |
+| Flexibility      | Full Python | Limited      | Full           | Full      |
+| AI Integration   | Built-in    | Limited      | Manual         | Yes       |
+| Maintenance      | Simple      | Complex      | Variable       | Variable  |
+| Cost             | Free        | Subscription | Free           | Free      |
+| Learning Curve   | Low         | Medium       | High           | High      |
+| Local Execution  | Yes         | No           | Yes            | Yes       |
+| Caching          | Built-in    | Limited      | Manual         | Yes       |
+| Rate Limiting    | Built-in    | Yes          | Manual         | Yes       |
+| State Management | Built-in    | Limited      | Manual         | Yes       |
 
 ## Example Projects
 
@@ -466,13 +436,13 @@ MIT License - see [LICENSE](LICENSE)
 
 ## Contributors
 
-<a href="https://github.com/yourusername/pynions/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourusername/pynions" />
+<a href="https://github.com/tomaslau/pynions/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=tomaslau/pynions" />
 </a>
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/pynions&type=Date)](https://star-history.com/#yourusername/pynions&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=tomaslau/pynions&type=Date)](https://star-history.com/#tomaslau/pynions&Date)
 
 ---
 
