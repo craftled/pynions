@@ -167,6 +167,7 @@ print(result["llm_response"])
   - [License](#license)
   - [Contributors](#contributors)
   - [Star History](#star-history)
+  - [Quick Start (2 minutes)](#quick-start-2-minutes)
 
 ## Core Concepts
 
@@ -352,3 +353,29 @@ MIT License - see [LICENSE](LICENSE)
 ---
 
 Built with ☕️ by [Tomas Laurinavicius](https://github.com/tomaslau)
+
+## Quick Start (2 minutes)
+
+1. Install Pynions:
+
+   ```bash
+   pip install pynions
+   ```
+
+2. Create a new project:
+
+   ```bash
+   pynions new myproject
+   cd myproject
+   ```
+
+3. Add your OpenAI API key to `.env`:
+
+   ```bash
+   OPENAI_API_KEY=your_key_here
+   ```
+
+4. Run the example:
+   ```bash
+   python workflows/tweet.py
+   ```
