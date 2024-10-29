@@ -1,5 +1,5 @@
 import pytest
-from pynions.flow import Flow
+from pynions.workflow import Flow
 
 
 async def test_basic_flow():

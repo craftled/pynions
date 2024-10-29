@@ -6,14 +6,46 @@ build-backend = "hatchling.build"
 [project]
 name = "pynions"
 version = "0.1.0"
-description = "Simple AI automation framework"
+description = "Simple AI automation framework for marketers"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
-dependencies = [
-    "litellm>=1.12.1",
-    "python-dotenv>=1.0.0",
-    "click>=8.1.7",
-    "pytest>=8.0.0",
-    "pytest-asyncio>=0.24.0"
+authors = [
+    { name = "Tomas Laurinavicius", email = "tom@pynions.com" }
 ]
+keywords = ["marketing", "automation", "ai", "workflow"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Marketing",
+    "Topic :: Office/Business",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "litellm>=1.12.1",      # AI/LLM integration
+    "python-dotenv>=1.0.0", # Environment management
+    "click>=8.1.7",         # CLI interface
+    "rich>=13.7.0",         # Better console output
+    "httpx>=0.26.0",        # Modern HTTP client
+]
+
+[project.urls]
+Homepage = "https://github.com/tomaslau/pynions"
+Documentation = "https://pynions.readthedocs.io"
+Repository = "https://github.com/tomaslau/pynions.git"
+Issues = "https://github.com/tomaslau/pynions/issues"
+
+[project.scripts]
+pynions = "pynions.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pynions"]
+
+[tool.hatch.version]
+path = "src/pynions/__init__.py"

@@ -1,35 +1,16 @@
 pynions/
-├── .github/
-│   ├── workflows/
-│   │   └── ci.yml            # Basic CI pipeline
-│   ├── ISSUE_TEMPLATE.md     # Single, simple template
-│   └── PULL_REQUEST_TEMPLATE.md
-├── docs/
-│   ├── _static/
-│   │   └── logo.svg         # Simple logo
-│   ├── conf.py              # Sphinx configuration
-│   ├── index.md             # Main documentation
-│   ├── quickstart.md
-│   └── api.md
-├── examples/
-│   ├── price_monitor.py
-│   └── content_research.py
 ├── src/
 │   └── pynions/
 │       ├── __init__.py
-│       ├── flow.py          # Core flow system
-│       ├── tools/
+│       ├── core/              # Core framework (unchangeable)
 │       │   ├── __init__.py
-│       │   ├── cache.py
-│       │   └── rate_limit.py
-│       └── cli.py
-├── tests/
-│   ├── __init__.py
-│   ├── test_flow.py
-│   └── test_tools.py
-├── .gitignore
-├── LICENSE
-├── README.md
-├── CONTRIBUTING.md
+│       │   ├── flow.py       # Base Flow class
+│       │   └── tool.py       # Base Tool class
+│       ├── tools/            # Built-in tools (plugins)
+│       │   ├── __init__.py
+│       │   └── llm.py        # LLM integration
+│       └── cli.py            # Simple CLI
+├── examples/
+│   └── simple_test.py        # Single clear example
 ├── pyproject.toml
-└── requirements-dev.txt
+└── README.md
