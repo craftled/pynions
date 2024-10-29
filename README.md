@@ -126,7 +126,7 @@ if __name__ == "__main__":
 
 6. **Run Your Workflow**
    ```bash
-   python your_workflow.py
+   python tweet_generator.py
    ```
 
 ## Design Principles
@@ -164,13 +164,9 @@ if __name__ == "__main__":
     - [2. API Integration](#2-api-integration)
     - [3. State Management](#3-state-management)
     - [4. Steps Tracking](#4-steps-tracking)
-  - [Real-World Use Cases](#real-world-use-cases)
   - [Setup](#setup)
   - [Why Use This?](#why-use-this)
   - [Design Philosophy](#design-philosophy)
-  - [Comparison with Alternatives](#comparison-with-alternatives)
-  - [Example Projects](#example-projects)
-  - [Need Help?](#need-help)
   - [License](#license)
   - [Contributors](#contributors)
   - [Star History](#star-history)
@@ -220,47 +216,11 @@ async def run(self):
         pass
 ```
 
-## Real-World Use Cases
-
-1. **Content Research**
-
-```python
-class ContentFlow(Workflow[ContentState]):
-    async def run(self):
-        # Search competitors
-        results = await self.call_api("search", self.search)
-
-        # Analyze content
-        analysis = await self.call_api("analyze", self.analyze)
-
-        # Generate content
-        content = await self.call_api("generate", self.generate)
-
-        return content
-```
-
-2. **Price Monitoring**
-
-```python
-class PriceMonitor(Workflow[PriceState]):
-    async def run(self):
-        current = await self.scrape_prices()
-        changes = self.compare_with_previous(current)
-        self.save_prices(current)
-
-        if changes:
-            await self.notify(changes)
-```
-
 ## Setup
 
 ```bash
 # Install
 pip install pynions
-
-# Create project
-pynions new myproject
-cd myproject
 
 # Project structure
 myproject/
@@ -318,31 +278,6 @@ myproject/
    - Store data your way
    - Full control over execution
 
-## Comparison with Alternatives
-
-| Feature          | Pynions     | n8n/Zapier   | Custom Scripts | LangChain |
-| ---------------- | ----------- | ------------ | -------------- | --------- |
-| Setup Time       | Minutes     | Hours        | Variable       | Variable  |
-| Flexibility      | Full Python | Limited      | Full           | Full      |
-| AI Integration   | Built-in    | Limited      | Manual         | Yes       |
-| Maintenance      | Simple      | Complex      | Variable       | Variable  |
-| Cost             | Free        | Subscription | Free           | Free      |
-| Learning Curve   | Low         | Medium       | High           | High      |
-| Local Execution  | Yes         | No           | Yes            | Yes       |
-| Caching          | Built-in    | Limited      | Manual         | Yes       |
-| Rate Limiting    | Built-in    | Yes          | Manual         | Yes       |
-| State Management | Built-in    | Limited      | Manual         | Yes       |
-
-## Example Projects
-
-## Need Help?
-
-1. 📖 Check examples in `examples/`
-2. 💻 Run `pynions --help`
-3. 🐛 Check [GitHub issues](https://github.com/yourusername/pynions/issues)
-4. 📚 Read the [documentation](https://pynions.readthedocs.io)
-5. 🔍 Read the source (it's simple!)
-
 ## License
 
 MIT License - see [LICENSE](LICENSE)
@@ -369,20 +304,13 @@ Built with ☕️ by [Tomas Laurinavicius](https://github.com/tomaslau)
    pip install pynions
    ```
 
-2. Create a new project:
-
-   ```bash
-   pynions new myproject
-   cd myproject
-   ```
-
-3. Add your OpenAI API key to `.env`:
+2. Add your OpenAI API key to `.env`:
 
    ```bash
    OPENAI_API_KEY=your_key_here
    ```
 
-4. Run the example:
+3. Run the example:
    ```bash
    python workflows/tweet.py
    ```

@@ -122,6 +122,26 @@ myproject/
 └── .cache/            # API cache
 ```
 
+### Developer
+
+```bash
+pynions/
+├── src/
+│   └── pynions/
+│       ├── core/
+│       │   ├── __init__.py
+│       │   ├── workflow.py
+│       │   └── base.py
+│       └── tools/
+│           ├── __init__.py
+│           └── llm.py
+├── tests/
+│   ├── __init__.py
+│   └── test_workflow.py
+└── examples/
+    └── simple.py
+```
+
 ## 🔑 Environment Setup
 
 1. **Required API Keys**

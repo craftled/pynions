@@ -1,9 +1,8 @@
 """Pynions - AI-powered automation workflows for marketers"""
 
-from pynions.core.workflow import Workflow
-from pynions.core.base import BaseTool
+from pynions.core import Workflow, BaseTool
 from pynions.tools.llm import AskLLM
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
-__all__ = ["Workflow", "AskLLM", "BaseTool"]
+__all__ = ["Workflow", "BaseTool", "AskLLM"]

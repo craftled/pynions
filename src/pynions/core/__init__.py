@@ -1,6 +1,6 @@
 """Core framework components"""
 
 from .workflow import Workflow
-from .tool import Tool
+from .base import BaseTool
 
-__all__ = ["Workflow", "Tool"]
+__all__ = ["Workflow", "BaseTool"]

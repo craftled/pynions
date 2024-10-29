@@ -5,11 +5,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pynions"
-version = "0.2.1"
+version = "0.2.2"
 description = "Simple AI automation framework for marketers"
 readme = "README.md"
 requires-python = ">=3.9"
-license = "MIT"
+license = { file = "LICENSE" }
 authors = [
     { name = "Tomas Laurinavicius", email = "tom@pynions.com" }
 ]
@@ -31,7 +31,6 @@ classifiers = [
 dependencies = [
     "litellm>=1.12.1",      # AI/LLM integration
     "python-dotenv>=1.0.0", # Environment management
-    "click>=8.1.7",         # CLI interface
     "rich>=13.7.0",         # Better console output
     "httpx>=0.26.0",        # Modern HTTP client
     "pydantic>=2.0.0",      # Data validation
@@ -54,15 +53,9 @@ Documentation = "https://github.com/tomaslau/pynions"
 Repository = "https://github.com/tomaslau/pynions.git"
 Issues = "https://github.com/tomaslau/pynions/issues"
 
-[project.scripts]
-pynions = "pynions.cli:main"
-
 [tool.hatch.build]
-include = [
-    "src/pynions/**/*.py",
-    "src/pynions/templates/**/*"
-]
-packages = ["src"]
+include = ["src/pynions/**/*.py"]
+packages = ["src/pynions"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
@@ -76,4 +69,9 @@ asyncio_default_fixture_loop_scope = "function"
 filterwarnings = [
     "ignore::DeprecationWarning",
     "ignore::pytest.PytestDeprecationWarning"
+]
+
+[tool.hatch]
+packages = [
+    { include = "pynions", from = "src" }
 ]
