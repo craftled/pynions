@@ -11,7 +11,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
 authors = [
-    { name = "Tomas Laurinavicius", email = "hi@tomaslau.com" }
+    { name = "Tomas Laurinavicius", email = "tom@pynions.com" }
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",

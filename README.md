@@ -9,16 +9,162 @@
 [![Downloads](https://pepy.tech/badge/pynions)](https://pepy.tech/project/pynions)
 [![Last Commit](https://img.shields.io/github/last-commit/yourusername/pynions)](https://github.com/yourusername/pynions/commits/main)
 
-Fast, simple AI automation framework for personal and small team use. Think "personal Zapier/n8n" but with AI capabilities and full coding flexibility.
+A lean Python framework for marketers who code. Build tiny AI-powered automations for your marketing tasks without the bloat. Perfect for growth hackers and marketing engineers who want to ship fast and iterate quickly.
+
+## TL;DR
+
+Pynions is a lean Python framework for building AI-powered automation flows that run on your machine. Built for marketers who want to automate research, monitoring, and content tasks without cloud dependencies or complex setups. Perfect for personal and small team use.
+
+## Key Features
+
+- 🚀 Start small, ship fast
+- 🔌 Easy API connections to your existing tools
+- 🤖 AI-first but not AI-only
+- 📦 Zero bloat, minimal dependencies
+- 🛠 Built for real marketing workflows
+- ⚡ Quick to prototype and iterate
+
+## Quick Example
+
+```python
+from pynions import Flow
+
+# Connect your favorite marketing tools in minutes
+class LinkedInLeadFlow(Flow):
+    async def run(self):
+        # Pull leads from LinkedIn
+        leads = await self.call_api("linkedin", self.get_new_leads)
+
+        # Enrich with Clearbit
+        enriched = await self.call_api("clearbit", self.enrich_leads, leads)
+
+        # Push to HubSpot
+        await self.call_api("hubspot", self.add_to_crm, enriched)
+
+# Run it
+flow = LinkedInLeadFlow()
+await flow.run()
+```
+
+## Why Marketers Love This
+
+1. **Start Tiny, Grow Fast**
+
+   - Build small, focused automations
+   - No massive setups or configurations
+   - Expand as needed
+
+2. **Connect What You Already Use**
+
+   - Works with your existing marketing stack
+   - Simple API integrations
+   - No vendor lock-in
+
+3. **Ship & Iterate Quickly**
+
+   - Build internal tools in minutes
+   - Test new processes rapidly
+   - Fail fast, learn faster
+
+4. **Growth Mindset Built-in**
+   - Perfect for A/B testing
+   - Easy to measure and modify
+   - Built for experimentation
+
+## Real Marketing Examples
+
+1. **Quick LinkedIn Lead Generator**
+
+```python
+class LeadGen(Flow):
+    async def run(self):
+        # Search LinkedIn
+        prospects = await self.search_linkedin()
+
+        # Generate personalized messages with AI
+        messages = await self.personalize_messages(prospects)
+
+        # Schedule connection requests
+        await self.schedule_connections(messages)
+```
+
+2. **Rapid Landing Page Tester**
+
+```python
+class ABTester(Flow):
+    async def run(self):
+        # Create variants with AI
+        variants = await self.generate_variants()
+
+        # Deploy via Vercel API
+        pages = await self.deploy_variants(variants)
+
+        # Track with existing analytics
+        await self.setup_tracking(pages)
+```
+
+## Getting Started (2-Minute Setup)
+
+1. Install:
+
+```bash
+pip install pynions
+```
+
+2. Create your first pynion:
+
+```python
+from pynions import Flow
+
+class QuickTest(Flow):
+    async def run(self):
+        # Connect to your tools
+        twitter = await self.connect_api("twitter")
+        gpt = await self.connect_api("openai")
+
+        # Do marketing stuff
+        tweets = await twitter.get_competitor_tweets()
+        analysis = await gpt.analyze_sentiment(tweets)
+
+        return analysis
+```
+
+3. Run it:
+
+```bash
+python -m pynions run quick_test.py
+```
+
+## Design Principles
+
+1. **Small is Beautiful**
+
+   - Tiny, focused automations
+   - Minimal dependencies
+   - Fast to build and modify
+
+2. **Code > Configuration**
+
+   - Simple Python scripts
+   - No complex UIs
+   - Full control
+
+3. **Marketing First**
+   - Built for marketing workflows
+   - Easy API integrations
+   - Growth-focused features
 
 ## Table of Contents
 
 - [Pynions 🤖](#pynions-)
-  - [Table of Contents](#table-of-contents)
   - [TL;DR](#tldr)
   - [Key Features](#key-features)
   - [Quick Example](#quick-example)
-  - [Installation](#installation)
+  - [Why Marketers Love This](#why-marketers-love-this)
+  - [Real Marketing Examples](#real-marketing-examples)
+  - [Getting Started (2-Minute Setup)](#getting-started-2-minute-setup)
+  - [Design Principles](#design-principles)
+  - [Table of Contents](#table-of-contents)
   - [Core Concepts](#core-concepts)
     - [1. Flows](#1-flows)
     - [2. API Integration](#2-api-integration)
@@ -38,60 +184,6 @@ Fast, simple AI automation framework for personal and small team use. Think "per
   - [License](#license)
   - [Contributors](#contributors)
   - [Star History](#star-history)
-
-## TL;DR
-
-Pynions is a lean Python framework for building AI-powered automation flows. Built for developers who want to automate research, monitoring, and content tasks without the overhead of complex frameworks.
-
-## Key Features
-
-- ⚡ Async-first design
-- 🔄 Built-in caching and rate limiting
-- 💾 Simple state management
-- 🤖 Easy AI integration
-- 📁 File-based storage
-- 📦 Minimal dependencies
-
-## Quick Example
-
-```python
-from pynions import Flow, State
-from typing import Dict, Any
-
-class ResearchState(State):
-    query: str
-    results: Dict[str, Any] = {}
-
-class ResearchFlow(Flow[ResearchState]):
-    async def run(self):
-        # Built-in caching and rate limiting
-        results = await self.call_api(
-            "search",
-            self.search_api,
-            self.state.query,
-            use_cache=True
-        )
-
-        self.state.results = results
-        return results
-
-# Usage
-flow = ResearchFlow(query="python async frameworks")
-results = await flow.run()
-```
-
-## Installation
-
-```bash
-# Using pip
-pip install pynions
-
-# Using uv (recommended)
-uv pip install pynions
-
-# Development installation
-pip install "pynions[dev]"
-```
 
 ## Core Concepts
 
@@ -228,22 +320,33 @@ mypy src/pynions
 
 ## Design Philosophy
 
-1. **Simple > Complex**
+1. **Local-First**
+
+   - Runs on your machine
+   - Your data stays with you
+   - No cloud dependencies
+   - Works offline
+   - Easy to debug locally
+
+2. **Simple > Complex**
 
    - Minimal boilerplate
    - Clear patterns
    - No magic
+   - Single responsibility flows
 
-2. **Practical > Perfect**
+3. **Practical > Perfect**
 
    - Focus on real use cases
    - Easy to modify
    - Fast to prototype
+   - Quick iteration cycles
 
-3. **Local > Cloud**
-   - File-based storage
-   - No external dependencies
-   - Easy to debug
+4. **Your Tools, Your Rules**
+   - Connect to your existing APIs
+   - Use your preferred AI models
+   - Store data your way
+   - Full control over execution
 
 ## Comparison with Alternatives
 
@@ -382,4 +485,4 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-Built with ❤️ by [Your Name](https://github.com/yourusername)
+Built with ☕️ by [Tomas Laurinavicius](https://github.com/tomaslau)
