@@ -9,4 +9,4 @@
 
 ## Enforcement
 
-Violations can be reported to [maintainers@pynions.dev]
+Violations can be reported to [tom@pynions.com]
