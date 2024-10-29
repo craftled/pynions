@@ -17,8 +17,9 @@ keywords = ["marketing", "automation", "ai", "workflow"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "Intended Audience :: Marketing",
+    "Intended Audience :: Other Audience",
     "Topic :: Office/Business",
+    "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.9",
@@ -35,9 +36,20 @@ dependencies = [
     "httpx>=0.26.0",        # Modern HTTP client
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",         # Testing framework
+    "black>=23.0.0",         # Code formatting
+    "isort>=5.0.0",         # Import sorting
+    "mypy>=1.0.0",          # Type checking
+    "build>=1.0.0",         # Package building
+    "twine>=4.0.0",         # PyPI uploading
+    "pytest-asyncio>=0.23.0" # Async test support
+]
+
 [project.urls]
 Homepage = "https://github.com/tomaslau/pynions"
-Documentation = "https://pynions.readthedocs.io"
+Documentation = "https://github.com/tomaslau/pynions"
 Repository = "https://github.com/tomaslau/pynions.git"
 Issues = "https://github.com/tomaslau/pynions/issues"
 

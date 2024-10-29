@@ -4,7 +4,7 @@ A lean Python framework for marketers who code. Build tiny AI-powered automation
 
 ## TL;DR
 
-Pynions is a lean Python framework for building AI-powered automation flows that run on your machine. Built for marketers who want to automate research, monitoring, and content tasks without cloud dependencies or complex setups. Perfect for personal and small team use.
+Pynions is a lean Python framework for building AI-powered automation workflows that run on your machine. Built for marketers who want to automate research, monitoring, and content tasks without cloud dependencies or complex setups. Perfect for personal and small team use.
 
 ## Key Features
 
@@ -62,40 +62,65 @@ print(result["llm_response"])
    - Easy to measure and modify
    - Built for experimentation
 
-## Getting Started (2-Minute Setup)
+## Getting Started (5-Minute Setup)
 
-1. Install:
+### Prerequisites
 
-```bash
-pip install pynions
-```
+1. **Development Environment**
 
-2. Create your first pynion:
+   - Install [VS Code](https://code.visualstudio.com/) or [Cursor](https://cursor.sh/)
+   - Install [Python 3.9+](https://www.python.org/downloads/)
+     - Or terminal version (macOS/Linux)
+       - `brew install python`
 
-```python
-from pynions import Workflow, AskLLM
+2. **Environment Setup**
 
-# Create a simple content workflow
-workflow = Workflow("Tweet Generator")
+   ```bash
+   # Create and activate virtual environment
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-# Add AI tool
-workflow.add(
-    AskLLM(
-        prompt="Write a tweet about {topic}. Make it engaging and include relevant hashtags.",
-        model="gpt-4o-mini"
-    )
-)
+3. **Install Pynions**
 
-# Run workflow
-result = await workflow.run({"topic": "AI tools for marketers"})
-print(result["llm_response"])
-```
+   ```bash
+   pip install pynions
+   ```
 
-3. Run it:
+4. **Configure Environment Variables**
+   Create a `.env` file in your project:
 
-```bash
-python -m pynions run quick_test.py
-```
+   ```bash
+   OPENAI_API_KEY=your_openai_key_here
+   ```
+
+5. **Create Your First Workflow**
+
+   ```python
+   from pynions import Workflow, AskLLM
+
+   async def main():
+       workflow = Workflow("Tweet Generator")
+
+       workflow.add(
+           AskLLM(
+               prompt="Write a tweet about {topic}. Make it engaging and include relevant hashtags.",
+               model="gpt-4o-mini"
+           )
+       )
+
+       result = await workflow.run({"topic": "AI tools for marketers"})
+       print(result["llm_response"])
+
+   if __name__ == "__main__":
+       import asyncio
+       asyncio.run(main())
+   ```
+
+6. **Run Your Workflow**
+   ```bash
+   python your_workflow.py
+   ```
 
 ## Design Principles
 
@@ -123,24 +148,21 @@ python -m pynions run quick_test.py
   - [Key Features](#key-features)
   - [Quick Example](#quick-example)
   - [Why Marketers Love This](#why-marketers-love-this)
-  - [Getting Started (2-Minute Setup)](#getting-started-2-minute-setup)
+  - [Getting Started (5-Minute Setup)](#getting-started-5-minute-setup)
+    - [Prerequisites](#prerequisites)
   - [Design Principles](#design-principles)
   - [Table of Contents](#table-of-contents)
   - [Core Concepts](#core-concepts)
-    - [1. Flows](#1-flows)
+    - [1. Workflows](#1-workflows)
     - [2. API Integration](#2-api-integration)
     - [3. State Management](#3-state-management)
     - [4. Steps Tracking](#4-steps-tracking)
   - [Real-World Use Cases](#real-world-use-cases)
   - [Setup](#setup)
-  - [Development](#development)
   - [Why Use This?](#why-use-this)
   - [Design Philosophy](#design-philosophy)
   - [Comparison with Alternatives](#comparison-with-alternatives)
   - [Example Projects](#example-projects)
-  - [Getting Started](#getting-started)
-  - [Contributing](#contributing)
-    - [Development Setup](#development-setup)
   - [Need Help?](#need-help)
   - [License](#license)
   - [Contributors](#contributors)
@@ -148,10 +170,10 @@ python -m pynions run quick_test.py
 
 ## Core Concepts
 
-### 1. Flows
+### 1. Workflows
 
-- Each automation is a Flow
-- Flows have state management
+- Each automation is a Workflow
+- Workflows have state management
 - Built-in logging and error handling
 - Automatic caching
 - Progress tracking
@@ -195,7 +217,7 @@ async def run(self):
 1. **Content Research**
 
 ```python
-class ContentFlow(Flow[ContentState]):
+class ContentFlow(Workflow[ContentState]):
     async def run(self):
         # Search competitors
         results = await self.call_api("search", self.search)
@@ -212,7 +234,7 @@ class ContentFlow(Flow[ContentState]):
 2. **Price Monitoring**
 
 ```python
-class PriceMonitor(Flow[PriceState]):
+class PriceMonitor(Workflow[PriceState]):
     async def run(self):
         current = await self.scrape_prices()
         changes = self.compare_with_previous(current)
@@ -234,31 +256,10 @@ cd myproject
 
 # Project structure
 myproject/
-├── flows/          # Your flows
+├── workflows/          # Your workflows
 ├── data/           # Local storage
-├── logs/           # Flow logs
+├── logs/           # Workflow logs
 └── .cache/        # API cache
-```
-
-## Development
-
-```bash
-# Clone
-git clone https://github.com/yourusername/pynions.git
-cd pynions
-
-# Install dev version
-pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Format code
-black .
-isort .
-
-# Type checking
-mypy src/pynions
 ```
 
 ## Why Use This?
@@ -294,7 +295,7 @@ mypy src/pynions
    - Minimal boilerplate
    - Clear patterns
    - No magic
-   - Single responsibility flows
+   - Single responsibility workflows
 
 3. **Practical > Perfect**
 
@@ -325,102 +326,6 @@ mypy src/pynions
 | State Management | Built-in    | Limited      | Manual         | Yes       |
 
 ## Example Projects
-
-1. **Content Research Bot**
-
-```python
-from pynions import Flow
-
-class ResearchBot(Flow):
-    async def run(self):
-        competitors = await self.search_competitors()
-        analysis = await self.analyze_content(competitors)
-        outline = await self.generate_outline(analysis)
-        article = await self.write_article(outline)
-        return article
-```
-
-2. **Market Monitor**
-
-```python
-from pynions import Flow
-
-class MarketMonitor(Flow):
-    async def run(self):
-        # Monitor multiple sources
-        await self.track_prices()
-        await self.track_features()
-        await self.track_sentiment()
-
-        # Generate report
-        return await self.generate_report()
-```
-
-## Getting Started
-
-1. Install:
-
-```bash
-pip install pynions
-```
-
-2. Create project:
-
-```bash
-pynions init myproject
-cd myproject
-```
-
-3. Create flow:
-
-```python
-# flows/my_flow.py
-from pynions import Flow
-
-class MyFlow(Flow):
-    async def run(self):
-        # Your automation logic here
-        pass
-```
-
-4. Run flow:
-
-```bash
-pynions run flows/my_flow.py:MyFlow
-```
-
-## Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Bug Reports**: Open an issue describing the bug
-2. **Feature Requests**: Open an issue describing the feature
-3. **Pull Requests**: Fork, create branch, submit PR
-4. **Documentation**: Help improve or fix documentation
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
-### Development Setup
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/pynions.git
-cd pynions
-
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate
-
-# Install dependencies
-pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Format code
-black .
-isort .
-```
 
 ## Need Help?
 

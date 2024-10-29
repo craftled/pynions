@@ -1,4 +1,4 @@
-We are building Pynions, a lean open source Python framework for building AI-powered automation flows that run on your machine. Built for marketers who want to automate research, monitoring, and content tasks without cloud dependencies or complex setups. Perfect for personal and small team use.
+We are building Pynions, a lean open source Python framework for building AI-powered automation workflows that run on your machine. Built for marketers who want to automate research, monitoring, and content tasks without cloud dependencies or complex setups. Perfect for personal and small team use.
 
 Something like Zapier/n8n but for local machines.
 
@@ -63,7 +63,6 @@ Something like Zapier/n8n but for local machines.
 ## Documentation
 
 - We use Mintlify for documentation
-- We use Read the Docs for hosting
 - We use GitHub Actions for CI/CD
 - We use Hatch for building and packaging
 - We use Pytest for testing

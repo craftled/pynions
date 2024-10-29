@@ -43,3 +43,6 @@ backups/
 # OS
 .DS_Store
 Thumbs.db
+
+# PyPI
+.pypirc
