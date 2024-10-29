@@ -254,6 +254,8 @@ Need more help? Just ask! We're friendly. 😊
 2. **Build and Test Package**
 
    ```bash
+   # clean build directory
+   rm -rf dist
    python -m build
    twine check dist/*
    ```

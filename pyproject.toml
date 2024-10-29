@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pynions"
-version = "0.2.0"
+version = "0.2.1"
 description = "Simple AI automation framework for marketers"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -62,10 +62,10 @@ include = [
     "src/pynions/**/*.py",
     "src/pynions/templates/**/*"
 ]
-packages = ["src/pynions"]
+packages = ["src"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pynions"]
+packages = ["src"]
 
 [tool.hatch.version]
 path = "src/pynions/__init__.py"
