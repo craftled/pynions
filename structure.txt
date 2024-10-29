@@ -1,0 +1,35 @@
+pynions/
+├── .github/
+│   ├── workflows/
+│   │   └── ci.yml            # Basic CI pipeline
+│   ├── ISSUE_TEMPLATE.md     # Single, simple template
+│   └── PULL_REQUEST_TEMPLATE.md
+├── docs/
+│   ├── _static/
+│   │   └── logo.svg         # Simple logo
+│   ├── conf.py              # Sphinx configuration
+│   ├── index.md             # Main documentation
+│   ├── quickstart.md
+│   └── api.md
+├── examples/
+│   ├── price_monitor.py
+│   └── content_research.py
+├── src/
+│   └── pynions/
+│       ├── __init__.py
+│       ├── flow.py          # Core flow system
+│       ├── tools/
+│       │   ├── __init__.py
+│       │   ├── cache.py
+│       │   └── rate_limit.py
+│       └── cli.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_flow.py
+│   └── test_tools.py
+├── .gitignore
+├── LICENSE
+├── README.md
+├── CONTRIBUTING.md
+├── pyproject.toml
+└── requirements-dev.txt
