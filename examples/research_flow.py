@@ -1,7 +1,9 @@
-from pynions import Flow, State
-from typing import List, Dict, Any
-import httpx
 from datetime import datetime
+from typing import Any, Dict, List
+
+import httpx
+
+from pynions import Flow, State
 
 
 class ResearchState(State):

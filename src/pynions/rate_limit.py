@@ -1,39 +1,24 @@
-import asyncio
 import time
-from collections import deque
+from functools import wraps
 
 
-class RateLimiter:
-    """
-    Simple token bucket rate limiter.
+class RateLimit:
+    def __init__(self, calls_per_second=1):
+        self.calls_per_second = calls_per_second
+        self.last_call = 0
 
-    Example:
-        ```python
-        limiter = RateLimiter(60)  # 60 requests per minute
-        await limiter.acquire()
-        # make api call
-        ```
-    """
+    def __call__(self, func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            # Simple rate limiting
+            current_time = time.time()
+            time_since_last = current_time - self.last_call
+            sleep_time = (1.0 / self.calls_per_second) - time_since_last
 
-    def __init__(self, rate: int):
-        self.rate = rate
-        self.tokens = deque()
-        self._last_update = time.time()
-
-    def _cleanup(self):
-        """Remove expired tokens"""
-        now = time.time()
-        while self.tokens and self.tokens[0] < now - 60:
-            self.tokens.popleft()
-
-    async def acquire(self):
-        """Wait for rate limit"""
-        self._cleanup()
-
-        while len(self.tokens) >= self.rate:
-            sleep_time = self.tokens[0] - time.time() + 60
             if sleep_time > 0:
-                await asyncio.sleep(sleep_time)
-            self._cleanup()
+                time.sleep(sleep_time)
 
-        self.tokens.append(time.time())
+            self.last_call = time.time()
+            return await func(*args, **kwargs)
+
+        return wrapper

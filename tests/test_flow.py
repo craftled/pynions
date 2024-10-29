@@ -1,46 +1,29 @@
 import pytest
-import asyncio
-from pynions import Flow, State
-from datetime import datetime
+from pynions.flow import Flow
 
 
-class TestState(State):
-    value: str = ""
-    processed: bool = False
-
-
-class TestFlow(Flow[TestState]):
-    async def run(self):
-        async with self.step("process"):
-            self.state.processed = True
-            return {"status": "success"}
-
-
-@pytest.mark.asyncio
 async def test_basic_flow():
-    """Test basic flow execution"""
-    flow = TestFlow(value="test")
+    async def step1(data):
+        return {"step1": "done"}
+
+    async def step2(data):
+        return {"step2": data["step1"] + " and more"}
+
+    flow = Flow()
+    flow.add_step(step1)
+    flow.add_step(step2)
+
     result = await flow.run()
-
-    assert result["status"] == "success"
-    assert flow.state.processed == True
-    assert isinstance(flow.get_duration(), float)
+    assert result["step1"] == "done"
+    assert result["step2"] == "done and more"
 
 
-@pytest.mark.asyncio
-async def test_cache():
-    """Test API calling with cache"""
+async def test_flow_with_initial_data():
+    async def step1(data):
+        return {"result": data["input"] + " processed"}
 
-    async def mock_api():
-        await asyncio.sleep(0.1)
-        return {"data": "test"}
+    flow = Flow()
+    flow.add_step(step1)
 
-    flow = TestFlow()
-
-    # First call
-    result1 = await flow.call_api("test", mock_api)
-
-    # Second call (should be cached)
-    result2 = await flow.call_api("test", mock_api)
-
-    assert result1 == result2
+    result = await flow.run({"input": "test"})
+    assert result["result"] == "test processed"

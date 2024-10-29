@@ -6,54 +6,14 @@ build-backend = "hatchling.build"
 [project]
 name = "pynions"
 version = "0.1.0"
-description = "Fast, simple AI automation framework"
+description = "Simple AI automation framework"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
-authors = [
-    { name = "Tomas Laurinavicius", email = "tom@pynions.com" }
-]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-]
 dependencies = [
     "litellm>=1.12.1",
-    "playwright>=1.41.1",
-    "httpx>=0.26.0",
-    "pydantic>=2.6.1",
-    "rich>=13.7.0",
     "python-dotenv>=1.0.0",
     "click>=8.1.7",
-]
-
-[project.optional-dependencies]
-dev = [
     "pytest>=8.0.0",
-    "black>=24.1.1",
-    "isort>=5.13.2",
-    "mypy>=1.8.0",
-    "build>=1.0.3",
-    "twine>=4.0.2",
+    "pytest-asyncio>=0.24.0"
 ]
-
-[project.urls]
-"Homepage" = "https://github.com/tomaslau/pynions"
-"Bug Tracker" = "https://github.com/tomaslau/pynions/issues"
-
-[project.scripts]
-pynions = "pynions.cli:main"
-
-[tool.black]
-line-length = 88
-target-version = ['py39']
-include = '\.pyi?$'
-
-[tool.isort]
-profile = "black"
-multi_line_output = 3

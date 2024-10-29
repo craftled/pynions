@@ -1,14 +1,5 @@
 # Pynions 🤖
 
-[![PyPI version](https://badge.fury.io/py/pynions.svg)](https://badge.fury.io/py/pynions)
-[![CI](https://github.com/yourusername/pynions/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/pynions/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Versions](https://img.shields.io/pypi/pyversions/pynions.svg)](https://pypi.org/project/pynions/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Documentation Status](https://readthedocs.org/projects/pynions/badge/?version=latest)](https://pynions.readthedocs.io/en/latest/?badge=latest)
-[![Downloads](https://pepy.tech/badge/pynions)](https://pepy.tech/project/pynions)
-[![Last Commit](https://img.shields.io/github/last-commit/yourusername/pynions)](https://github.com/yourusername/pynions/commits/main)
-
 A lean Python framework for marketers who code. Build tiny AI-powered automations for your marketing tasks without the bloat. Perfect for growth hackers and marketing engineers who want to ship fast and iterate quickly.
 
 ## TL;DR
