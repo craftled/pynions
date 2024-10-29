@@ -1,5 +1,5 @@
 """Built-in tools"""
 
-from .llm import LLM
+from .llm import AskLLM
 
-__all__ = ["LLM"]
+__all__ = ["AskLLM"]

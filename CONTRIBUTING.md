@@ -247,8 +247,8 @@ Need more help? Just ask! We're friendly. 😊
 1. **Update Version**
 
    ```bash
-   # Update version in src/pynions/__init__.py
-   __version__ = "0.1.1"
+   # Update version in pyproject.toml
+   version = "0.1.10"
    ```
 
 2. **Build and Test Package**
@@ -264,7 +264,47 @@ Need more help? Just ask! We're friendly. 😊
    twine upload --repository testpypi dist/*
    ```
 
-4. **Upload to PyPI**
+4. **Test Installation from TestPyPI**
+
+   ```bash
+   # Create a new test environment
+   python -m venv test_venv
+   source test_venv/bin/activate  # On Windows: test_venv\Scripts\activate
+
+   # Install from TestPyPI with dependencies from PyPI
+   pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple pynions==0.1.10
+
+   # Test basic imports
+   python -c "from pynions import Workflow; print('Import successful!')"
+
+   # Test CLI functionality
+   pynions new testproject
+   cd testproject
+   pip install -r requirements.txt
+   python workflows/tweet.py
+   ```
+
+5. **Upload to PyPI**
+
    ```bash
    twine upload dist/*
    ```
+
+6. **Tag Release**
+   ```bash
+   git tag -a v0.1.10 -m "Release v0.1.10"
+   git push origin v0.1.10
+   ```
+
+### Verify Installation
+
+```bash
+# After installing in dev mode
+pip list | grep -E "pynions|click|rich|httpx|pydantic|litellm|python-dotenv"
+
+# Test CLI
+pynions --help
+
+# Test imports
+python -c "from pynions import Workflow, AskLLM, BaseTool; print('All good!')"
+```

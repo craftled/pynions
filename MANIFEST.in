@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+recursive-include src/pynions/templates *
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .DS_Store

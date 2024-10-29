@@ -21,20 +21,27 @@ Pynions is a lean Python framework for building AI-powered automation workflows 
 ```python
 from pynions import Workflow, AskLLM
 
-# Create a simple content workflow
-workflow = Workflow("Tweet Generator")
 
-# Add AI tool
-workflow.add(
-    AskLLM(
-        prompt="Write a tweet about {topic}. Make it engaging and include relevant hashtags.",
-        model="gpt-4o-mini"
+async def main():
+    """Example workflow that generates a tweet"""
+    workflow = Workflow("Tweet Generator")
+
+    workflow.add(
+        AskLLM(
+            prompt="Write a tweet about {topic}. Make it engaging and include relevant hashtags.",
+            model="gpt-4o-mini",
+        )
     )
-)
 
-# Run workflow
-result = await workflow.run({"topic": "AI tools for marketers"})
-print(result["llm_response"])
+    result = await workflow.run({"topic": "AI automation"})
+    print(f"\nGenerated tweet: {result['llm_response']}")
+
+
+if __name__ == "__main__":
+    import asyncio
+
+    asyncio.run(main())
+
 ```
 
 ## Why Marketers Love This
@@ -252,7 +259,7 @@ class PriceMonitor(Workflow[PriceState]):
 pip install pynions
 
 # Create project
-pynions init myproject
+pynions new myproject
 cd myproject
 
 # Project structure

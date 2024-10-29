@@ -18,7 +18,7 @@ AI-powered automation workflows built with Pynions.
 
 3. Run example workflow:
    ```bash
-   python workflows/example.py
+   python workflows/tweet.py
    ```
 
 ## Project Structure

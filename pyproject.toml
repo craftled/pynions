@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pynions"
-version = "0.1.5"
+version = "0.2.0"
 description = "Simple AI automation framework for marketers"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -34,6 +34,7 @@ dependencies = [
     "click>=8.1.7",         # CLI interface
     "rich>=13.7.0",         # Better console output
     "httpx>=0.26.0",        # Modern HTTP client
+    "pydantic>=2.0.0",      # Data validation
 ]
 
 [project.optional-dependencies]
@@ -56,13 +57,23 @@ Issues = "https://github.com/tomaslau/pynions/issues"
 [project.scripts]
 pynions = "pynions.cli:main"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/pynions"]
+[tool.hatch.build]
 include = [
-    "src/pynions/core/*.py",
-    "src/pynions/tools/*.py",
+    "src/pynions/**/*.py",
     "src/pynions/templates/**/*"
 ]
+packages = ["src/pynions"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pynions"]
 
 [tool.hatch.version]
 path = "src/pynions/__init__.py"
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::pytest.PytestDeprecationWarning"
+]

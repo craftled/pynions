@@ -1,7 +1,9 @@
-"""
-Pynions - Simple AI automation framework for marketers
-"""
+"""Pynions - AI-powered automation workflows for marketers"""
 
-__version__ = "0.1.5"
+from pynions.core.workflow import Workflow
+from pynions.core.base import BaseTool
+from pynions.tools.llm import AskLLM
 
-from .cli import main, cli  # Export both entry points
+__version__ = "0.2.0"
+
+__all__ = ["Workflow", "AskLLM", "BaseTool"]

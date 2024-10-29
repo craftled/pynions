@@ -1,32 +1,33 @@
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
 from .base import BaseTool
 
 
 class Workflow:
     """Core workflow class for automation"""
 
-    def __init__(self, name: Optional[str] = None):
-        self.name = name or self.__class__.__name__
-        self.tools: List[BaseTool] = []
-        self.state: Dict[str, Any] = {}
+    def __init__(self, name: str):
+        self.name = name
+        self.tools = []
 
-    def add(self, tool: BaseTool) -> "Workflow":
+    def add(self, tool: BaseTool):
         """Add a tool to the workflow"""
         self.tools.append(tool)
-        return self
+        return self  # Enable chaining
 
-    async def run(self, input_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Run the workflow"""
-        print(f"\n🚀 Starting workflow: {self.name}")
-        self.state = input_data or {}
+        current_context = context.copy()  # Start with input context
 
+        # Process through each tool in sequence
         for tool in self.tools:
-            try:
-                print(f"\n⚙️  Running: {tool.__class__.__name__}")
-                self.state = await tool.run(self.state)
-            except Exception as e:
-                print(f"❌ Error in {tool.__class__.__name__}: {str(e)}")
-                raise
+            # Run current tool and get its result
+            tool_result = await tool.run(current_context)
 
-        print(f"\n✅ Workflow completed: {self.name}")
-        return self.state
+            # Update context with tool's result
+            # This ensures each subsequent tool gets the full context
+            current_context.update(tool_result)
+
+            # For debugging
+            # print(f"After {tool.__class__.__name__}: {current_context}")
+
+        return current_context

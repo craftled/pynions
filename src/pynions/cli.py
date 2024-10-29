@@ -1,29 +1,13 @@
 import click
-from rich import print
-from dotenv import load_dotenv
-import os
 import sys
 from pathlib import Path
 import shutil
 
 
-def main():
-    """Entry point for CLI"""
-    cli()  # Call our click group
-
-
 @click.group()
 def cli():
-    """Pynions CLI - Simple AI automation framework"""
-    load_dotenv()
-
-
-@cli.command()
-def version():
-    """Show version"""
-    from pynions import __version__
-
-    print(f"📦 Pynions v{__version__}")
+    """Pynions CLI - AI automation framework for marketers"""
+    pass
 
 
 @cli.command()
@@ -31,7 +15,9 @@ def version():
 def new(project_name: str):
     """Create a new project from template"""
     try:
-        template_dir = Path(__file__).parent / "templates" / "project"
+        import pynions
+
+        template_dir = Path(pynions.__file__).parent / "templates" / "project"
         target_dir = Path.cwd() / project_name
 
         if not template_dir.exists():
@@ -39,24 +25,43 @@ def new(project_name: str):
             sys.exit(1)
 
         print(f"📁 Creating project in {target_dir}")
-        shutil.copytree(template_dir, target_dir)
+        target_dir.mkdir(parents=True, exist_ok=True)
 
-        # Replace template variables
-        for file in target_dir.rglob("*"):
-            if file.is_file() and file.suffix in [".md", ".py", ".txt"]:
-                content = file.read_text()
-                content = content.replace("{{project_name}}", project_name)
-                file.write_text(content)
+        # Copy template files and create directories
+        for src in template_dir.rglob("*"):
+            rel_path = src.relative_to(template_dir)
+            dst = target_dir / rel_path
+
+            if src.is_dir():
+                dst.mkdir(parents=True, exist_ok=True)
+            elif src.is_file():
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src, dst)
+
+                # Replace template variables
+                if dst.suffix in [".md", ".py", ".txt"]:
+                    content = dst.read_text()
+                    content = content.replace("{{project_name}}", project_name)
+                    dst.write_text(content)
+
+        # Create empty directories
+        for dir_name in ["data", "logs", ".cache"]:
+            (target_dir / dir_name).mkdir(exist_ok=True)
+            (target_dir / dir_name / ".gitkeep").touch()
 
         print(f"✨ Created new project: {project_name}")
         print("\n🚀 Next steps:")
-        print("1. cd", project_name)
+        print(f"1. cd {project_name}")
         print("2. Add your API keys to .env")
-        print("3. python workflows/example.py")
+        print("3. python workflows/tweet.py")
 
     except Exception as e:
         print(f"❌ Error creating project: {e}")
         sys.exit(1)
+
+
+def main():
+    cli()
 
 
 if __name__ == "__main__":
