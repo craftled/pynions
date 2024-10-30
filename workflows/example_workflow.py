@@ -1,6 +1,5 @@
 import asyncio
-from pynions.core import Workflow, WorkflowStep, Config, DataStore
-from pynions.plugins.serper import SerperWebSearch
+from pynions import Workflow, WorkflowStep, Config, DataStore, SerperWebSearch
 
 
 async def main():

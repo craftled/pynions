@@ -1,0 +1,33 @@
+{
+  "plugins": {
+    "serper": {
+      "max_results": 10,
+      "country": "us",
+      "language": "en"
+    },
+    "litellm": {
+      "default_model": "gpt-4",
+      "temperature": 0.7,
+      "max_tokens": 2000,
+      "retry_attempts": 3
+    },
+    "playwright": {
+      "headless": true,
+      "timeout": 30000,
+      "screenshot": false
+    },
+    "jina": {
+      "chunk_size": 1000,
+      "overlap": 200
+    }
+  },
+  "storage": {
+    "data_dir": "data",
+    "max_file_size_mb": 100
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "date_format": "%Y-%m-%d %H:%M:%S"
+  }
+}

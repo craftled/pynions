@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import litellm
 from litellm import completion
 import openai
-from pynions.plugins.stats import StatsPlugin
+from pynions import StatsPlugin
 
 # Load environment variables
 load_dotenv()

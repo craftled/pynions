@@ -5,6 +5,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -22,9 +23,6 @@ wheels/
 *.egg
 
 # Virtual Environment
-.env
-.venv
-env/
 venv/
 ENV/
 
@@ -35,12 +33,14 @@ ENV/
 *.swo
 
 # Project specific
-.cache/
-logs/
-data/
-backups/
+.env
+config.json
+data/*
+!data/.gitkeep
+logs/*
+!logs/.gitkeep
 
-# OS
+# OS specific
 .DS_Store
 Thumbs.db
 
