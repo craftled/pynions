@@ -1,0 +1,11 @@
+{
+  "plugins": {
+    "serper": {
+      "api_key": "your_serper_api_key_here"
+    },
+    "litellm": {
+      "api_key": "your_openai_api_key_here",
+      "default_model": "gpt-4"
+    }
+  }
+}
