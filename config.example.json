@@ -16,10 +16,7 @@
       "timeout": 30000,
       "screenshot": false
     },
-    "jina": {
-      "chunk_size": 1000,
-      "overlap": 200
-    }
+    "jina": {}
   },
   "storage": {
     "data_dir": "data",

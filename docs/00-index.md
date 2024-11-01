@@ -90,3 +90,9 @@ See [Project Structure](01-project-structure.md) for:
 - Code organization
 - Testing requirements
 - Documentation standards
+
+## Plugin Documentation
+- [Jina AI Reader](plugins/jina.md) - Extract clean content from web pages
+TODO: - [Serper Web Search](plugins/serper.md) - Search engine results and analytics
+TODO: - [LiteLLM](plugins/litellm.md) - AI model integration
+TODO: - [Playwright](plugins/playwright.md) - Web scraping and automation
