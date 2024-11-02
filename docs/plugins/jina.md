@@ -1,4 +1,8 @@
-# Jina AI Reader Plugin
+---
+title: "Jina AI Reader Plugin"
+sidebarTitle: "Jina"
+description: "Extract clean, readable content from any webpage using Jina AI's content extraction capabilities."
+---
 
 ## Overview
 The Jina AI Reader plugin helps marketers extract clean, readable content from any webpage. Think of it as your personal content assistant that removes all the clutter and gives you just the important parts.

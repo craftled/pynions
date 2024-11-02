@@ -49,6 +49,10 @@
       ]
     },
     {
+      "group": "Plugins",
+      "pages": ["plugins/jina"]
+    },
+    {
       "group": "API Components",
       "pages": ["api-playground/overview", "api-playground/configuration"]
     },
