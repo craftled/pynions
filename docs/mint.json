@@ -37,7 +37,16 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction", "quickstart"]
+      "pages": [
+        "00-index",
+        "01-project-structure",
+        "02-installation",
+        "03-configuration",
+        "04-plugins",
+        "05-workflows",
+        "06-debugging",
+        "quickstart"
+      ]
     },
     {
       "group": "API Components",
