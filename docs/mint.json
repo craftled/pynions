@@ -1,0 +1,12 @@
+"name": "Pynions"
+"logo": {
+  "light": "/logo/light.svg",
+  "dark": "/logo/dark.svg",
+  "href": "https://pynions.com"
+},
+"favicon": "/favicon.svg",
+"colors": {
+  "primary": "#2AB673",
+  "light": "#55D799",
+  "dark": "#117866",
+},
