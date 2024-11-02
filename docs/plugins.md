@@ -1,6 +1,6 @@
 ---
 title: "Plugin Development Guide"
-sidebarTitle: "Plugin Development"
+sidebarTitle: "Plugins"
 description: "Learn how to create custom plugins to extend Pynions with new capabilities and integrate additional tools into your marketing automation workflows."
 ---
 
