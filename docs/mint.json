@@ -2,13 +2,63 @@
   "name": "Pynions",
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg",
-    "href": "https://pynions.com"
+    "dark": "/logo/dark.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#2AB673",
-    "light": "#55D799",
-    "dark": "#117866"
+    "primary": "#16A34A",
+    "light": "#4ADE80",
+    "dark": "#166534"
+  },
+  "topbarLinks": [
+    {
+      "name": "Contact",
+      "url": "mailto:tom@pynions.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://1tc7vihvbit.typeform.com/to/pZJ31XZB"
+  },
+  "anchors": [
+    {
+      "name": "API Components",
+      "icon": "rectangle-terminal",
+      "color": "#f59f0b",
+      "url": "api-components"
+    },
+    {
+      "name": "Community",
+      "icon": "comments",
+      "color": "#2564eb",
+      "url": "https://discord.gg/MPNgtSZkgK"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "API Components",
+      "pages": ["api-playground/overview", "api-playground/configuration"]
+    },
+    {
+      "group": "Settings",
+      "pages": ["settings/global", "settings/page"]
+    },
+    {
+      "group": "Analytics",
+      "pages": ["analytics/posthog"]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/tomaslau/pynions",
+    "slack": "https://mintlify.com/community",
+    "x": "https://x.com/tomaslaucom"
+  },
+  "integrations": {
+    "intercom": "APP_ID",
+    "frontchat": "CHAT_ID"
   }
 }
