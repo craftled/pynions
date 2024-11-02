@@ -1,3 +1,10 @@
+---
+title: "Pynions Documentation Index"
+sidebarTitle: "Documentation Index"
+description: "Complete documentation for Pynions - a lean Python framework for building AI-powered marketing automation workflows that run locally"
+---
+
+
 # Pynions Documentation Index
 
 ## Getting Started
