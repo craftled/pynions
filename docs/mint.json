@@ -28,10 +28,10 @@
       "url": "api-components"
     },
     {
-      "name": "Community",
-      "icon": "comments",
+      "name": "Issues",
+      "icon": "bug",
       "color": "#2564eb",
-      "url": "https://discord.gg/MPNgtSZkgK"
+      "url": "https://github.com/tomaslau/pynions/issues"
     }
   ],
   "navigation": [
