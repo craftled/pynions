@@ -1,4 +1,8 @@
-# 2-Minute Quick Start Guide 🚀
+---
+title: "2-Minute Quick Start Guide 🚀"
+sidebarTitle: "2-Minute Quick Start Guide 🚀"
+description: "Get started with Pynions in 2 minutes by setting up your first local AI workflow. No cloud dependencies, just Python and a few API keys."
+---
 
 ## Super Quick Setup (Copy-Paste Ready)
 

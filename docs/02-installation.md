@@ -1,4 +1,8 @@
-# Installation Guide
+---
+title: "Installation Guide"
+sidebarTitle: "Installation"
+description: "Step-by-step guide for installing Pynions and setting up your local marketing automation environment on macOS."
+---
 
 ## Prerequisites
 

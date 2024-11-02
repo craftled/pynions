@@ -1,4 +1,8 @@
-# Workflow Creation Guide
+---
+title: "Workflow Creation Guide"
+sidebarTitle: "Workflows"
+description: "Learn how to create and run marketing automation workflows by combining plugins into reusable sequences that execute locally on your machine."
+---
 
 ## Workflow System Overview
 

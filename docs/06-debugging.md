@@ -1,4 +1,8 @@
-# Debugging Guide
+---
+title: "Debugging Guide"
+sidebarTitle: "Debugging"
+description: "Learn how to debug and troubleshoot common issues when developing plugins and workflows in Pynions, including installation problems, API errors, and testing failures."
+---
 
 ## Common Issues & Solutions
 

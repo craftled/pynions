@@ -1,4 +1,8 @@
-# Configuration Guide
+---
+title: "Configuration Guide"
+sidebarTitle: "Configuration"
+description: "Learn how to configure Pynions with API keys and settings to power your local marketing automation workflows."
+---
 
 ## Overview
 
