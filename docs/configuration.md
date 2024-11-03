@@ -1,7 +1,9 @@
 ---
-title: "Configuration Guide"
-sidebarTitle: "Configuration"
-description: "Learn how to configure Pynions with API keys and settings to power your local marketing automation workflows."
+title: "Configuration"
+publishedAt: "2024-10-30"
+updatedAt: "2024-11-03"
+summary: "Learn how to configure Pynions with API keys and settings to power your local marketing automation workflows."
+kind: "simple"
 ---
 
 ## Overview
