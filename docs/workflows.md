@@ -18,8 +18,8 @@ Workflows in Pynions are sequences of steps that:
 
 ```python
 from pynions.core import Workflow, WorkflowStep
-from pynions.plugins.serper_plugin import SerperPlugin
-from pynions.plugins.litellm_plugin import LiteLLMPlugin
+from pynions.plugins.serper import SerperWebSearch
+from pynions.plugins.litellm import LiteLLMPlugin
 
 # Create workflow
 workflow = Workflow(
@@ -29,7 +29,7 @@ workflow = Workflow(
 
 # Add steps
 workflow.add_step(WorkflowStep(
-    plugin=SerperPlugin(config),
+    plugin=SerperWebSearch({"max_results": 10}),
     name="search",
     description="Search for content"
 ))
@@ -41,7 +41,7 @@ workflow.add_step(WorkflowStep(
 ))
 
 # Execute
-results = await workflow.execute(initial_input)
+results = await workflow.execute({"query": "your search query"})
 ```
 
 ## Example Workflows
@@ -54,7 +54,9 @@ async def serp_analysis_workflow():
     data_store = DataStore()
     
     # Setup plugins
-    serper = SerperPlugin(config.get_plugin_config('serper'))
+    serper = SerperWebSearch({
+        "max_results": 10
+    })
     llm = LiteLLMPlugin(config.get_plugin_config('litellm'))
     
     # Create workflow
@@ -63,17 +65,19 @@ async def serp_analysis_workflow():
     # Add steps
     workflow.add_step(WorkflowStep(
         plugin=serper,
-        name="fetch_serp"
+        name="fetch_serp",
+        description="Fetch search results"
     ))
     
     workflow.add_step(WorkflowStep(
         plugin=llm,
-        name="analyze_results"
+        name="analyze_results",
+        description="Analyze SERP data"
     ))
     
     # Execute
     results = await workflow.execute({
-        'query': 'best project management software'
+        'query': 'best marketing automation tools 2024'
     })
     
     # Save results
@@ -82,36 +86,35 @@ async def serp_analysis_workflow():
     return results
 ```
 
-### 2. Content Creation Workflow
+### 2. Content Research Workflow
 ```python
-async def content_creation_workflow():
-    workflow = Workflow("content_creation")
+async def content_research_workflow():
+    workflow = Workflow("content_research")
     
-    # Research step
+    # SERP research step
     workflow.add_step(WorkflowStep(
-        plugin=SerperPlugin(config),
-        name="research"
+        plugin=SerperWebSearch({"max_results": 10}),
+        name="search",
+        description="Search for relevant content"
     ))
     
-    # Scraping step
+    # Content extraction step
     workflow.add_step(WorkflowStep(
-        plugin=PlaywrightPlugin(config),
-        name="scrape"
+        plugin=JinaAIReader(config),
+        name="extract",
+        description="Extract content from top results"
     ))
     
     # Analysis step
     workflow.add_step(WorkflowStep(
-        plugin=JinaPlugin(config),
-        name="extract"
-    ))
-    
-    # Writing step
-    workflow.add_step(WorkflowStep(
         plugin=LiteLLMPlugin(config),
-        name="write"
+        name="analyze",
+        description="Analyze extracted content"
     ))
     
-    return await workflow.execute(initial_data)
+    return await workflow.execute({
+        "query": "marketing automation trends 2024"
+    })
 ```
 
 ## Workflow Best Practices
@@ -192,6 +195,12 @@ try:
     result = await step.execute(input_data)
 except Exception as e:
     logger.error(f"Step {step.name} failed: {str(e)}")
+    if isinstance(e, ValueError):
+        # Handle validation errors
+        pass
+    elif isinstance(e, aiohttp.ClientError):
+        # Handle API errors
+        pass
     raise
 ```
 
@@ -209,12 +218,24 @@ except Exception as e:
 
 ### 1. Input Validation
 ```python
-def validate_input(input_data: Dict[str, Any]) -> bool:
-    required_fields = ['query', 'max_results']
-    return all(field in input_data for field in required_fields)
+def validate_serp_input(input_data: Dict[str, Any]) -> bool:
+    """Validate input for SERP analysis workflow"""
+    if not isinstance(input_data, dict):
+        return False
+    if 'query' not in input_data:
+        return False
+    return True
 ```
 
 ### 2. Result Storage
 ```python
 def store_results(results: Dict[str, Any], workflow_name: str):
+    """Store workflow results with timestamp"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"data/{workflow_name}_{timestamp}.json"
+    
+    with open(filename, 'w') as f:
+        json.dump(results, f, indent=2)
+    
+    return filename
+```

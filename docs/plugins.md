@@ -38,15 +38,13 @@ class MyPlugin(Plugin):
 
 ### 1. Serper Plugin (Google SERP Data)
 ```python
-from pynions.plugins.serper_plugin import SerperPlugin
-
-serper = SerperPlugin({
-    "api_key": "your_key_here",
-    "max_results": 10
+from pynions.plugins.serper import SerperWebSearch
+serper = SerperWebSearch({
+"max_results": 10 # Optional, defaults to 10
 })
-
-results = await serper.execute({
-    "query": "best project management software"
+Execute search
+result = await serper.execute({
+"query": "your search query"
 })
 ```
 

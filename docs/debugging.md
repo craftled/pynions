@@ -47,9 +47,11 @@ playwright --version
 
 ### 2. API Issues
 
-#### Invalid API Keys
+#### Serper API Issues
+
+##### API Key Not Found
 ```python
-Error: Authentication failed for API request
+Error: SERPER_API_KEY not found in environment variables
 ```
 
 Solution:
@@ -57,14 +59,24 @@ Solution:
 # Check if environment variables are loaded
 python -c "import os; print(os.getenv('SERPER_API_KEY'))"
 
-# If None, verify .env file:
-cat .env
+# If None, verify .env file contains:
+SERPER_API_KEY=your_serper_key_here
 
 # Reload environment:
 source venv/bin/activate
 ```
 
-#### Rate Limits
+##### Invalid Response Format
+```python
+Error: Serper API error: 401 (Invalid API key)
+```
+
+Solution:
+1. Verify API key is valid in Serper dashboard
+2. Check API service status
+3. Monitor credit usage
+
+##### Rate Limits
 ```python
 Error: 429 Too Many Requests
 ```
@@ -75,6 +87,7 @@ Solution:
 {
   "plugins": {
     "serper": {
+      "max_results": 10,
       "retry_attempts": 3,
       "retry_delay": 5
     }
@@ -90,18 +103,19 @@ Error: Step 'fetch_serp' failed: Connection timeout
 ```
 
 Debug Steps:
-1. Check individual step:
+1. Test SerperWebSearch independently:
 ```python
-# Test step independently
-async def test_step():
-    step = WorkflowStep(
-        plugin=SerperPlugin(config),
-        name="fetch_serp"
-    )
-    return await step.execute({"query": "test"})
+# Test search independently
+async def test_search():
+    searcher = SerperWebSearch({
+        "max_results": 10
+    })
+    return await searcher.execute({
+        "query": "test query"
+    })
 
 # Run test
-await test_step()
+await test_search()
 ```
 
 2. Enable debug logging:
@@ -209,15 +223,22 @@ python -m memory_profiler your_script.py
 
 ### 1. Unit Tests
 ```python
-# tests/test_plugins/test_serper_plugin.py
+# tests/test_plugins/test_serper.py
 import pytest
-from pynions.plugins.serper_plugin import SerperPlugin
+from pynions.plugins.serper import SerperWebSearch
 
 @pytest.mark.asyncio
-async def test_serper_plugin():
-    plugin = SerperPlugin({"api_key": "test_key"})
-    result = await plugin.execute({"query": "test"})
+async def test_serper_search():
+    searcher = SerperWebSearch({
+        "max_results": 10
+    })
+    result = await searcher.execute({
+        "query": "test query"
+    })
     assert result is not None
+    assert "organic" in result
+    assert "peopleAlsoAsk" in result
+    assert "relatedSearches" in result
 ```
 
 ### 2. Integration Tests
@@ -225,12 +246,19 @@ async def test_serper_plugin():
 # tests/test_workflows/test_serp_workflow.py
 import pytest
 from pynions.core import Workflow
+from pynions.plugins.serper import SerperWebSearch
 
 @pytest.mark.asyncio
 async def test_serp_workflow():
-    workflow = create_test_workflow()
-    result = await workflow.execute({"query": "test"})
-    assert "fetch_serp" in result
+    workflow = Workflow("serp_test")
+    workflow.add_step(WorkflowStep(
+        plugin=SerperWebSearch({"max_results": 10}),
+        name="fetch_serp"
+    ))
+    result = await workflow.execute({
+        "query": "test query"
+    })
+    assert result is not None
 ```
 
 ## Monitoring
@@ -285,3 +313,39 @@ def log_system_metrics():
 3. Test in isolation
 4. Use debugging tools
 5. Ask specific questions
+
+## Common Serper Response Issues
+
+### 1. Missing Data Fields
+If certain fields are missing from the response:
+```python
+# Check if fields exist before accessing
+if "peopleAlsoAsk" in result and result["peopleAlsoAsk"]:
+    # Process people also ask data
+    pass
+
+if "relatedSearches" in result and result["relatedSearches"]:
+    # Process related searches
+    pass
+```
+
+### 2. Rate Limit Monitoring
+```python
+# Monitor credit usage
+if "credits" in result:
+    logging.info(f"Credits used: {result['credits']}")
+    if result["credits"] > threshold:
+        logging.warning("High credit usage detected")
+```
+
+### 3. Response Validation
+```python
+def validate_serper_response(result):
+    """Validate Serper API response"""
+    required_fields = ["searchParameters", "organic"]
+    for field in required_fields:
+        if field not in result:
+            logging.error(f"Missing required field: {field}")
+            return False
+    return True
+```
