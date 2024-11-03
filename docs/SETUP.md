@@ -3,7 +3,7 @@ title: "Local Setup"
 publishedAt: "2024-10-30"
 updatedAt: "2024-11-03"
 summary: "Detailed local setup guide for Pynions."
-kind: "simple"
+kind: "detailed"
 ---
 
 ## Prerequisites Installation (Mac)
