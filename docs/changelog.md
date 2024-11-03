@@ -2,7 +2,7 @@
 title: "Changelog"
 publishedAt: "2024-11-03"
 updatedAt: "2024-11-03"
-summary: "New updates and improvements"
+summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
