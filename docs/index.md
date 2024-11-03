@@ -1,7 +1,9 @@
 ---
-title: "Pynions Documentation Index"
-sidebarTitle: "Documentation Index"
-description: "Complete documentation for Pynions - a lean Python framework for building AI-powered marketing automation workflows that run locally."
+title: "Documentation Index"
+publishedAt: "2024-10-30"
+updatedAt: "2024-11-03"
+summary: "Complete documentation for Pynions - a lean Python framework for building AI-powered marketing automation workflows that run locally."
+kind: "simple"
 ---
 
 ## Getting Started
@@ -97,6 +99,6 @@ See [Project Structure](01-project-structure.md) for:
 
 ## Plugin Documentation
 - [Jina AI Reader](plugins/jina.md) - Extract clean content from web pages
-TODO: - [Serper Web Search](plugins/serper.md) - Search engine results and analytics
-TODO: - [LiteLLM](plugins/litellm.md) - AI model integration
-TODO: - [Playwright](plugins/playwright.md) - Web scraping and automation
+- TODO: [Serper Web Search](plugins/serper.md) - Search engine results and analytics
+- TODO: [LiteLLM](plugins/litellm.md) - AI model integration
+- TODO: [Playwright](plugins/playwright.md) - Web scraping and automation
