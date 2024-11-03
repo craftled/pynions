@@ -2,7 +2,7 @@
 title: "Environment Setup"
 publishedAt: "2024-10-30"
 updatedAt: "2024-11-03"
-summary: "ENV setup guide for Pynions"
+summary: "ENV setup guide for Pynions."
 kind: "simple"
 ---
 
