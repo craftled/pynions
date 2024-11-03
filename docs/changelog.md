@@ -7,4 +7,4 @@ kind: "detailed"
 ---
 
 ## v0.1.0 - Oct 30, 2024
-- Initial release
+- Initial release.
