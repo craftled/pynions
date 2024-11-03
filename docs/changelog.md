@@ -6,5 +6,5 @@ summary: "New updates and improvements"
 kind: "detailed"
 ---
 
-## v0.0.1
+## v0.0.1 - Oct 30, 2024
 - Initial release
