@@ -1,4 +1,10 @@
-# Detailed Setup Guide for Pynions
+---
+title: "Setup"
+publishedAt: "2024-10-30"
+updatedAt: "2024-11-03"
+summary: "Detailed local setup guide for Pynions."
+kind: "simple"
+---
 
 ## Prerequisites Installation (Mac)
 
