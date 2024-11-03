@@ -2,7 +2,7 @@
 title: "Plugin Development"
 publishedAt: "2024-10-30"
 updatedAt: "2024-11-03"
-description: "Learn how to create custom plugins to extend Pynions with new capabilities and integrate additional tools into your marketing automation workflows."
+summary: "Learn how to create custom plugins to extend Pynions with new capabilities and integrate additional tools into your marketing automation workflows."
 kind: "simple"
 ---
 
