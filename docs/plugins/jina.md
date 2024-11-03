@@ -1,7 +1,9 @@
 ---
-title: "Jina AI Reader Plugin"
-sidebarTitle: "Jina"
-description: "Extract clean, readable content from any webpage using Jina AI's content extraction capabilities."
+title: "Jina AI Reader"
+publishedAt: "2024-11-01"
+updatedAt: "2024-11-03"
+summary: "Extract clean, readable content from any webpage using Jina AI's content extraction capabilities."
+kind: "simple"
 ---
 
 ## Overview
