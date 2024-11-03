@@ -1,7 +1,9 @@
 ---
-title: "Installation Guide"
-sidebarTitle: "Installation"
-description: "Step-by-step guide for installing Pynions and setting up your local marketing automation environment on macOS."
+title: "Installation"
+publishedAt: "2024-10-30"
+updatedAt: "2024-11-03"
+summary: "Step-by-step guide for installing Pynions and setting up your local marketing automation environment on macOS."
+kind: "simple"
 ---
 
 ## Prerequisites
