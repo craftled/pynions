@@ -184,4 +184,4 @@ If you encounter issues:
 
 ## Credits
 
-Built with ❤️ by marketers who code
+Built with ☕️ and dedication by a marketer who codes.
