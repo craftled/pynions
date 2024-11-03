@@ -1,7 +1,9 @@
 ---
-title: "Project Structure Guide"
-sidebarTitle: "Project Structure"
-description: "Learn how to organize your Pynions project files and understand the recommended project structure for building local marketing automation workflows."
+title: "Project Structure"
+publishedAt: "2024-10-30"
+updatedAt: "2024-11-03"
+summary: "Learn how to organize your Pynions project files and understand the recommended project structure for building local marketing automation workflows."
+kind: "simple"
 ---
 
 ## Complete File Structure
