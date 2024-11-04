@@ -1,11 +1,9 @@
-# .gitignore
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -33,12 +31,21 @@ ENV/
 *.swo
 
 # Project specific
-.env
-config.json
 data/*
 !data/.gitkeep
 logs/*
 !logs/.gitkeep
+output/
+results/
+
+# Environment and Settings
+*.env
+.envrc
+.direnv
+*.local
+local_settings.py
+instance/
+config*.json
 
 # OS specific
 .DS_Store
@@ -47,10 +54,49 @@ Thumbs.db
 # PyPI
 .pypirc
 
-# Test coverage
-htmlcov/
-.pytest_cache/
-.coverage
-.coverage.*
+# Testing and Coverage
+.coverage*
 coverage.xml
 *.cover
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage/
+htmlcov/
+test-results/
+junit/
+
+# Secrets and Keys
+*.pem
+*.key
+*.cert
+secrets.*
+credentials.*
+token.*
+
+# Logs and Databases
+*.log
+*.sqlite*
+*.db
+db.json
+
+# Temporary and Cache files
+*.tmp
+*.temp
+*.cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Package specific
+pynions-*/
