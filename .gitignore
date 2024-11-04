@@ -46,3 +46,10 @@ Thumbs.db
 
 # PyPI
 .pypirc
+
+# Test coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
