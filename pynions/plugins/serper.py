@@ -12,10 +12,15 @@ class SerperWebSearch(Plugin):
 
     def __init__(self, config: Dict[str, Any] = None):
         super().__init__(config)
-        load_dotenv()
-        self.api_key = os.getenv("SERPER_API_KEY")
+        # Get API key from config first, then environment
+        self.api_key = config.get("api_key") if config else None
         if not self.api_key:
-            raise ValueError("SERPER_API_KEY not found in environment variables")
+            self.api_key = os.getenv("SERPER_API_KEY")
+
+        if not self.api_key:
+            raise ValueError(
+                "SERPER_API_KEY not found in environment variables or config"
+            )
 
         self.base_url = "https://google.serper.dev/search"
         self.headers = {"X-API-KEY": self.api_key, "Content-Type": "application/json"}
@@ -29,6 +34,9 @@ class SerperWebSearch(Plugin):
         Returns:
             Dict containing search results or None if search fails
         """
+        if not self.api_key:
+            raise ValueError("SERPER_API_KEY not found in environment variables")
+
         query = input_data.get("query")
         if not query:
             raise ValueError("Query is required in input_data")
