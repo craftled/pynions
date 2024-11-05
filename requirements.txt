@@ -1,16 +1,18 @@
-# Core dependencies
-aiohttp>=3.8.0
-python-dotenv>=0.19.0
-pydantic>=2.0.0
+# Core (required)
+aiohttp==3.10.10
+python-dotenv==1.0.1
+pydantic==2.9.2
 
-# Plugin-specific dependencies
-litellm>=1.0.0
-playwright>=1.39.0
-httpx>=0.24.0
+# Plugins (will be installed automatically)
+litellm==1.51.3
+playwright==1.48.0
+httpx==0.27.2
+pip==24.3.1
 
-# Development dependencies
-pytest>=7.0.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
-black>=23.0.0
-isort>=5.12.0
+# Development (optional)
+setuptools==75.3.0
+pytest>=8.3.3
+pytest-asyncio>=0.24.0
+pytest-cov>=6.0.0
+black>=24.10.0
+isort>=5.13.2

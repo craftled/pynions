@@ -9,6 +9,7 @@ kind: "detailed"
 ## Super Quick Setup (Copy-Paste Ready)
 
 ### 1. Create Project & Install
+
 ```bash
 # Create project directory and enter it
 mkdir ~/Documents/pynions && cd ~/Documents/pynions
@@ -25,12 +26,14 @@ pip install aiohttp litellm python-dotenv
 ```
 
 ### 2. Create Config Files
+
 ```bash
 # Create .env file
 echo "OPENAI_API_KEY=your_openai_api_key_here" > .env
 ```
 
 ### 3. Copy-Paste This Complete Working Example
+
 Create `quickstart.py` and paste this complete code:
 
 ```python
@@ -38,25 +41,22 @@ import asyncio
 import os
 from datetime import datetime
 from dotenv import load_dotenv
+from litellm import acompletion
 
 # Load environment variables
 load_dotenv()
 
 class QuickAI:
-    def __init__(self):
-        self.api_key = os.getenv('OPENAI_API_KEY')
-        if not self.api_key:
-            raise ValueError("Please add your OpenAI API key to .env file")
-    
     async def analyze(self, topic):
-        from litellm import completion
-        
         try:
-            response = await completion(
+            response = await acompletion(
                 model="gpt-4o-mini",
                 messages=[{
+                    "role": "system",
+                    "content": "You are a helpful AI assistant that analyzes topics."
+                }, {
                     "role": "user",
-                    "content": f"Give me 3 key points about: {topic}. Be concise."
+                    "content": f"Analyze this topic: {topic}"
                 }]
             )
             return response.choices[0].message.content
@@ -67,30 +67,31 @@ async def main():
     # Initialize
     print("\n🤖 Pynions Quick Start Demo")
     print("---------------------------")
-    
+
     try:
         ai = QuickAI()
-        
+
         # Get user input
         topic = input("\n📝 Enter a topic to analyze: ")
-        
+
         # Process
         print("\n🔄 Analyzing...")
         result = await ai.analyze(topic)
-        
+
         # Save result
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"data/analysis_{timestamp}.txt"
-        
+
+        os.makedirs('data', exist_ok=True)
         with open(filename, 'w') as f:
             f.write(result)
-        
+
         # Display result
         print("\n📊 Analysis Results:")
         print("------------------")
         print(result)
         print(f"\n✅ Results saved to: {filename}")
-        
+
     except Exception as e:
         print(f"\n❌ Error: {str(e)}")
         print("\n🔍 Troubleshooting:")
@@ -103,6 +104,7 @@ if __name__ == "__main__":
 ```
 
 ### 4. Run It!
+
 ```bash
 # Add your OpenAI API key to .env file (replace with your actual key)
 echo "OPENAI_API_KEY=sk-your-key-here" > .env
@@ -127,11 +129,13 @@ python quickstart.py
 ## Common Issues
 
 1. **"Module not found" error**
+
    ```bash
    pip install aiohttp litellm python-dotenv
    ```
 
 2. **API Key error**
+
    - Check .env file exists
    - Verify API key is correct
    - Make sure no quotes in .env file
@@ -142,6 +146,7 @@ python quickstart.py
    ```
 
 ## 30-Second Test Run
+
 ```bash
 # Quick test with a simple topic
 echo "OPENAI_API_KEY=your-key-here" > .env
