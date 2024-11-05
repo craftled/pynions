@@ -86,17 +86,17 @@ code config.json
 {
   "plugins": {
     "serper": {
-      "api_key": "your_serper_api_key_here"
+      "location": "United States",
+      "num": 20
     },
     "litellm": {
-      "api_key": "your_openai_api_key_here",
-      "default_model": "gpt-4"
+      "model_name": "gpt-4o-mini"
     },
     "anthropic": {
-      "api_key": "your_anthropic_api_key_here"
+      "model": "claude-3-5-sonnet-latest"
     },
     "jina": {
-      "api_key": "your_jina_api_key_here"
+      "with_links_summary": true
     }
   }
 }

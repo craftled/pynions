@@ -1,16 +1,19 @@
 import asyncio
-from pynions import Workflow, WorkflowStep, Config, DataStore, SerperWebSearch
+import os
+from dotenv import load_dotenv
+from pynions import Config, DataStore, Workflow, WorkflowStep
+from pynions.plugins.serper import SerperWebSearch
+
+# Load environment variables
+load_dotenv()
 
 
 async def main():
-    # Load configuration
-    config = Config("config.json")
+    # Initialize plugin with minimal config (API key will be loaded from .env)
+    serper_config = {"max_results": 20}  # Only non-sensitive configuration
 
-    # Initialize data store
-    data_store = DataStore()
-
-    # Initialize plugins
-    serper = SerperWebSearch(config.get_plugin_config("serper"))
+    # Initialize plugin
+    serper = SerperWebSearch(serper_config)
 
     # Create workflow steps
     serp_step = WorkflowStep(
@@ -30,8 +33,15 @@ async def main():
             {"query": "best project management software 2024"}
         )
 
-        # Save results
+        # Save results using DataStore
+        data_store = DataStore()
         data_store.save(results, "serp_analysis")
+
+        # Display results summary
+        print("\nAll search results:")
+        for i, result in enumerate(results["fetch_serp"]["organic"], 1):
+            print(f"\n{i}. {result['title']}")
+            print(f"   URL: {result['link']}")
 
     except Exception as e:
         print(f"Workflow error: {str(e)}")
