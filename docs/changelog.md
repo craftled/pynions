@@ -8,6 +8,7 @@ kind: "detailed"
 
 ## v0.2.13 - Nov 5, 2024
 
+- Updated homepage
 - Updated quickstart example
 - Updated requirements.txt
 - Updated setup.py
