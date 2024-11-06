@@ -6,7 +6,7 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
-## v0.2.14 - Nov 6, 2024
+## v0.2.14 - Nov 7, 2024
 
 ### Added
 - New LiteLLM plugin for unified LLM access
