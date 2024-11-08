@@ -39,7 +39,7 @@ setup(
     description="Simple AI automation framework for marketers",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tomaslau/pynions",
+    url="https://pynions.com",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
