@@ -97,6 +97,7 @@ if __name__ == "__main__":
 
 - **SerperWebSearch**: Google SERP data extraction using Serper.dev API
 - **JinaAIReader**: Clean content extraction from web pages
+- **FraseAPI**: Content analysis and metrics extraction
 - **StatsPlugin**: Track and display request statistics
 - More plugins coming soon!
 
@@ -126,6 +127,7 @@ SERPER_API_KEY=your_serper_key_here
 OPENAI_API_KEY=your_openai_key_here
 ANTHROPIC_API_KEY=your_anthropic_key_here
 JINA_API_KEY=your_jina_key_here
+FRASER_API_KEY=your_fraser_key_here
 ```
 
 ### Application Config (config.json)
