@@ -1,10 +1,18 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-05"
+updatedAt: "2024-11-08"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.15 - Nov 8, 2024
+
+### Added
+- New Frase API integration for content analysis
+- Batch URL processing support
+- Detailed metrics aggregation
+- Enhanced logging and debugging output
 
 ## v0.2.14 - Nov 7, 2024
 
