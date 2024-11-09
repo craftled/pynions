@@ -1,13 +1,15 @@
 import json
 import logging
 from typing import Any, Dict
+from pathlib import Path
 
 
 class Config:
     """Manages configuration loading and access"""
 
-    def __init__(self, config_file: str = "config.json"):
-        self.config_file = config_file
+    def __init__(self, config_file: str = "settings.json"):
+        self.config_dir = Path(__file__).parent.parent / "config"
+        self.config_file = self.config_dir / config_file
         self.config_data = {}
         self.logger = logging.getLogger("pynions.config")
         self._load_config()
