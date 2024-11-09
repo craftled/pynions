@@ -53,9 +53,9 @@ result = await serper.execute({
 ### 2. LiteLLM Plugin (AI Models)
 
 ```python
-from pynions.plugins.litellm_plugin import LiteLLMPlugin
+from pynions.plugins.litellm_plugin import LiteLLM
 
-llm = LiteLLMPlugin({
+llm = LiteLLM({
     "api_key": "your_key_here",
     "model": "gpt-4"
 })
@@ -82,9 +82,9 @@ content = await browser.execute({
 ### 4. Jina Plugin (Content Extraction)
 
 ```python
-from pynions.plugins.jina_plugin import JinaPlugin
+from pynions.plugins.jina import JinaAIReader
 
-jina = JinaPlugin({
+jina = JinaAIReader({
     "api_key": "your_key_here"
 })
 
