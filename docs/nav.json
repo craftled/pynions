@@ -1,0 +1,37 @@
+{
+  "docsNavigationOrder": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "quickstart",
+        "index",
+        "project-structure",
+        "installation",
+        "configuration",
+        "plugins",
+        "workflows",
+        "debugging"
+      ]
+    },
+    {
+      "group": "Plugins",
+      "pages": ["plugins/jina"]
+    },
+    {
+      "group": "Examples",
+      "pages": ["examples/bofu_ideas"]
+    },
+    {
+      "group": "Templates",
+      "pages": ["templates/bofu_ideas"]
+    },
+    {
+      "group": "Use Cases",
+      "pages": ["use-cases/bofu_ideas"]
+    },
+    {
+      "group": "Workflows",
+      "pages": ["workflows/bofu_ideas"]
+    }
+  ]
+}
