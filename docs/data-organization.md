@@ -6,12 +6,12 @@ Pynions uses a structured approach to organize data and content workflows.
 
 ```
 data/
-├── raw/              # Original, unmodified data
-│   ├── scraped_data/ # Raw scraped content
-│   └── logs/         # Application logs
-└── output/           # All workflow outputs
-    └── [project]/    # Project-specific folders
-        └── [project]_[status]_[date].[ext]
+├── output/           # All workflow outputs
+│   └── [project]/    # Project-specific folders
+│       └── [project]_[status]_[date].[ext]
+└── raw/              # Original, unmodified data
+    ├── scraped_data/ # Raw scraped content
+    └── logs/         # Application logs
 ```
 
 ## Workflow Status Types
@@ -33,6 +33,7 @@ Files are automatically named using the following pattern:
 `[project]_[status]_[YYYYMMDD].[extension]`
 
 Examples:
+
 ```
 best_mailchimp_alternatives_research_20240309.md
 best_mailchimp_alternatives_brief_20240309.md
@@ -120,16 +121,19 @@ Status types and their properties are configured in `settings.json`:
 ## Best Practices
 
 1. **Project Names**
+
    - Use descriptive, hyphen-separated names
    - Keep names consistent across related content
    - Example: "best-mailchimp-alternatives"
 
 2. **Content Organization**
+
    - Create a new project folder for each content initiative
    - Keep all related files within the project folder
    - Use appropriate status types to track progress
 
 3. **Raw Data**
+
    - Always save original, unmodified data in the raw directory
    - Use descriptive source names
    - Include timestamps for tracking
@@ -142,14 +146,17 @@ Status types and their properties are configured in `settings.json`:
 ## Data Lifecycle
 
 1. **Creation**
+
    - Raw data is saved in appropriate raw/ subdirectories
    - New project folders are created as needed
 
 2. **Processing**
+
    - Content moves through various status types
    - Each stage saved with appropriate status
 
 3. **Completion**
+
    - Final content marked with 'final' status
    - Raw data retained for reference
 
