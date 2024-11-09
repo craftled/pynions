@@ -1,7 +1,7 @@
 ---
 title: "Quickstart"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-03"
+updatedAt: "2024-11-09"
 summary: "Get started with Pynions in 2 minutes by setting up your first local AI workflow. No cloud dependencies, just Python and a few API keys."
 kind: "detailed"
 ---
@@ -18,18 +18,23 @@ mkdir ~/Documents/pynions && cd ~/Documents/pynions
 python3 -m venv venv
 source venv/bin/activate
 
-# Create folders and files
-mkdir -p pynions/plugins data
+# Create project structure
+mkdir -p pynions/config pynions/plugins pynions/core data/output data/raw
 
 # Install required packages
-pip install aiohttp litellm python-dotenv
+pip install aiohttp litellm python-dotenv httpx
 ```
 
 ### 2. Create Config Files
 
 ```bash
-# Create .env file
-echo "OPENAI_API_KEY=your_openai_api_key_here" > .env
+# Create config directory and files
+mkdir -p pynions/config
+cp .env.example pynions/config/.env
+cp settings.example.json pynions/config/settings.json
+
+# Add your API key to .env
+nano pynions/config/.env
 ```
 
 ### 3. Copy-Paste This Complete Working Example
@@ -40,64 +45,47 @@ Create `quickstart.py` and paste this complete code:
 import asyncio
 import os
 from datetime import datetime
-from dotenv import load_dotenv
-from litellm import acompletion
-
-# Load environment variables
-load_dotenv()
-
-class QuickAI:
-    async def analyze(self, topic):
-        try:
-            response = await acompletion(
-                model="gpt-4o-mini",
-                messages=[{
-                    "role": "system",
-                    "content": "You are a helpful AI assistant that analyzes topics."
-                }, {
-                    "role": "user",
-                    "content": f"Analyze this topic: {topic}"
-                }]
-            )
-            return response.choices[0].message.content
-        except Exception as e:
-            return f"Error: {str(e)}"
+from pynions.core.config import load_config
+from pynions.core.datastore import save_result
+from pynions.plugins.litellm import LiteLLMPlugin
 
 async def main():
-    # Initialize
+    # Load configuration
+    config = load_config()
+
+    # Initialize LiteLLM plugin
+    ai = LiteLLMPlugin(config["plugins"]["litellm"])
+
     print("\n🤖 Pynions Quick Start Demo")
     print("---------------------------")
 
     try:
-        ai = QuickAI()
-
         # Get user input
         topic = input("\n📝 Enter a topic to analyze: ")
 
-        # Process
+        # Process with AI
         print("\n🔄 Analyzing...")
-        result = await ai.analyze(topic)
+        response = await ai.analyze(topic)
 
-        # Save result
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"data/analysis_{timestamp}.txt"
-
-        os.makedirs('data', exist_ok=True)
-        with open(filename, 'w') as f:
-            f.write(result)
+        # Save result using core utilities
+        save_result(
+            content=response,
+            project_name="quickstart",
+            status="research"
+        )
 
         # Display result
         print("\n📊 Analysis Results:")
         print("------------------")
-        print(result)
-        print(f"\n✅ Results saved to: {filename}")
+        print(response)
+        print(f"\n✅ Results saved to data/output/quickstart/")
 
     except Exception as e:
         print(f"\n❌ Error: {str(e)}")
         print("\n🔍 Troubleshooting:")
-        print("1. Check if OPENAI_API_KEY is set in .env")
+        print("1. Check if API keys are set in pynions/config/.env")
         print("2. Verify internet connection")
-        print("3. Ensure OpenAI API is accessible")
+        print("3. Ensure API services are accessible")
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -106,10 +94,7 @@ if __name__ == "__main__":
 ### 4. Run It!
 
 ```bash
-# Add your OpenAI API key to .env file (replace with your actual key)
-echo "OPENAI_API_KEY=sk-your-key-here" > .env
-
-# Run the demo
+# Make sure your API keys are in pynions/config/.env
 python quickstart.py
 ```
 
