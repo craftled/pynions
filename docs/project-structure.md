@@ -37,7 +37,7 @@ pynions/
 │   ├── testing.md                      # Testing guide
 │   └── workflows.md                    # Workflow creation guide
 │
-├── pynions/                           # Main package directory
+├── pynions/                            # Main package directory
 │   ├── config/                         # Configuration files
 │   │   ├── .env                        # Environment variables
 │   │   ├── .env.example                # Environment variables example
@@ -64,9 +64,9 @@ pynions/
 │   ├── tests/                          # Test files
 │   │   ├── test_plugins/               # Test plugin files
 │   │   │   └── test_serper_plugin.py
-│   │   ├── __init__.py                  # Package initialization
-│   │   ├── conftest.py                  # Test configuration
-│   │   └── test_core.py                  # Core test file
+│   │   ├── __init__.py                 # Package initialization
+│   │   ├── conftest.py                 # Test configuration
+│   │   └── test_core.py                # Core test file
 │   │
 │   └── __init__.py                     # Package initialization
 │
