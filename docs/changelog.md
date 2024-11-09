@@ -6,7 +6,7 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
-## v0.2.16 - Nov 9, 2024
+## v0.2.17 - Nov 9, 2024
 
 ### Changed
 
