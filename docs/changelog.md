@@ -1,10 +1,38 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-08"
+updatedAt: "2024-11-09"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.18 - Nov 9, 2024
+
+### Changed
+
+- Reorganized project configuration structure
+  - Moved all config files to `/pynions/config/` directory
+  - Consolidated settings into single `settings.json`
+  - Moved `.env` to config directory
+- Improved data directory organization
+  - Separated raw and output data
+  - Added structured workflow status types
+  - Implemented project-based output organization
+- Enhanced utils.py with new file management functions
+  - Added project-aware save functions
+  - Improved status type validation
+  - Added configurable file extensions
+
+### Added
+
+- New configuration management system
+  - Added `settings.py` for centralized config loading
+  - Added workflow status types configuration
+  - Added file extension preferences per status
+- New utility functions for content workflow
+  - `save_result()` with project and status support
+  - `save_raw_data()` for structured data storage
+  - `slugify()` for consistent file naming
 
 ## v0.2.17 - Nov 9, 2024
 

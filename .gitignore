@@ -100,3 +100,7 @@ site/
 
 # Package specific
 pynions-*/
+
+# Config files
+pynions/config/.env
+.env
