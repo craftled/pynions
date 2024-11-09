@@ -6,6 +6,19 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
+## v0.2.16 - Nov 9, 2024
+
+### Changed
+- Reorganized examples structure for better discoverability
+- Moved example scripts from /examples to /docs/examples
+- Added detailed documentation for each example
+- Improved example organization by marketing function
+
+### Added
+- New documentation for BOFU content generator
+- Quick analysis example documentation
+- Examples README with categorized listing
+
 ## v0.2.15 - Nov 8, 2024
 
 ### Added
