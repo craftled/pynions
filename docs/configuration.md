@@ -19,26 +19,38 @@ Main configuration file located at `pynions/config/settings.json`:
 
 ```json
 {
-  "model": {
-    "name": "gpt-4",
-    "temperature": 0.7
-  },
-  "plugins": {
-    "serper": {
-      "max_results": 10
+  "workflow": {
+    "status_types": {
+      "research": {
+        "description": "Initial research and data gathering",
+        "extensions": ["md", "txt"]
+      },
+      "brief": {
+        "description": "Content brief or outline",
+        "extensions": ["md"]
+      },
+      "draft": {
+        "description": "First version of content",
+        "extensions": ["md"]
+      }
     }
   },
   "storage": {
     "data_dir": "data",
     "raw_dir": "data/raw",
     "output_dir": "data/output"
+  },
+  "plugins": {
+    "serper": {
+      "max_results": 10
+    }
   }
 }
 ```
 
 ### Environment Variables (.env)
 
-Sensitive configuration in `pynions/config/.env`:
+Sensitive configuration like API keys are stored in `pynions/config/.env`:
 
 ```bash
 # Search API
@@ -50,6 +62,7 @@ ANTHROPIC_API_KEY=your_anthropic_key_here
 
 # Content Processing
 JINA_API_KEY=your_jina_key_here
+FRASE_API_KEY=your_actual_frase_key
 ```
 
 ## Setup Steps
