@@ -6,7 +6,7 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
-## v0.2.18 - Nov 9, 2024
+## v0.2.19 - Nov 9, 2024
 
 ### Changed
 
@@ -22,6 +22,11 @@ kind: "detailed"
   - Added project-aware save functions
   - Improved status type validation
   - Added configurable file extensions
+- Reorganized core module structure
+  - Split core.py into separate modules
+  - Created dedicated core/ directory
+  - Improved code organization
+- Maintained backward compatibility
 
 ### Added
 
