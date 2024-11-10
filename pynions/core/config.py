@@ -2,6 +2,9 @@ from typing import Dict, Any
 import os
 from dotenv import load_dotenv
 import json
+from pathlib import Path
+
+CONFIG_DIR = Path(__file__).parent.parent / "config"
 
 
 class Config:
@@ -16,12 +19,12 @@ class Config:
         return cls._instance
 
     def _load(self):
-        """Load all configuration"""
-        load_dotenv("pynions/config/.env")
-        self._load_settings()
+        """Load all configuration from the central config directory"""
+        # Load .env from config directory
+        load_dotenv(CONFIG_DIR / ".env")
 
-    def _load_settings(self):
-        with open("pynions/config/settings.json") as f:
+        # Load settings.json from config directory
+        with open(CONFIG_DIR / "settings.json") as f:
             self.settings = json.load(f)
 
     def get(self, key: str, default: Any = None) -> Any:

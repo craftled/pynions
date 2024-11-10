@@ -71,35 +71,23 @@ playwright install
 
 ## Configuration Setup
 
-1. Create config.json:
+1. All configuration files are located in `pynions/config/`:
+   - `.env` - For API keys and secrets
+   - `settings.json` - For application settings
+
+2. Copy example files:
 ```bash
-cp config.example.json config.json
+cp .env.example pynions/config/.env
+cp settings.example.json pynions/config/settings.json
 ```
 
-2. Open config.json in your editor (e.g., VS Code):
+3. Edit your configuration:
 ```bash
-code config.json
-```
+# Add your API keys
+nano pynions/config/.env
 
-3. Add your API keys:
-```json
-{
-  "plugins": {
-    "serper": {
-      "location": "United States",
-      "num": 20
-    },
-    "litellm": {
-      "model_name": "gpt-4o-mini"
-    },
-    "anthropic": {
-      "model": "claude-3-5-sonnet-latest"
-    },
-    "jina": {
-      "with_links_summary": true
-    }
-  }
-}
+# Modify settings if needed
+nano pynions/config/settings.json
 ```
 
 ## Cursor IDE Setup

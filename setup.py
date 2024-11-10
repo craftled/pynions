@@ -2,6 +2,8 @@ from setuptools import setup, find_packages
 import sys
 import subprocess
 from setuptools.command.install import install
+from pathlib import Path
+import shutil
 
 # Read requirements from requirements.txt
 with open("requirements.txt") as f:
@@ -22,6 +24,12 @@ class PostInstallCommand(install):
         print("1. Create a .env file with your API keys")
         print("2. Copy config.example.json to config.json")
         print("3. Run: playwright install")
+        config_dir = Path("pynions/config")
+        config_dir.mkdir(exist_ok=True)
+
+        # Copy example files to config directory
+        shutil.copy2(".env.example", config_dir / ".env")
+        shutil.copy2("settings.example.json", config_dir / "settings.json")
 
 
 def run_playwright_install():
