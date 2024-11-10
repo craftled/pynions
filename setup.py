@@ -33,7 +33,7 @@ def run_playwright_install():
 
 setup(
     name="pynions",
-    version="0.2.21",
+    version="0.2.22",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple AI automation framework for marketers",
