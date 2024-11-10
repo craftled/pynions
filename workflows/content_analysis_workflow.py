@@ -1,15 +1,11 @@
 import asyncio
 import os
 from typing import Dict, Any, List
-from dotenv import load_dotenv
 from pynions import Config, DataStore, Workflow, WorkflowStep
 from pynions.plugins.serper import SerperWebSearch
 from pynions.plugins.jina import JinaAIReader
 from pynions.plugins.litellm_plugin import LiteLLM
 from datetime import datetime
-
-# Load environment variables
-load_dotenv()
 
 
 async def content_analysis_workflow(keyword: str):

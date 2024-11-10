@@ -1,20 +1,17 @@
-from abc import ABC, abstractmethod
-from typing import Any, Dict
-import logging
+from typing import Dict, Any
+from .config import config
 
 
-class Plugin(ABC):
-    """Base class for all plugins"""
+class Plugin:
+    """Base plugin class"""
 
-    def __init__(self, config: Dict[str, Any] = None):
-        self.config = config or {}
-        self.logger = logging.getLogger(f"pynions.{self.__class__.__name__}")
+    def __init__(self, plugin_config: Dict[str, Any] = None):
+        self.config = plugin_config or {}
 
-    @abstractmethod
-    async def execute(self, input_data: Any) -> Any:
-        """Execute the plugin's main functionality"""
-        pass
+    def get_env(self, key: str) -> str:
+        """Get environment variable through core config"""
+        return config.get_env(key)
 
-    def validate_config(self) -> bool:
-        """Validate plugin configuration"""
-        return True
+    def get_setting(self, path: str) -> Any:
+        """Get setting through core config"""
+        return config.get_setting(path)

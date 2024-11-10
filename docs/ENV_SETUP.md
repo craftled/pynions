@@ -1,7 +1,7 @@
 ---
 title: "Environment Setup"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-08"
+updatedAt: "2024-11-10"
 summary: "ENV setup guide for Pynions."
 kind: "detailed"
 ---
@@ -40,7 +40,7 @@ The project now uses two types of configuration:
    - Credentials
    - Environment-specific settings
 
-2. `config.json` for non-sensitive settings:
+2. `settings.json` for non-sensitive settings:
    - Plugin configurations
    - Default values
    - Feature flags
@@ -55,16 +55,10 @@ The project now uses two types of configuration:
 cat .gitignore | grep .env
 ```
 
-2. Keep .env.example updated:
-
+2. Keep `settings.json` updated:
    - Add new variables as needed
    - Remove unused variables
    - Don't include actual API keys
-
-3. Use different .env files for different environments:
-   - .env.development
-   - .env.testing
-   - .env.production
 
 ## Troubleshooting
 
@@ -85,7 +79,7 @@ print(os.getenv('SERPER_API_KEY'))  # Should print your key
 
 3. Common issues:
    - .env file not copied from .env.example
-   - .env file in wrong directory
+   - .env file in wrong directory (should be in `pynions/config/`)
    - Invalid API key format
    - Missing required variables
 
@@ -95,6 +89,14 @@ The configuration system loads in this order:
 
 1. System environment variables
 2. .env file variables
-3. config.json settings
+3. settings.json settings
 
 Later values override earlier ones.
+
+## Automatic Loading
+
+Environment variables are automatically loaded by the base Plugin class. You don't need to manually load them in your plugins or workflows. Just ensure your `.env` file is in the correct location:
+
+```bash
+pynions/config/.env
+```

@@ -1,11 +1,7 @@
 import asyncio
 import os
-from dotenv import load_dotenv
 from pynions import Config, DataStore, Workflow, WorkflowStep
 from pynions.plugins.serper import SerperWebSearch
-
-# Load environment variables
-load_dotenv()
 
 
 async def main():

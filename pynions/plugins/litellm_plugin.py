@@ -1,42 +1,37 @@
-import os
 from typing import Dict, Any, Optional
 import logging
 from litellm import completion
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+from pynions.core import Plugin
+from pynions.core.config import config
 
 
-class LiteLLM:
+class LiteLLM(Plugin):
     """Plugin for interacting with LLMs using LiteLLM"""
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, plugin_config: Optional[Dict[str, Any]] = None):
         """Initialize the LiteLLM plugin with configuration"""
-        self.config = config or {}
+        super().__init__(plugin_config)
         self.logger = logging.getLogger("pynions.plugins.litellm")
 
-        # Set default model to gpt-4o
+        # Set default model and get API key from core config
         self.model = self.config.get("model", "gpt-4o-mini")
+        self.api_key = config.get("OPENAI_API_KEY")
 
-        # Set API key from environment
-        self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             self.logger.warning("No OpenAI API key provided")
 
     async def execute(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
         """Execute LLM completion request"""
         try:
-            # Extract parameters from input
             messages = input_data.get("messages", [])
             if not messages:
                 raise ValueError("No messages provided for completion")
 
-            # Get optional parameters
+            # Get optional parameters with defaults
             temperature = self.config.get("temperature", 0.7)
             max_tokens = self.config.get("max_tokens", 2000)
 
-            # Make completion request (using sync for now as async isn't working well)
+            # Make completion request
             response = completion(
                 model=self.model,
                 messages=messages,
@@ -44,7 +39,7 @@ class LiteLLM:
                 max_tokens=max_tokens,
             )
 
-            # Extract and return relevant response data
+            # Extract usage data if available
             usage_data = None
             if hasattr(response, "usage"):
                 usage_data = {
@@ -66,7 +61,7 @@ class LiteLLM:
             return {"error": str(e), "content": None}
 
 
-async def test_completion(prompt: str = "What is content marketing?"):
+async def test_completion(prompt: str = "What is SaaS content marketing?"):
     """Test the LiteLLM plugin with a sample prompt"""
     try:
         llm = LiteLLM()
@@ -98,7 +93,6 @@ async def test_completion(prompt: str = "What is content marketing?"):
 
 
 if __name__ == "__main__":
-    # Run test with a simple prompt
     import asyncio
 
     asyncio.run(test_completion())

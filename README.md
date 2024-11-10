@@ -115,19 +115,19 @@ if __name__ == "__main__":
 - **SerperWebSearch**: Google SERP data extraction using Serper.dev API
 - **JinaAIReader**: Clean content extraction from web pages
 - **LiteLLMPlugin**: Unified access to various LLM APIs
-- **FraseAPI**: Content analysis and metrics extraction
+- **FraseAPI**: NLP-powered content analysis and metrics extraction
 - **PlaywrightPlugin**: Web scraping and automation
 - **StatsPlugin**: Track and display request statistics
 - More plugins coming soon!
 
 ## Documentation
 
-1. [Project Structure](docs/01-project-structure.md)
-2. [Installation Guide](docs/02-installation.md)
-3. [Configuration Guide](docs/03-configuration.md)
-4. [Plugin Development](docs/04-plugins.md)
-5. [Workflow Creation](docs/05-workflows.md)
-6. [Debugging Guide](docs/06-debugging.md)
+1. [Project Structure](docs/project-structure.md)
+2. [Installation Guide](docs/installation.md)
+3. [Configuration Guide](docs/configuration.md)
+4. [Plugin Development](docs/plugins.md)
+5. [Workflow Creation](docs/workflows.md)
+6. [Debugging Guide](docs/debugging.md)
 
 ## Requirements
 
@@ -161,6 +161,7 @@ See [settings.example.json](pynions/config/settings.example.json) for all availa
 
 ## Philosophy
 
+- Use the "Don't Repeat Yourself" (DRY) principle
 - Smart and safe defaults
   - OpenAI's "gpt-4o-mini" is the default LLM
   - Serper is the default search tool
@@ -168,6 +169,8 @@ See [settings.example.json](pynions/config/settings.example.json) for all availa
 - No AI-only, always human in the loop
 - Minimal dependencies
 - No cloud dependencies
+  - All tools are local
+  - No need to sign up for anything (except for OpenAI API key, Serper dev API key, and Perplexity API key (optional))
 - No proprietary formats
 - No tracking
 - No telemetry
@@ -195,7 +198,7 @@ chmod 755 data
 
 ## Contributing
 
-See [Project Structure](docs/01-project-structure.md) for:
+See [Project Structure](docs/project-structure.md) for:
 
 - Code organization
 - Testing requirements
@@ -209,7 +212,7 @@ MIT License - see [LICENSE](LICENSE) for details
 
 If you encounter issues:
 
-1. Check the [Debugging Guide](docs/06-debugging.md)
+1. Check the [Debugging Guide](docs/debugging.md)
 2. Review relevant documentation sections
 3. Test components in isolation
 4. Use provided debugging tools
@@ -217,4 +220,4 @@ If you encounter issues:
 
 ## Credits
 
-Built with ☕️ and dedication by a marketer who codes.
+Standing on the shoulders of the open-source giants, built with ☕️ and dedication by a marketer who codes.

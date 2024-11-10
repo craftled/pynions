@@ -22,6 +22,7 @@ Something like Zapier/n8n but for local machines.
 
 ## Philosophy
 
+- Use the "Don't Repeat Yourself" (DRY) principle
 - Smart and safe defaults
   - OpenAI's "gpt-4o-mini" is the default LLM
   - Serper is the default search tool

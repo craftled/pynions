@@ -1,20 +1,18 @@
-import os
 import asyncio
 import aiohttp
 from typing import Any, Dict, Optional
-from dotenv import load_dotenv
 from pynions.core import Plugin
+from pynions.core.config import config
 
 
 class JinaAIReader(Plugin):
     """Plugin for extracting content from URLs using Jina AI Reader API"""
 
-    def __init__(self, config: Dict[str, Any] = None):
-        super().__init__(config)
-        load_dotenv()
-        self.api_key = os.getenv("JINA_API_KEY")
+    def __init__(self, plugin_config: Dict[str, Any] = None):
+        super().__init__(plugin_config)
+        self.api_key = config.get("JINA_API_KEY")
         if not self.api_key:
-            raise ValueError("JINA_API_KEY not found in environment variables")
+            raise ValueError("JINA_API_KEY not found in configuration")
 
         self.base_url = "https://r.jina.ai"
         self.headers = {
@@ -23,14 +21,7 @@ class JinaAIReader(Plugin):
         }
 
     async def execute(self, input_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """
-        Extract content from a URL using Jina AI Reader
-
-        Args:
-            input_data: Dict containing 'url' key
-        Returns:
-            Dict containing title, description, url, and content or None if extraction fails
-        """
+        """Extract content from a URL using Jina AI Reader"""
         url = input_data.get("url")
         if not url:
             raise ValueError("URL is required in input_data")
@@ -51,7 +42,7 @@ class JinaAIReader(Plugin):
                     return {
                         "title": data.get("title", ""),
                         "description": data.get("description", ""),
-                        "url": data.get("url", url),  # Fallback to input URL
+                        "url": data.get("url", url),
                         "content": data.get("content", ""),
                     }
 
@@ -60,10 +51,9 @@ class JinaAIReader(Plugin):
             return None
 
 
-async def test_reader(
-    url: str = "https://marketful.com/blog/marketing-planning-tools/",
-):
+async def test_reader():
     """Test the Jina AI Reader with a sample URL"""
+    url = "https://marketful.com/blog/marketing-planning-tools/"
     try:
         reader = JinaAIReader()
         print(f"\n🔄 Extracting content from: {url}")
@@ -83,7 +73,6 @@ async def test_reader(
         print("\nContent:")
         print("-" * 50)
         print(result["content"])
-        print("-" * 50)
         return result
 
     except Exception as e:
@@ -92,5 +81,4 @@ async def test_reader(
 
 
 if __name__ == "__main__":
-    # Run test with a simple example URL
-    asyncio.run(test_reader("https://marketful.com/blog/marketing-planning-tools/"))
+    asyncio.run(test_reader())

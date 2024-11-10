@@ -1,53 +1,41 @@
 from pynions.core import Plugin
-import os
 import asyncio
 import aiohttp
 from typing import Dict, Any, Optional, List
-from dotenv import load_dotenv
 import json
+from pynions.core.config import config
 
 
 class Frase(Plugin):
     """Plugin for processing URLs using Frase.io API"""
 
-    def __init__(self, config: Dict[str, Any] = None):
-        super().__init__(config)
-        load_dotenv()
-        # Get API key from config or environment
-        self.api_key = config.get("api_key") if config else None
+    def __init__(self, plugin_config: Dict[str, Any] = None):
+        super().__init__(plugin_config)
+        self.api_key = config.get("FRASE_API_KEY")
         if not self.api_key:
-            self.api_key = os.getenv("FRASE_API_KEY")
+            raise ValueError("FRASE_API_KEY not found in configuration")
 
-        if not self.api_key:
-            raise ValueError(
-                "FRASE_API_KEY not found in environment variables or config"
-            )
-
-        # Update base URL and headers according to docs
         self.base_url = "https://api.frase.io/api/v1/process_serp"
         self.headers = {
-            "token": self.api_key,  # API key should be in token header field
+            "token": self.api_key,
             "Accept": "application/json",
             "Content-Type": "application/json",
         }
 
     async def execute(self, params: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Execute the Frase API request"""
-        try:
-            # Validate input
-            if "serp_urls" not in params:
-                self.logger.error("serp_urls is required in params")
-                return None
+        if "serp_urls" not in params:
+            self.logger.error("serp_urls is required in params")
+            return None
 
-            # Make API request
+        try:
             async with aiohttp.ClientSession() as session:
                 async with session.post(
                     self.base_url,
                     headers=self.headers,
-                    json={"serp_urls": params["serp_urls"]},  # Simplified payload
+                    json={"serp_urls": params["serp_urls"]},
                     timeout=30,
                 ) as response:
-                    # Get response text first as mentioned
                     text = await response.text()
 
                     if response.status != 200:
@@ -56,7 +44,6 @@ class Frase(Plugin):
                         return None
 
                     try:
-                        # Parse response text as JSON
                         return json.loads(text)
                     except json.JSONDecodeError as e:
                         self.logger.error(f"Failed to parse JSON response: {e}")
@@ -72,8 +59,8 @@ async def test_frase(urls: List[str] = None):
     """Test the Frase API with sample URLs"""
     if urls is None:
         urls = [
-            "https://www.goodhousekeeping.com/home/gardening/g4348/summer-flowers/",
-            "https://www.countryliving.com/life/g32036880/flowers-bloom-in-summer/",
+            "https://www.custify.com/blog/best-email-marketing-tools-saas/",
+            "https://www.convertize.com/email-marketing-automation-software-tools/",
         ]
 
     try:
@@ -86,14 +73,10 @@ async def test_frase(urls: List[str] = None):
             return None
 
         print("\n✅ Successfully processed URLs!")
-
-        # Print raw response for debugging
         print("\n🔍 Raw API Response:")
         print("-" * 50)
         print(json.dumps(result, indent=2))
-        print("-" * 50)
 
-        # Print items summary if available
         if "items" in result:
             print("\n📄 Processed Items:")
             print("-" * 50)
@@ -102,21 +85,15 @@ async def test_frase(urls: List[str] = None):
                 print(f"   URL: {item.get('url', 'No URL')}")
                 if "word_count" in item:
                     print(f"   Word count: {item['word_count']}")
-                if (
-                    "questions" in item and item["questions"]
-                ):  # Check if questions exists and is not None
+                if "questions" in item and item["questions"]:
                     print(f"   Questions found: {len(item['questions'])}")
-                if (
-                    "entities" in item and item["entities"]
-                ):  # Check if entities exists and is not None
+                if "entities" in item and item["entities"]:
                     print(f"   Entities found: {len(item['entities'])}")
 
-        # Print aggregate metrics if available
         if "aggregate_metrics" in result:
             print("\n📊 Aggregate Metrics:")
             print("-" * 50)
-            metrics = result["aggregate_metrics"]
-            for key, value in metrics.items():
+            for key, value in result["aggregate_metrics"].items():
                 print(f"{key}: {value}")
 
         return result

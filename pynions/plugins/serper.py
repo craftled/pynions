@@ -1,42 +1,24 @@
-import os
-import json
 import asyncio
 import aiohttp
-from typing import Dict, Any, List, Optional
-from dotenv import load_dotenv
+from typing import Dict, Any, Optional
 from pynions.core import Plugin
+from pynions.core.config import config
 
 
 class SerperWebSearch(Plugin):
     """Plugin for fetching SERP data using Serper.dev API"""
 
-    def __init__(self, config: Dict[str, Any] = None):
-        super().__init__(config)
-        # Get API key from config first, then environment
-        self.api_key = config.get("api_key") if config else None
+    def __init__(self, plugin_config: Dict[str, Any] = None):
+        super().__init__(plugin_config)
+        self.api_key = config.get("SERPER_API_KEY")
         if not self.api_key:
-            self.api_key = os.getenv("SERPER_API_KEY")
-
-        if not self.api_key:
-            raise ValueError(
-                "SERPER_API_KEY not found in environment variables or config"
-            )
+            raise ValueError("SERPER_API_KEY not found in configuration")
 
         self.base_url = "https://google.serper.dev/search"
         self.headers = {"X-API-KEY": self.api_key, "Content-Type": "application/json"}
 
     async def execute(self, input_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """
-        Fetch SERP results for a given query
-
-        Args:
-            input_data: Dict containing 'query' key
-        Returns:
-            Dict containing search results or None if search fails
-        """
-        if not self.api_key:
-            raise ValueError("SERPER_API_KEY not found in environment variables")
-
+        """Execute SERP search request"""
         query = input_data.get("query")
         if not query:
             raise ValueError("Query is required in input_data")
@@ -68,9 +50,7 @@ class SerperWebSearch(Plugin):
             return None
 
 
-async def test_search(
-    query: str = "best marketing automation tools 2024",
-):
+async def test_search(query: str = "best marketing automation tools 2024"):
     """Test the Serper Web Search with a sample query"""
     try:
         searcher = SerperWebSearch()
@@ -92,7 +72,7 @@ async def test_search(
             print(f"Type: {params.get('type')}")
             print(f"Engine: {params.get('engine')}")
 
-        # Print organic results with dates and sitelinks
+        # Print organic results
         print("\n🌐 Organic Results:")
         print("-" * 50)
         for item in result.get("organic", []):
@@ -102,7 +82,6 @@ async def test_search(
             print(f"Snippet: {item.get('snippet')}")
             if "date" in item:
                 print(f"Date: {item.get('date')}")
-
             if "sitelinks" in item:
                 print("\nSitelinks:")
                 for sitelink in item["sitelinks"]:
@@ -138,5 +117,4 @@ async def test_search(
 
 
 if __name__ == "__main__":
-    # Run test with a sample query
-    asyncio.run(test_search("best marketing automation tools 2024"))
+    asyncio.run(test_search())

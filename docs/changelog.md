@@ -1,10 +1,38 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-09"
+updatedAt: "2024-11-10"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.21 - Nov 10, 2024
+
+### Changed
+
+- Centralized configuration management
+  - Moved all environment loading to core Plugin class
+  - Simplified plugin initialization
+  - Removed redundant config loading from individual plugins
+  - Standardized configuration access patterns
+- Simplified workflow system
+  - Streamlined WorkflowStep implementation
+  - Improved error handling and propagation
+  - Maintained backward compatibility with existing workflows
+
+### Fixed
+
+- Standardized environment variable handling across all plugins
+- Fixed configuration file paths in documentation
+- Improved workflow execution reliability
+- Removed duplicate configuration loading
+
+### Documentation
+
+- Updated plugin development guide with new configuration patterns
+- Added clear instructions for environment setup
+- Improved workflow examples and best practices
+- Added content analysis workflow documentation
 
 ## v0.2.19 - Nov 9, 2024
 

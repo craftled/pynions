@@ -1,13 +1,6 @@
 import pytest
 import os
-from dotenv import load_dotenv
 from pynions.plugins.serper import SerperWebSearch
-
-
-@pytest.fixture(autouse=True)
-def load_env():
-    """Load environment variables before tests"""
-    load_dotenv()
 
 
 @pytest.fixture

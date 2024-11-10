@@ -23,7 +23,7 @@ from typing import Any, Dict
 
 class MyPlugin(Plugin):
     def __init__(self, config: Dict[str, Any]):
-        super().__init__(config)
+        super().__init__(config)  # Automatically loads environment variables
         # Plugin-specific initialization
 
     async def execute(self, input_data: Any) -> Any:
@@ -34,6 +34,8 @@ class MyPlugin(Plugin):
         # Configuration validation
         return True
 ```
+
+Note: Environment variables are automatically loaded by the base Plugin class.
 
 ## Built-in Plugins
 

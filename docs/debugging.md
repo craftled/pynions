@@ -1,7 +1,7 @@
 ---
 title: "Debugging"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-03"
+updatedAt: "2024-11-10"
 summary: "Learn how to debug and troubleshoot common issues when developing plugins and workflows in Pynions, including installation problems, API errors, and testing failures."
 kind: "detailed"
 ---

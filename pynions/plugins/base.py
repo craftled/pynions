@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
 
 
 class Plugin(ABC):
     """Base class for all plugins"""
 
     def __init__(self, config=None):
+        load_dotenv()  # Load environment variables for all plugins
         self.config = config or {}
 
     @abstractmethod

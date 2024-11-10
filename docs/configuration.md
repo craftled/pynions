@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-09"
+updatedAt: "2024-11-10"
 summary: "Learn how to configure Pynions with API keys and settings."
 kind: "detailed"
 ---
@@ -109,3 +109,5 @@ config = load_config()
 model_name = config["model"]["name"]
 max_results = config["plugins"]["serper"]["max_results"]
 ```
+
+*Note:* Environment variables are automatically loaded by the Plugin system. You don't need to manually load them in your code when using plugins.

@@ -1,13 +1,9 @@
 import os
 from datetime import datetime
-from dotenv import load_dotenv
 import litellm
 from litellm import completion
 import openai
 from pynions import StatsPlugin
-
-# Load environment variables
-load_dotenv()
 
 # Default configuration
 DEFAULT_CONFIG = {

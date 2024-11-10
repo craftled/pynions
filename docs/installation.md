@@ -1,7 +1,7 @@
 ---
 title: "Installation"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-03"
+updatedAt: "2024-11-10"
 summary: "Step-by-step guide for installing Pynions and setting up your local marketing automation environment on macOS."
 kind: "detailed"
 ---
@@ -64,9 +64,10 @@ playwright install
 
 1. Set up environment variables:
 ```bash
-# Copy example files
-cp .env.example .env
-cp config.example.json config.json
+# Copy example files to the correct location
+mkdir -p pynions/config
+cp .env.example pynions/config/.env
+cp settings.example.json pynions/config/settings.json
 ```
 
 2. Edit .env file:
