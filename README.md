@@ -221,3 +221,29 @@ If you encounter issues:
 ## Credits
 
 Standing on the shoulders of the open-source giants, built with ☕️ and dedication by a marketer who codes.
+
+## Workers
+
+Workers are standalone task executors that combine multiple plugins for specific data extraction needs. Perfect for automated research and monitoring tasks.
+
+### Available Workers
+
+- **PricingResearchWorker**: Extracts structured pricing data from any SaaS website
+  ```python
+  from pynions.workers import PricingResearchWorker
+  
+  async def analyze_pricing():
+      worker = PricingResearchWorker()
+      result = await worker.execute({"domain": "example.com"})
+      print(json.dumps(result, indent=2))
+  ```
+
+### Features
+
+- 🎯 Task-specific implementations
+- 🔄 Automated data extraction
+- 📊 Structured output
+- 🛠 Plugin integration
+- ⚡ Efficient processing
+
+See [Workers Documentation](docs/workers.md) for more details.

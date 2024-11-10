@@ -6,6 +6,32 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
+## v0.2.22 - Nov 10, 2024
+
+### Added
+
+- New Workers system for standalone data extraction tasks
+  - Added base Worker class in core module
+  - Added PricingResearchWorker for automated pricing analysis
+  - Integrated with existing plugins (Serper, Jina, LiteLLM)
+- Automated pricing data extraction capabilities
+  - Accurate plan detection
+  - Feature extraction
+  - Price point analysis
+  - Subscriber limit detection
+
+### Changed
+
+- Enhanced LiteLLM integration for structured data extraction
+- Improved content extraction accuracy in Jina plugin
+- Standardized worker output format
+
+### Documentation
+
+- Added workers documentation and examples
+- Updated plugin integration guides
+- Added pricing research examples
+
 ## v0.2.21 - Nov 10, 2024
 
 ### Changed
