@@ -3,9 +3,9 @@ Pynions - A lean Python framework for marketers who code
 Built for automating marketing tasks without the bloat.
 """
 
-from pynions.core import Plugin, Workflow, WorkflowStep, Config, DataStore
+from pynions.core import Plugin, Workflow, WorkflowStep, Config, DataStore, Worker
 
-__version__ = "0.2.22"
+__version__ = "0.2.24"
 
 __all__ = [
     # Core components
@@ -14,4 +14,5 @@ __all__ = [
     "WorkflowStep",
     "Config",
     "DataStore",
+    "Worker",
 ]

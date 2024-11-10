@@ -68,6 +68,9 @@ pynions/
 │   │   ├── conftest.py                 # Test configuration
 │   │   └── test_core.py                # Core test file
 │   │
+│   └── workers/                        # Workers directory
+│       └── pricing_research_worker.py  # Pricing research worker
+│   │
 │   └── __init__.py                     # Package initialization
 │
 ├── workflows/                          # Workflow files

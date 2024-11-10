@@ -1,7 +1,7 @@
 import asyncio
 import json
 from typing import Dict, Any
-from pynions.core import Worker
+from pynions import Worker
 from pynions.plugins.serper import SerperWebSearch
 from pynions.plugins.jina import JinaAIReader
 from pynions.plugins.litellm_plugin import LiteLLM
