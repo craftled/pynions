@@ -294,8 +294,8 @@ playwright install
 
 ## Next Steps
 
-1. Read `configuration.md` for detailed API setup
+1. Read [configuration.md](configuration.md) for detailed API setup
 2. Try example workflows in `examples/`
-3. Check `plugins.md` for plugin usage
-4. See `workflows.md` for creating custom workflows
-5. Review `debugging.md` if you encounter issues
+3. Check [plugins.md](plugins.md) for plugin usage
+4. See [workflows.md](workflows.md) for creating custom workflows
+5. Review [debugging.md](debugging.md) if you encounter issues
