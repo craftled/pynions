@@ -1,4 +1,10 @@
-# Data Organization
+---
+title: "Data Organization"
+publishedAt: "2024-11-09"
+updatedAt: "2024-11-14"
+summary: "Learn how to organize data and content workflows in Pynions."
+kind: "detailed"
+---
 
 Pynions uses a structured approach to organize data and content workflows.
 
@@ -8,36 +14,40 @@ Pynions uses a structured approach to organize data and content workflows.
 data/
 ├── output/           # All workflow outputs
 │   └── [project]/    # Project-specific folders
-│       └── [project]_[status]_[date].[ext]
+│       ├── assets/    # Project-specific assets
+│       └── [status]_[project]_[date].[ext]
 └── raw/              # Original, unmodified data
     ├── scraped_data/ # Raw scraped content
     └── logs/         # Application logs
 ```
 
-## Workflow Status Types
+## Data Folders
 
-Content goes through several stages in a typical workflow:
-
-- `research`: Initial research and data gathering
-- `brief`: Content brief or outline
-- `outline`: Detailed content structure
-- `draft`: First version of content
-- `review`: Content under review
-- `final`: Final approved version
 - `data`: Processed data files
 - `assets`: Related assets and resources
+
+## Workflow Status Types
+
+Content goes through six (optional) stages in a typical workflow:
+
+- `1_research`: Initial research and data gathering
+- `2_brief`: Content brief or outline
+- `3_outline`: Detailed content structure
+- `4_draft`: First version of content
+- `5_review`: Content under review
+- `6_final`: Final approved version
 
 ## File Naming Convention
 
 Files are automatically named using the following pattern:
-`[project]_[status]_[YYYYMMDD].[extension]`
+`[status]_[project]_[YYYY_MM_DD].[extension]`
 
 Examples:
 
 ```
-best_mailchimp_alternatives_research_20240309.md
-best_mailchimp_alternatives_brief_20240309.md
-best_mailchimp_alternatives_draft_20240309.md
+1_research_best_mailchimp_alternatives_2024_03_09.md
+2_brief_best_mailchimp_alternatives_2024_03_09.md
+4_draft_best_mailchimp_alternatives_2024_03_09.md
 ```
 
 ## Usage
