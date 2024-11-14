@@ -10,6 +10,7 @@ kind: "detailed"
 
 ### Changed
 
+- Updated data organization documentation
 - Consolidated installation documentation
   - Merged SETUP.md and ENV_SETUP.md into installation.md
   - Improved organization and readability

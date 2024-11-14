@@ -45,7 +45,7 @@ Files are automatically named using the following pattern:
 Examples:
 
 ```
-1_research_best_mailchimp_alternatives_2024_03_09.md
+1_research_best_mailchimp_alternatives_2024_ 03_09.md
 2_brief_best_mailchimp_alternatives_2024_03_09.md
 4_draft_best_mailchimp_alternatives_2024_03_09.md
 ```
