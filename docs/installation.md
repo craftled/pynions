@@ -1,123 +1,160 @@
 ---
 title: "Installation"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-10"
-summary: "Step-by-step guide for installing Pynions and setting up your local marketing automation environment on macOS."
+updatedAt: "2024-11-14"
+summary: "Complete guide for installing and configuring Pynions on your local machine."
 kind: "detailed"
 ---
 
 ## Prerequisites
 
 1. Install Homebrew (if not already installed):
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-2. Install Python 3.9+ via Homebrew:
-```bash
-brew install python
-```
+2. Install Python 3.9+ and Git:
 
-3. Verify Python installation:
 ```bash
-python3 --version  # Should show 3.9 or higher
-```
+brew install python git
 
-4. Install git:
-```bash
-brew install git
+#Verify installations
+python3 --version # Should show 3.9 or higher
+git --version
 ```
 
 ## Project Setup
 
-1. Clone or create project:
-```bash
-# If starting fresh:
-mkdir ~/Documents/pynions
-cd ~/Documents/pynions
+1. Create project structure:
 
-# If cloning:
-git clone https://github.com/yourusername/pynions.git
-cd pynions
+```bash
+# Create main directory
+mkdir -p ~/Documents/pynions && cd ~/Documents/pynions
+
+# Initialize git repository
+git init
+Create core directories
+mkdir -p pynions/{plugins,utils,config} docs/{examples,plugins,workflows} tests/test_plugins data/{raw,output}
+
+#Create core Python files
+touch pynions/init.py pynions/core.py
+touch pynions/plugins/init.py pynions/plugins/{serper,litellm,playwright,jina}plugin.py
+touch pynions/utils/init.py pynions/utils/helpers.py
+
+#Create example files
+touch examples/init.py examples/{serp_analysis,content_workflow}.py
+
+# Create test files
+touch tests/init.py tests/test_core.py tests/test_plugins/test_serper_plugin.py
+
+# Create configuration files
+touch .env.example config.example.json requirements.txt pytest.ini
+touch README.md .gitignore
+
+# Create documentation files
+touch docs/{project-structure,installation,configuration,plugins,workflows,debugging}.md
 ```
 
-2. Create virtual environment:
+2. Set up Python environment:
+
 ```bash
-# Create venv
+# Create and activate virtual environment
 python3 -m venv venv
-
-# Activate it
 source venv/bin/activate
-```
 
-3. Install dependencies:
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-4. Install Playwright browsers:
-```bash
+# Install Playwright browsers
 playwright install
 ```
 
 ## Configuration
 
-1. Set up environment variables:
+### Environment Setup
+
+1. Copy configuration templates:
+
 ```bash
-# Copy example files to the correct location
-mkdir -p pynions/config
 cp .env.example pynions/config/.env
 cp settings.example.json pynions/config/settings.json
 ```
 
-2. Edit .env file:
-```bash
-# Open in your preferred editor
-nano .env
+2. Configure API keys in `.env`:
 
-# Add your API keys:
+```bash
+# Required API Keys
 SERPER_API_KEY=your_key_here
 OPENAI_API_KEY=your_key_here
+
+# Optional API Keys
 ANTHROPIC_API_KEY=your_key_here
 JINA_API_KEY=your_key_here
+FRASE_API_KEY=your_key_here
 ```
+
+### Configuration Loading
+
+The system loads configuration in this order:
+
+1. System environment variables
+2. `.env` file variables
+3. `settings.json` settings
+
+Environment variables are automatically loaded by the base Plugin class.
+
+### Security Best Practices
+
+- Never commit `.env` file
+- Keep API keys secure
+- Regularly rotate keys
+- Use minimum required permissions
+- Verify `.env` is in `.gitignore`
+- Remove quotes from API keys in `.env`
+- Don't include actual API keys in settings.json
 
 ## Verify Installation
 
 1. Run test workflow:
+
 ```bash
-# Make sure venv is activated
+# Ensure venv is activated
 source venv/bin/activate
 
 # Run example
 python examples/serp_analysis.py
 ```
 
-2. Check the output:
-- Should see progress messages
-- Results saved in `data/` directory
+2. Check output:
+
+- Progress messages should appear
+- Results in `data/` directory
 - No error messages
+- Check logs in data/pynions.log
 
 ## IDE Setup (Cursor)
 
 1. Download Cursor:
+
    - Visit https://cursor.sh
    - Download Mac version
    - Install application
 
 2. Open project:
+
    - Open Cursor
    - File -> Open Folder
    - Select `~/Documents/pynions`
 
 3. Configure Python interpreter:
    - Click Python version in status bar
-   - Select interpreter from virtual environment:
-     `~/Documents/pynions/venv/bin/python`
+   - Select: `~/Documents/pynions/venv/bin/python`
 
 ## Common Issues
 
 ### Python Version Issues
+
 ```bash
 # Check Python version
 python --version
@@ -127,6 +164,7 @@ python3 --version
 ```
 
 ### Virtual Environment Issues
+
 ```bash
 # Deactivate if already in a venv
 deactivate
@@ -142,6 +180,7 @@ source venv/bin/activate
 ```
 
 ### Permission Issues
+
 ```bash
 # Fix venv permissions
 chmod +x venv/bin/activate
@@ -152,7 +191,11 @@ chmod 755 data
 ```
 
 ### Module Not Found Issues
+
 ```bash
+# Verify virtual environment is activated
+which python # Should show: ~/Documents/pynions/venv/bin/python
+
 # Verify installation
 pip list
 
@@ -160,41 +203,99 @@ pip list
 pip install -r requirements.txt
 ```
 
-## Next Steps
+### API Issues
 
-1. Read `03-configuration.md` for detailed API setup
-2. Try example workflows in `examples/`
-3. Check `04-plugins.md` for plugin usage
-4. See `05-workflows.md` for creating custom workflows
+```bash
+# Check if environment variables are loaded
+python -c "import os; print(os.getenv('SERPER_API_KEY'))"
+
+# Common fixes:
+- Check if .env file exists
+- Verify API keys are correct
+- Remove quotes from API keys
+- Ensure .env is in correct location (pynions/config/.env)
+```
+
+### Playwright Issues
+
+```bash
+# Install browsers
+playwright install
+
+# If that fails, try with sudo
+sudo playwright install
+
+# Verify installation
+playwright --version
+```
+
+## Development Workflow
+
+1. Always work with activated virtual environment
+2. Create feature branches for new work:
+
+```bash
+git checkout -b feature-name
+```
+
+3. Run tests before committing:
+
+```bash
+pytest tests/
+```
+
+4. Follow git workflow:
+
+```bash
+git add .
+git commit -m "Description of changes"
+```
+
+Remember to:
+
+- Keep config.json in .gitignore
+- Check logs in data/pynions.log for issues
+- Run tests before committing changes
+- Test components in isolation when debugging
 
 ## Development Tools
 
-Optional but recommended tools:
+Optional but recommended:
 
 1. HTTPie for API testing:
+
 ```bash
 brew install httpie
 ```
 
 2. jq for JSON processing:
+
 ```bash
 brew install jq
 ```
 
-3. Visual Studio Code extensions:
+3. VS Code extensions:
    - Python
    - Python Environment Manager
-   - Git Lens
-   - Docker (if using containers)
 
 ## Updating
 
 To update dependencies:
+
 ```bash
 pip install --upgrade -r requirements.txt
 ```
 
 To update Playwright:
+
 ```bash
 playwright install
 ```
+
+## Next Steps
+
+1. Read `configuration.md` for detailed API setup
+2. Try example workflows in `examples/`
+3. Check `plugins.md` for plugin usage
+4. See `workflows.md` for creating custom workflows
+5. Review `debugging.md` if you encounter issues

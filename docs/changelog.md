@@ -1,10 +1,31 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-10"
+updatedAt: "2024-11-14"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.24 - Nov 14, 2024
+
+### Changed
+
+- Consolidated installation documentation
+  - Merged SETUP.md and ENV_SETUP.md into installation.md
+  - Improved organization and readability
+  - Added comprehensive troubleshooting section
+  - Enhanced security best practices
+  - Updated file creation commands
+  - Added detailed Python environment setup
+  - Improved IDE setup instructions
+
+### Documentation
+
+- Streamlined documentation structure
+- Removed redundant installation guides
+- Updated cross-references in documentation
+- Enhanced configuration documentation
+- Added clear next steps section
 
 ## v0.2.22 - Nov 10, 2024
 
