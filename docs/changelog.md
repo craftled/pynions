@@ -1,10 +1,30 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-14"
+updatedAt: "2024-11-20"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.25 - Nov 19, 2024
+
+### Security
+
+- Fixed security vulnerabilities in aiohttp dependency
+  - Addressed CVE-2024-52303 (Moderate severity)
+  - Addressed CVE-2024-52304 (Moderate severity)
+
+### Changed
+
+- Improved dependency management
+  - Updated to more flexible version ranges in requirements.txt
+  - Reduced potential for dependency conflicts
+  - Updated key dependencies:
+    - aiohttp to 3.10.11
+    - pydantic to 2.10.0
+    - litellm to 1.52.11
+    - openai to 1.55.0
+    - setuptools to 75.6.0
 
 ## v0.2.24 - Nov 14, 2024
 
