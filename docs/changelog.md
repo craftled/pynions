@@ -6,7 +6,7 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
-## v0.2.25 - Nov 19, 2024
+## v0.2.25 - Nov 20, 2024
 
 ### Security
 
