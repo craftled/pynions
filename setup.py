@@ -44,7 +44,7 @@ class PostInstallCommand(install):
 
 setup(
     name="pynions",
-    version="0.2.24",
+    version="0.2.25",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple AI automation framework for marketers",
