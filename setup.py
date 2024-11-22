@@ -54,7 +54,7 @@ setup(
     description="Simple marketing automation framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tomaslau/pynions",
+    url="https://github.com/craftled/pynions",
     packages=find_namespace_packages(include=["pynions", "pynions.*"]),
     install_requires=requirements,
     cmdclass={
