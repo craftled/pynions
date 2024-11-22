@@ -2,112 +2,88 @@
 title: "Configuration"
 publishedAt: "2024-10-30"
 updatedAt: "2024-11-10"
-summary: "Learn how to configure Pynions with API keys and settings."
+summary: "Simple configuration guide for marketers using Pynions"
 kind: "detailed"
 ---
 
-## Configuration Structure
+## Quick Setup
 
-Pynions uses a two-part configuration system:
+1. Copy `.env.example` to `.env` and add your API key:
+```bash
+cp .env.example .env
+nano .env  # Add your OpenAI API key
+```
 
-1. `pynions/config/settings.json` - Main application settings
-2. `pynions/config/.env` - Environment variables and API keys
+2. (Optional) Create `pynions.json` if you need custom settings:
+```bash
+cp pynions.example.json pynions.json
+```
 
-### Settings (settings.json)
+That's it! You're ready to start using Pynions.
 
-Main configuration file located at `pynions/config/settings.json`:
+## Configuration Files
+
+### 1. API Keys (.env)
+
+Put your API keys in `.env` file in the root directory:
+
+```bash
+# Required
+OPENAI_API_KEY=your_key_here
+
+# Optional (only if you use these features)
+SERPER_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here
+```
+
+### 2. Optional Settings (pynions.json)
+
+If you need to customize settings, create `pynions.json` in the root directory:
 
 ```json
 {
-  "workflow": {
-    "status_types": {
-      "research": {
-        "description": "Initial research and data gathering",
-        "extensions": ["md", "txt"]
-      },
-      "brief": {
-        "description": "Content brief or outline",
-        "extensions": ["md"]
-      },
-      "draft": {
-        "description": "First version of content",
-        "extensions": ["md"]
-      }
+    "save_results": true,        // Save generated content to files
+    "output_folder": "data",     // Where to save files
+    "plugins": {
+        "serper": {
+            "results": 10,       // Number of search results
+            "country": "us"      // Search region
+        }
     }
-  },
-  "storage": {
-    "data_dir": "data",
-    "raw_dir": "data/raw",
-    "output_dir": "data/output"
-  },
-  "plugins": {
-    "serper": {
-      "max_results": 10
-    }
-  }
 }
 ```
 
-### Environment Variables (.env)
+All settings are optional and have sensible defaults.
 
-Sensitive configuration like API keys are stored in `pynions/config/.env`:
+## Using in Scripts
 
-```bash
-# Search API
-SERPER_API_KEY=your_serper_key_here
-
-# AI Models
-OPENAI_API_KEY=your_openai_key_here
-ANTHROPIC_API_KEY=your_anthropic_key_here
-
-# Content Processing
-JINA_API_KEY=your_jina_key_here
-FRASE_API_KEY=your_actual_frase_key
-```
-
-## Setup Steps
-
-1. Create config directory:
-
-```bash
-mkdir -p pynions/config
-```
-
-2. Copy example settings:
-
-```bash
-cp settings.example.json pynions/config/settings.json
-```
-
-3. Create environment file:
-
-```bash
-cp .env.example pynions/config/.env
-```
-
-4. Edit your settings and API keys:
-
-```bash
-# Edit settings
-nano pynions/config/settings.json
-
-# Add your API keys
-nano pynions/config/.env
-```
-
-## Configuration Access
-
-Access settings in your code:
+Access configuration in your scripts:
 
 ```python
-from pynions.config import load_config
+from pynions.core.config import config
 
-# Load full config
-config = load_config()
+# Check API key
+if not config.check_api_key():
+    print("Add your OpenAI API key to .env file")
+    exit()
 
-# Access settings
-model_name = config["model"]["name"]
-max_results = config["plugins"]["serper"]["max_results"]
+# Get settings (with defaults)
+output_dir = config.get("output_folder", "data")
+save_to_file = config.get("save_results", True)
 ```
 
-*Note:* Environment variables are automatically loaded by the Plugin system. You don't need to manually load them in your code when using plugins.
+## AI Configuration
+
+Pynions uses [LiteLLM](https://docs.litellm.ai/docs/) for AI features. You don't need to configure AI settings - they're handled automatically.
+
+Example usage:
+```python
+from litellm import completion
+
+response = completion(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+```
+
+See [LiteLLM documentation](https://docs.litellm.ai/docs/) for more options.

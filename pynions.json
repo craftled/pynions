@@ -1,0 +1,10 @@
+{
+    "save_results": true,
+    "output_folder": "data",
+    "plugins": {
+        "serper": {
+            "results": 10,
+            "country": "us"
+        }
+    }
+}

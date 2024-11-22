@@ -2,143 +2,125 @@
 title: "Quickstart"
 publishedAt: "2024-10-30"
 updatedAt: "2024-11-09"
-summary: "Get started with Pynions in 2 minutes by setting up your first local AI workflow. No cloud dependencies, just Python and a few API keys."
+summary: "Get started with Pynions in 60 seconds - perfect for marketers!"
 kind: "detailed"
 ---
 
-## Super Quick Setup (Copy-Paste Ready)
+## Quick Setup (Just 2 Steps!)
 
-### 1. Create Project & Install
-
-```bash
-# Create project directory and enter it
-mkdir ~/Documents/pynions && cd ~/Documents/pynions
-
-# Create virtual environment and activate it
-python3 -m venv venv
-source venv/bin/activate
-
-# Create project structure
-mkdir -p pynions/config pynions/plugins pynions/core data/output data/raw
-
-# Install required packages
-pip install aiohttp litellm python-dotenv httpx
-```
-
-### 2. Create Config Files
+### 1. Install & Configure
 
 ```bash
-# Create config directory and files
-mkdir -p pynions/config
-cp .env.example pynions/config/.env
-cp settings.example.json pynions/config/settings.json
+# Create project and enter it
+mkdir my-pynions && cd my-pynions
 
-# Add your API key to .env
-nano pynions/config/.env
+# Install Pynions
+pip install pynions
+
+# Add your OpenAI API key
+cp .env.example .env
+echo "OPENAI_API_KEY=your-key-here" > .env
 ```
 
-### 3. Copy-Paste This Complete Working Example
+### 2. Create Your First Workflow
 
-Create `quickstart.py` and paste this complete code:
+Create `workflows/content_ideas.py` and paste this complete example:
 
 ```python
-import asyncio
+from litellm import completion
+from pynions.core.config import config
 import os
-from datetime import datetime
-from pynions.core.config import load_config
-from pynions.core.datastore import save_result
-from pynions.plugins.litellm import LiteLLMPlugin
 
-async def main():
-    # Load configuration
-    config = load_config()
-
-    # Initialize LiteLLM plugin
-    ai = LiteLLMPlugin(config["plugins"]["litellm"])
-
-    print("\n🤖 Pynions Quick Start Demo")
-    print("---------------------------")
-
+def generate_content_ideas(topic):
+    """Marketing workflow for content ideation"""
+    
+    # Check API key
+    if not config.check_api_key():
+        return None
+        
+    print(f"🎯 Analyzing {topic}...")
+    
+    prompt = f"""Generate 3 content ideas for {topic}.
+    Include for each:
+    1. Content Type (blog, video, etc)
+    2. Catchy Title
+    3. Key Points (3-5)
+    """
+    
     try:
-        # Get user input
-        topic = input("\n📝 Enter a topic to analyze: ")
-
-        # Process with AI
-        print("\n🔄 Analyzing...")
-        response = await ai.analyze(topic)
-
-        # Save result using core utilities
-        save_result(
-            content=response,
-            project_name="quickstart",
-            status="research"
+        response = completion(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
         )
-
-        # Display result
-        print("\n📊 Analysis Results:")
-        print("------------------")
-        print(response)
-        print(f"\n✅ Results saved to data/output/quickstart/")
-
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"\n❌ Error: {str(e)}")
-        print("\n🔍 Troubleshooting:")
-        print("1. Check if API keys are set in pynions/config/.env")
-        print("2. Verify internet connection")
-        print("3. Ensure API services are accessible")
+        print(f"❌ Error: {str(e)}")
+        return None
+
+def save_ideas(content):
+    """Save workflow results"""
+    output_folder = config.get("output_folder", "data")
+    os.makedirs(output_folder, exist_ok=True)
+    
+    filename = f"{output_folder}/content_ideas.txt"
+    with open(filename, "w") as f:
+        f.write(content)
+    return filename
+
+def main():
+    print("\n🎯 Content Idea Generator")
+    print("----------------------")
+    
+    topic = input("\n📝 What topic should we analyze? ")
+    
+    if result := generate_content_ideas(topic):
+        print("\n💡 Your Content Ideas:")
+        print("-------------------")
+        print(result)
+        
+        if config.get("save_results", True):
+            filename = save_ideas(result)
+            print(f"\n💾 Ideas saved to: {filename}")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
 ```
 
-### 4. Run It!
-
+That's it! Run your workflow:
 ```bash
-# Make sure your API keys are in pynions/config/.env
-python quickstart.py
+python workflows/content_ideas.py
 ```
 
 ## What You Get
 
-- A working AI analysis tool
-- Results saved to data folder
-- Easy to modify and extend
+1. **AI-Powered Content Ideas**: Get instant content suggestions for any topic
+2. **Auto-Save**: Results saved to files (optional)
+3. **Simple Setup**: Just one API key needed
+4. **Marketing Focus**: Built for content creators
 
 ## Next Steps
 
-1. Try different topics
-2. Modify the analysis prompt
-3. Add more features
-4. Check the full documentation
-
-## Common Issues
-
-1. **"Module not found" error**
-
-   ```bash
-   pip install aiohttp litellm python-dotenv
+1. **Customize Settings** (Optional)
+   Create `pynions.json` to customize where files are saved:
+   ```json
+   {
+       "save_results": true,
+       "output_folder": "my_content"
+   }
    ```
 
-2. **API Key error**
+2. **Try More Examples**
+   Check out the `examples` folder for more marketing workflows:
+   - Blog post generator
+   - Social media scheduler
+   - Content repurposing
+   - SEO optimization
 
-   - Check .env file exists
-   - Verify API key is correct
-   - Make sure no quotes in .env file
+3. **Read the Docs**
+   Visit our [documentation](https://docs.pynions.dev) for more examples and guides.
 
-3. **Permission error**
-   ```bash
-   chmod 755 data
-   ```
+## Need Help?
 
-## 30-Second Test Run
-
-```bash
-# Quick test with a simple topic
-echo "OPENAI_API_KEY=your-key-here" > .env
-python quickstart.py
-# Enter topic: "artificial intelligence"
-```
-
-That's it! You should see AI-generated analysis of your topic and the results saved to a file.
-
-Need the full version? Check out the complete documentation for all features and capabilities.
+- Join our [Discord community](https://discord.gg/pynions)
+- Check [common issues](https://docs.pynions.dev/debugging)
+- Email us: support@pynions.dev

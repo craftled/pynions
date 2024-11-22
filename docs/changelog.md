@@ -1,10 +1,38 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-20"
+updatedAt: "2024-11-22"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.26 - Nov 22, 2024
+
+### Changed
+- Simplified configuration management system
+- Moved configuration files to project root
+- Removed nested config folder structure
+- Improved direct litellm integration
+- Updated advanced example with async support
+- Enhanced error handling and output formatting
+
+### Added
+- Root-level `.env` for API keys
+- Root-level `pynions.json` for settings
+- Clearer setup instructions in installation
+- Example file copying during installation
+
+### Removed
+- Complex nested configuration system
+- ~/.pynions directory requirement
+- Outdated example configurations
+
+### Security
+- Improved API key management
+- Enhanced environment variable handling
+
+### Dependencies
+- Updated minimum Python version to 3.8+
 
 ## v0.2.25 - Nov 20, 2024
 
