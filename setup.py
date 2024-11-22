@@ -65,12 +65,12 @@ setup(
     },
     classifiers=[
         "Development Status :: 4 - Beta",
-        "Intended Audience :: Marketing",
+        "Intended Audience :: End Users/Desktop",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
-        "Topic :: Office/Business :: Marketing",
+        "Topic :: Office/Business",
     ],
     python_requires=">=3.8",
 )
