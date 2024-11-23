@@ -1,10 +1,53 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-22"
+updatedAt: "2024-11-23"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.27 - Nov 23, 2024
+
+### Changed
+- Enhanced configuration management
+  - Moved `.env` and `pynions.json` to project root
+  - Removed nested config directory structure
+  - Added proper typing support for configuration
+  - Improved singleton pattern implementation
+  - Added comprehensive test coverage
+  - Standardized on gpt-4o-mini as default model
+- Improved configuration API
+  - Added `set()` method for runtime configuration
+  - Added `clear()` method for resetting configuration
+  - Added `load()` method for custom file paths
+  - Enhanced environment variable handling
+- Updated documentation
+  - Added new configuration examples
+  - Updated API documentation
+  - Added comprehensive test coverage information
+  - Updated all examples to use gpt-4o-mini
+- Simplified example workflow code
+
+### Added
+- New configuration methods:
+  - `set()` for runtime configuration
+  - `clear()` for resetting state
+  - `load()` for custom file paths
+- Complete test suite for configuration
+- Type hints for better IDE support
+
+### Fixed
+- Environment variable handling in tests
+- Configuration inheritance issues
+- Missing type hints
+- Inconsistent model defaults across codebase
+
+### Security
+- Improved API key management
+- Enhanced environment variable handling
+
+### Performance
+- Standardized on gpt-4o-mini for better cost-performance ratio
 
 ## v0.2.26 - Nov 22, 2024
 

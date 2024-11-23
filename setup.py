@@ -48,7 +48,7 @@ class PostInstallCommand(install):
 
 setup(
     name="pynions",
-    version="0.2.26",
+    version="0.2.27",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple marketing automation framework",

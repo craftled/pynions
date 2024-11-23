@@ -28,7 +28,7 @@ OPENAI_API_KEY=your_key_here
 from pynions.plugins.litellm_plugin import LiteLLM
 Initialize LLM with any supported model
 llm = LiteLLM({
-"model": "gpt-4", # or any other supported model
+"model": "gpt-4o-mini", # or any other supported model
 "temperature": 0.7,
 "max_tokens": 2000
 })

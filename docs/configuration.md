@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-10"
+updatedAt: "2024-11-23"
 summary: "Simple configuration guide for marketers using Pynions"
 kind: "detailed"
 ---
@@ -62,26 +62,34 @@ Access configuration in your scripts:
 ```python
 from pynions.core.config import config
 
-# Check API key
-if not config.check_api_key():
-    print("Add your OpenAI API key to .env file")
-    exit()
-
 # Get settings (with defaults)
-output_dir = config.get("output_folder", "data")
-save_to_file = config.get("save_results", True)
+model = config.get("model", "gpt-4o-mini")
+temperature = config.get("temperature", 0.7)
+
+# Set runtime configuration
+config.set("max_tokens", 2000)
+
+# Load custom configuration files
+config.load(
+    env_path=Path("custom/.env"),
+    config_path=Path("custom/pynions.json")
+)
+
+# Clear configuration if needed
+config.clear()
 ```
 
 ## AI Configuration
 
-Pynions uses [LiteLLM](https://docs.litellm.ai/docs/) for AI features. You don't need to configure AI settings - they're handled automatically.
+Pynions uses [LiteLLM](https://docs.litellm.ai/docs/) for AI features. The configuration system automatically manages API keys and model settings.
 
 Example usage:
 ```python
 from litellm import completion
 
 response = completion(
-    model="gpt-4o-mini",
+    model=config.get("model", "gpt-4o-mini"),
+    temperature=config.get("temperature", 0.7),
     messages=[{"role": "user", "content": "Hello!"}]
 )
 ```

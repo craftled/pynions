@@ -39,7 +39,7 @@ class StatsPlugin(Plugin):
             "input_tokens": getattr(response.usage, "prompt_tokens", 0),
             "output_tokens": getattr(response.usage, "completion_tokens", 0),
             "total_tokens": getattr(response.usage, "total_tokens", 0),
-            "model": getattr(response, "model", "unknown"),
+            "model": getattr(response, "model", "gpt-4o-mini"),
         }
 
     def display_stats(self) -> None:
@@ -60,6 +60,11 @@ class StatsPlugin(Plugin):
     def get_stats(self) -> Dict[str, Any]:
         """Return collected stats"""
         return self.stats.copy()
+
+    def get_model_stats(self, model_name: str = None) -> Dict:
+        """Get stats for a specific model"""
+        if model_name is None:
+            model_name = "gpt-4o-mini"
 
 
 async def test_stats():

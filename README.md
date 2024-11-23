@@ -1,4 +1,4 @@
-# Pynions 🚀
+# Pynions 
 
 A lean open-source Python framework for building AI-powered automation workflows that run on your machine. Built for marketers who want to automate research, monitoring, and content tasks without cloud dependencies or complex setups.
 
@@ -16,13 +16,13 @@ Pynions helps marketers automate:
 
 ## Key Features
 
-- 🚀 Start small, ship fast
-- 🔌 Easy API connections to your existing tools
-- 🤖 AI-first but not AI-only
-- 📦 Zero bloat, minimal dependencies
-- 🛠 Built for real marketing workflows
-- ⚡ Quick to prototype and iterate
-- 🌐 Local-first, no cloud dependencies
+- Start small, ship fast
+- Easy API connections to your existing tools
+- AI-first but not AI-only
+- Zero bloat, minimal dependencies
+- Built for real marketing workflows
+- Quick to prototype and iterate
+- Local-first, no cloud dependencies
 
 ## Technology Stack
 
@@ -38,42 +38,36 @@ Pynions helps marketers automate:
 ## Quick Start
 
 ```bash
-# Create project directory
-mkdir pynions && cd pynions
-
 # Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
-# Install required packages
-pip install -r requirements.txt
+# Install Pynions
+pip install .
 
-# Set up configuration
-mkdir -p pynions/config
-cp .env.example pynions/config/.env
-cp settings.example.json pynions/config/settings.json
+# The installer will automatically:
+# 1. Create .env from .env.example
+# 2. Create pynions.json from pynions.example.json
 
 # Add your API keys to .env
-nano pynions/config/.env
+nano .env
 ```
 
 ## Example Workflow
 
 ```python
 import asyncio
-from pynions.core.workflow import Workflow, WorkflowStep
+from pynions.core import Workflow, WorkflowStep
+from pynions.plugins import SerperWebSearch, JinaAIReader
 from pynions.core.config import load_config
-from pynions.core.datastore import save_result
-from pynions.plugins.serper import SerperWebSearch
-from pynions.plugins.jina import JinaAIReader
 
 async def main():
-    # Load configuration
+    # Load configuration (automatically reads from root .env and pynions.json)
     config = load_config()
 
     # Initialize plugins
-    serper = SerperWebSearch(config["plugins"]["serper"])
-    jina = JinaAIReader(config["plugins"]["jina"])
+    serper = SerperWebSearch()  # Automatically uses API key from .env
+    jina = JinaAIReader()      # Automatically uses API key from .env
 
     # Create workflow
     workflow = Workflow(
@@ -140,24 +134,19 @@ if __name__ == "__main__":
 
 ## Configuration
 
-### Environment Variables (pynions/config/.env)
+### Environment Variables (.env)
 
-```bash
-# Search API
-SERPER_API_KEY=your_serper_key_here
+Required:
+- `OPENAI_API_KEY`: Your OpenAI API key
 
-# AI Models
-OPENAI_API_KEY=your_openai_key_here
-ANTHROPIC_API_KEY=your_anthropic_key_here
+Optional:
+- `SERPER_API_KEY`: For search functionality
+- `ANTHROPIC_API_KEY`: For Claude models
+- `JINA_API_KEY`: For embeddings
 
-# Content Processing
-JINA_API_KEY=your_jina_key_here
-FRASE_API_KEY=your_frase_key_here
-```
+### Application Config (pynions.json)
 
-### Application Config (pynions/config/settings.json)
-
-See [settings.example.json](pynions/config/settings.example.json) for all available options.
+See [pynions.example.json](pynions.example.json) for all available options.
 
 ## Philosophy
 
@@ -240,10 +229,10 @@ Workers are standalone task executors that combine multiple plugins for specific
 
 ### Features
 
-- 🎯 Task-specific implementations
-- 🔄 Automated data extraction
-- 📊 Structured output
-- 🛠 Plugin integration
-- ⚡ Efficient processing
+- Task-specific implementations
+- Automated data extraction
+- Structured output
+- Plugin integration
+- Efficient processing
 
 See [Workers Documentation](docs/workers.md) for more details.

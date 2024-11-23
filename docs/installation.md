@@ -24,95 +24,45 @@ python3 --version # Should show 3.9 or higher
 git --version
 ```
 
-## Project Setup
+## Installation
 
-1. Create project structure:
-
+1. Create and activate a virtual environment:
 ```bash
-# Create main directory
-mkdir -p ~/Documents/pynions && cd ~/Documents/pynions
-
-# Initialize git repository
-git init
-Create core directories
-mkdir -p pynions/{plugins,utils,config} docs/{examples,plugins,workflows} tests/test_plugins data/{raw,output}
-
-#Create core Python files
-touch pynions/init.py pynions/core.py
-touch pynions/plugins/init.py pynions/plugins/{serper,litellm,playwright,jina}plugin.py
-touch pynions/utils/init.py pynions/utils/helpers.py
-
-#Create example files
-touch examples/init.py examples/{serp_analysis,content_workflow}.py
-
-# Create test files
-touch tests/init.py tests/test_core.py tests/test_plugins/test_serper_plugin.py
-
-# Create configuration files
-touch .env.example config.example.json requirements.txt pytest.ini
-touch README.md .gitignore
-
-# Create documentation files
-touch docs/{project-structure,installation,configuration,plugins,workflows,debugging}.md
-```
-
-2. Set up Python environment:
-
-```bash
-# Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install Playwright browsers
-playwright install
 ```
 
-## Configuration
-
-### Environment Setup
-
-1. Copy configuration templates:
-
+2. Install Pynions:
 ```bash
-cp .env.example pynions/config/.env
-cp settings.example.json pynions/config/settings.json
+pip install .
 ```
 
-2. Configure API keys in `.env`:
+The installer will automatically:
+- Create `.env` from `.env.example` in your project root
+- Create `pynions.json` from `pynions.example.json` in your project root
 
+3. Configure your API keys:
 ```bash
-# Required API Keys
-SERPER_API_KEY=your_key_here
-OPENAI_API_KEY=your_key_here
+# Open .env in your favorite editor
+nano .env
 
-# Optional API Keys
-ANTHROPIC_API_KEY=your_key_here
-JINA_API_KEY=your_key_here
-FRASE_API_KEY=your_key_here
+# Add your API keys:
+OPENAI_API_KEY=your_key_here      # Required
+SERPER_API_KEY=your_key_here      # Optional, for search
+ANTHROPIC_API_KEY=your_key_here   # Optional, for Claude
+JINA_API_KEY=your_key_here        # Optional, for embeddings
 ```
 
-### Configuration Loading
+## Troubleshooting
 
-The system loads configuration in this order:
+Common issues:
 
-1. System environment variables
-2. `.env` file variables
-3. `settings.json` settings
-
-Environment variables are automatically loaded by the base Plugin class.
-
-### Security Best Practices
-
-- Never commit `.env` file
-- Keep API keys secure
-- Regularly rotate keys
-- Use minimum required permissions
-- Verify `.env` is in `.gitignore`
-- Remove quotes from API keys in `.env`
-- Don't include actual API keys in settings.json
+- Missing API keys
+  - Check if `.env` exists in your project root
+  - Ensure you've added your OpenAI API key
+- Configuration issues
+  - Verify `pynions.json` exists in your project root
+  - Check file permissions
 
 ## Verify Installation
 

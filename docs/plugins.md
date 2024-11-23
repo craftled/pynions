@@ -59,7 +59,7 @@ from pynions.plugins.litellm_plugin import LiteLLM
 
 llm = LiteLLM({
     "api_key": "your_key_here",
-    "model": "gpt-4"
+    "model": "gpt-4o-mini"
 })
 
 response = await llm.execute({
@@ -258,3 +258,15 @@ class WeatherPlugin(Plugin):
         """Validate required configuration"""
         return bool(self.api_key)
 ```
+
+```json
+{
+  "plugins": {
+    "litellm": {
+      "enabled": true,
+      "api_key": "your-api-key",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7
+    }
+  }
+}
