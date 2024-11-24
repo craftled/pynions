@@ -20,35 +20,53 @@ class PostInstallCommand(install):
     def run(self):
         install.run(self)
 
-        # Create project directory and copy example files
-        project_dir = Path.cwd()
+        # Get package directory
+        pkg_dir = Path(__file__).parent
         
-        # Copy example files if they don't exist
-        example_files = [
-            (".env.example", ".env"),
-            ("pynions.example.json", "pynions.json")
+        # Get installation directory (where user ran pip install)
+        install_dir = Path.cwd()
+        
+        # Files to copy
+        core_dirs = ['pynions', 'workflows', 'docs', 'tests', 'data']
+        config_files = [
+            ('.env.example', '.env'),
+            ('pynions.example.json', 'pynions.json'),
+            ('README.md', 'README.md'),
+            ('requirements.txt', 'requirements.txt'),
+            ('pytest.ini', 'pytest.ini')
         ]
         
-        for src_name, dst_name in example_files:
-            src = project_dir / src_name
-            dst = project_dir / dst_name
+        # Copy core directories
+        for dir_name in core_dirs:
+            src_dir = pkg_dir / dir_name
+            dst_dir = install_dir / dir_name
+            if src_dir.exists() and not dst_dir.exists():
+                shutil.copytree(src_dir, dst_dir)
+        
+        # Copy config files
+        for src_name, dst_name in config_files:
+            src = pkg_dir / src_name
+            dst = install_dir / dst_name
             if src.exists() and not dst.exists():
                 shutil.copy2(src, dst)
 
-        print("\n Pynions installed successfully!")
-        print("\n Quick Setup:")
-        print("1. Add your OpenAI API key to .env")
-        print("2. (Optional) Customize settings in pynions.json")
-        print("\n Optional API keys for specific features:")
-        print("- SERPER_API_KEY (search)")
-        print("- ANTHROPIC_API_KEY (Claude)")
-        print("- JINA_API_KEY (embeddings)")
-        print("\n Documentation: https://pynions.com")
+        print("\n✨ Pynions installed successfully!")
+        print("\n🚀 Quick Start:")
+        print("1. Add your API keys to .env:")
+        print("   - OPENAI_API_KEY (required)")
+        print("   - SERPER_API_KEY (for search)")
+        print("   - ANTHROPIC_API_KEY (for Claude)")
+        print("   - JINA_API_KEY (for embeddings)")
+        print("\n2. Try an example workflow:")
+        print("   python workflows/example_workflow.py")
+        print("\n📚 Documentation: docs/")
+        print("🔧 Configuration: pynions.json")
+        print("🧪 Run tests: pytest")
 
 
 setup(
     name="pynions",
-    version="0.2.27",
+    version="0.2.28",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple marketing automation framework",
@@ -60,9 +78,7 @@ setup(
     cmdclass={
         "install": PostInstallCommand,
     },
-    package_data={
-        "pynions": ["*.example.json", "*.example"],
-    },
+    include_package_data=True,
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: End Users/Desktop",

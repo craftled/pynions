@@ -6,6 +6,19 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
+## v0.2.28 - 2024-03-21
+
+### Changed
+- Updated package installation to include complete project structure
+- Modified setup.py to create WordPress-like installation experience
+- Updated MANIFEST.in to include all project files
+- Improved installation process to copy workflows, docs, and configuration files
+
+### Added
+- Complete project scaffold during installation
+- Example workflows ready to use after installation
+- Documentation and configuration files included in package
+
 ## v0.2.27 - Nov 23, 2024
 
 ### Changed

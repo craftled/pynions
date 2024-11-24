@@ -5,7 +5,7 @@ Built for automating marketing tasks without the bloat.
 
 from pynions.core import Plugin, Workflow, WorkflowStep, Config, DataStore, Worker
 
-__version__ = "0.2.27"
+__version__ = "0.2.28"
 
 __all__ = [
     # Core components

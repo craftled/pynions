@@ -1,5 +1,31 @@
 include README.md
 include LICENSE
 include requirements.txt
-recursive-include pynions/config *.json
-recursive-include docs *.md
+include .env.example
+include pynions.example.json
+include pytest.ini
+
+# Documentation
+recursive-include docs *
+
+# Core package files
+recursive-include pynions *
+
+# Example workflows
+recursive-include workflows *
+
+# Tests
+recursive-include tests *
+
+# Data directory structure
+recursive-include data *
+
+# Exclude development files
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .DS_Store
+global-exclude .env
+global-exclude *.egg-info
+global-exclude .git*
+global-exclude .pytest_cache
+global-exclude htmlcov
