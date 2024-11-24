@@ -1,12 +1,30 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-23"
+updatedAt: "2024-11-24"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
-## v0.2.28 - 2024-03-21
+## v0.2.30 - Nov 24, 2024
+
+### Changed
+- Updated version number in setup.py and `__init__.py`
+
+## v0.2.29 - Nov 24, 2024
+
+### Changed
+- Updated package installation to include complete project structure
+- Modified setup.py to create WordPress-like installation experience
+- Updated MANIFEST.in to include all project files
+- Improved installation process to copy workflows, docs, and configuration files
+
+### Added
+- Complete project scaffold during installation
+- Example workflows ready to use after installation
+- Documentation and configuration files included in package
+
+## v0.2.28 - Nov 24, 2024
 
 ### Changed
 - Updated package installation to include complete project structure

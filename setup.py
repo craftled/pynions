@@ -66,7 +66,7 @@ class PostInstallCommand(install):
 
 setup(
     name="pynions",
-    version="0.2.28",
+    version="0.2.30",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple marketing automation framework",
@@ -74,6 +74,27 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/craftled/pynions",
     packages=find_namespace_packages(include=["pynions", "pynions.*"]),
+    package_data={
+        "pynions": [
+            "../workflows/*",
+            "../docs/*",
+            "../docs/**/*",
+            "../tests/*",
+            "../data/*",
+            "../.env.example",
+            "../pynions.example.json",
+            "../README.md",
+            "../requirements.txt",
+            "../pytest.ini"
+        ],
+    },
+    data_files=[
+        (".", [".env.example", "pynions.example.json", "README.md", "requirements.txt", "pytest.ini"]),
+        ("workflows", ["workflows/example_workflow.py", "workflows/content_analysis_workflow.py", "workflows/research_workflow.py", "workflows/alternatives_writer.py"]),
+        ("docs", [f"docs/{f}" for f in ["changelog.md", "configuration.md", "data-organization.md", "debugging.md", "index.md", "installation.md", "nav.json", "plugins.md", "project-structure.md", "quickstart.md", "testing.md", "workers.md", "workflows.md"]]),
+        ("data", ["data/air.md"]),
+        ("tests", ["tests/test_config.py"])
+    ],
     install_requires=requirements,
     cmdclass={
         "install": PostInstallCommand,
