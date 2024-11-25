@@ -4,13 +4,13 @@ Something like Zapier/n8n but for local machines.
 
 ## Key Features
 
-- 🚀 Start small, ship fast
-- 🔌 Easy API connections to your existing tools
-- 🤖 AI-first but not AI-only
-- 📦 Zero bloat, minimal dependencies
-- 🛠 Built for real marketing workflows
-- ⚡ Quick to prototype and iterate
-- 🌐 Local-first, no cloud dependencies
+- Start small, ship fast
+- Easy API connections to your existing tools
+- AI-first but not AI-only
+- Zero bloat, minimal dependencies
+- Built for real marketing workflows
+- Quick to prototype and iterate
+- Local-first, no cloud dependencies
 
 ## Technology
 

@@ -22,27 +22,27 @@ class PostInstallCommand(install):
 
         # Get package directory
         pkg_dir = Path(__file__).parent
-        
+
         # Get installation directory (where user ran pip install)
         install_dir = Path.cwd()
-        
+
         # Files to copy
-        core_dirs = ['pynions', 'workflows', 'docs', 'tests', 'data']
+        core_dirs = ["pynions", "workflows", "docs", "tests", "data"]
         config_files = [
-            ('.env.example', '.env'),
-            ('pynions.example.json', 'pynions.json'),
-            ('README.md', 'README.md'),
-            ('requirements.txt', 'requirements.txt'),
-            ('pytest.ini', 'pytest.ini')
+            (".env.example", ".env"),
+            ("pynions.example.json", "pynions.json"),
+            ("README.md", "README.md"),
+            ("requirements.txt", "requirements.txt"),
+            ("pytest.ini", "pytest.ini"),
         ]
-        
+
         # Copy core directories
         for dir_name in core_dirs:
             src_dir = pkg_dir / dir_name
             dst_dir = install_dir / dir_name
             if src_dir.exists() and not dst_dir.exists():
                 shutil.copytree(src_dir, dst_dir)
-        
+
         # Copy config files
         for src_name, dst_name in config_files:
             src = pkg_dir / src_name
@@ -66,7 +66,7 @@ class PostInstallCommand(install):
 
 setup(
     name="pynions",
-    version="0.2.30",
+    version="0.2.31",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple marketing automation framework",
@@ -85,15 +85,52 @@ setup(
             "../pynions.example.json",
             "../README.md",
             "../requirements.txt",
-            "../pytest.ini"
+            "../pytest.ini",
         ],
     },
     data_files=[
-        (".", [".env.example", "pynions.example.json", "README.md", "requirements.txt", "pytest.ini"]),
-        ("workflows", ["workflows/example_workflow.py", "workflows/content_analysis_workflow.py", "workflows/research_workflow.py", "workflows/alternatives_writer.py"]),
-        ("docs", [f"docs/{f}" for f in ["changelog.md", "configuration.md", "data-organization.md", "debugging.md", "index.md", "installation.md", "nav.json", "plugins.md", "project-structure.md", "quickstart.md", "testing.md", "workers.md", "workflows.md"]]),
-        ("data", ["data/air.md"]),
-        ("tests", ["tests/test_config.py"])
+        (
+            ".",
+            [
+                ".env.example",
+                "pynions.example.json",
+                "README.md",
+                "requirements.txt",
+                "pytest.ini",
+            ],
+        ),
+        (
+            "workflows",
+            [
+                "workflows/example_workflow.py",
+                "workflows/content_analysis_workflow.py",
+                "workflows/research_workflow.py",
+                "workflows/alternatives_writer.py",
+            ],
+        ),
+        (
+            "docs",
+            [
+                f"docs/{f}"
+                for f in [
+                    "changelog.md",
+                    "configuration.md",
+                    "data-organization.md",
+                    "debugging.md",
+                    "index.md",
+                    "installation.md",
+                    "nav.json",
+                    "plugins.md",
+                    "project-structure.md",
+                    "quickstart.md",
+                    "testing.md",
+                    "workers.md",
+                    "workflows.md",
+                ]
+            ],
+        ),
+        ("data", []),
+        ("tests", ["tests/test_config.py"]),
     ],
     install_requires=requirements,
     cmdclass={

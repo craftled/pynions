@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import json
 from typing import Any, Dict
 
+
 class Config:
     """Minimal configuration management"""
 
@@ -29,7 +30,12 @@ class Config:
                 self._settings.update(json.load(f))
 
     def get(self, key: str, default: Any = None) -> Any:
-        """Get a configuration value"""
+        """Get a configuration value from env or settings"""
+        # First check environment variables
+        env_value = os.getenv(key)
+        if env_value is not None:
+            return env_value
+        # Then check settings dictionary
         return self._settings.get(key, default)
 
     def set(self, key: str, value: Any) -> None:
@@ -56,6 +62,7 @@ class Config:
         config_path = root_dir / "pynions.json"
 
         self.load(env_path, config_path)
+
 
 # Global instance
 config = Config()

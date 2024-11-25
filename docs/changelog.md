@@ -1,25 +1,52 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-24"
+updatedAt: "2024-11-25"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
+## v0.2.31 - Nov 25, 2024
+
+### Fixed
+
+- Environment variable handling in Config class
+  - Added proper os.getenv() check in config.get()
+  - Fixed API key loading from .env files
+  - Improved error messages for missing keys
+  - Maintained backward compatibility
+
+### Changed
+
+- Enhanced configuration management
+  - Simplified environment variable access
+  - Improved error handling for missing API keys
+  - Added better debugging support
+  - Updated documentation with clear examples
+
+### Documentation
+
+- Updated debugging guide with environment troubleshooting
+- Added clear examples for API key configuration
+- Improved error message documentation
+
 ## v0.2.30 - Nov 24, 2024
 
 ### Changed
+
 - Updated version number in setup.py and `__init__.py`
 
 ## v0.2.29 - Nov 24, 2024
 
 ### Changed
+
 - Updated package installation to include complete project structure
 - Modified setup.py to create WordPress-like installation experience
 - Updated MANIFEST.in to include all project files
 - Improved installation process to copy workflows, docs, and configuration files
 
 ### Added
+
 - Complete project scaffold during installation
 - Example workflows ready to use after installation
 - Documentation and configuration files included in package
@@ -27,12 +54,14 @@ kind: "detailed"
 ## v0.2.28 - Nov 24, 2024
 
 ### Changed
+
 - Updated package installation to include complete project structure
 - Modified setup.py to create WordPress-like installation experience
 - Updated MANIFEST.in to include all project files
 - Improved installation process to copy workflows, docs, and configuration files
 
 ### Added
+
 - Complete project scaffold during installation
 - Example workflows ready to use after installation
 - Documentation and configuration files included in package
@@ -40,6 +69,7 @@ kind: "detailed"
 ## v0.2.27 - Nov 23, 2024
 
 ### Changed
+
 - Enhanced configuration management
   - Moved `.env` and `pynions.json` to project root
   - Removed nested config directory structure
@@ -60,6 +90,7 @@ kind: "detailed"
 - Simplified example workflow code
 
 ### Added
+
 - New configuration methods:
   - `set()` for runtime configuration
   - `clear()` for resetting state
@@ -68,21 +99,25 @@ kind: "detailed"
 - Type hints for better IDE support
 
 ### Fixed
+
 - Environment variable handling in tests
 - Configuration inheritance issues
 - Missing type hints
 - Inconsistent model defaults across codebase
 
 ### Security
+
 - Improved API key management
 - Enhanced environment variable handling
 
 ### Performance
+
 - Standardized on gpt-4o-mini for better cost-performance ratio
 
 ## v0.2.26 - Nov 22, 2024
 
 ### Changed
+
 - Simplified configuration management system
 - Moved configuration files to project root
 - Removed nested config folder structure
@@ -91,21 +126,25 @@ kind: "detailed"
 - Enhanced error handling and output formatting
 
 ### Added
+
 - Root-level `.env` for API keys
 - Root-level `pynions.json` for settings
 - Clearer setup instructions in installation
 - Example file copying during installation
 
 ### Removed
+
 - Complex nested configuration system
 - ~/.pynions directory requirement
 - Outdated example configurations
 
 ### Security
+
 - Improved API key management
 - Enhanced environment variable handling
 
 ### Dependencies
+
 - Updated minimum Python version to 3.8+
 
 ## v0.2.25 - Nov 20, 2024
