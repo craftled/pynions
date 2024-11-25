@@ -4,12 +4,16 @@ include requirements.txt
 include .env.example
 include pynions.example.json
 include pytest.ini
+include pyproject.toml
 
 # Documentation
 recursive-include docs *
 
 # Core package files
 recursive-include pynions *
+recursive-include pynions/core *
+recursive-include pynions/plugins *
+recursive-include pynions/tests *
 
 # Example workflows
 recursive-include workflows *

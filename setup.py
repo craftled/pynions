@@ -66,21 +66,21 @@ class PostInstallCommand(install):
 
 setup(
     name="pynions",
-    version="0.2.31",
+    version="0.2.32",
     author="Tomas Laurinavicius",
     author_email="tom@pynions.com",
     description="Simple marketing automation framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/craftled/pynions",
-    packages=find_namespace_packages(include=["pynions", "pynions.*"]),
+    packages=find_namespace_packages(include=["pynions*"]),
     package_data={
         "pynions": [
-            "../workflows/*",
-            "../docs/*",
+            "**/*",  # Include all files under pynions
+            "../workflows/**/*",
             "../docs/**/*",
-            "../tests/*",
-            "../data/*",
+            "../tests/**/*",
+            "../data/**/*",
             "../.env.example",
             "../pynions.example.json",
             "../README.md",
@@ -97,6 +97,19 @@ setup(
                 "README.md",
                 "requirements.txt",
                 "pytest.ini",
+            ],
+        ),
+        (
+            "pynions",
+            [
+                f"pynions/{f}"
+                for f in [
+                    "__init__.py",
+                    "core/__init__.py",
+                    "plugins/__init__.py",
+                    "tests/__init__.py",
+                    # Add all other Python files
+                ]
             ],
         ),
         (

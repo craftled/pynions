@@ -6,6 +6,24 @@ summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
 
+## v0.2.32 - Nov 25, 2024
+
+### Fixed
+
+- Package installation issues
+  - Fixed missing pynions folder contents
+  - Ensured all development files are included
+  - Improved file copying during installation
+  - Added proper package data inclusion
+
+### Changed
+
+- Updated package structure
+  - Reorganized file inclusion in setup.py
+  - Enhanced MANIFEST.in configuration
+  - Improved development file distribution
+  - Maintained backward compatibility
+
 ## v0.2.31 - Nov 25, 2024
 
 ### Fixed
