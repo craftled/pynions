@@ -1,10 +1,16 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-11-25"
+updatedAt: "2024-02-15"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.33 - Feb 15, 2025
+
+### Changed
+
+- Minor documentation updates
 
 ## v0.2.32 - Nov 25, 2024
 
