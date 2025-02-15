@@ -1,7 +1,7 @@
 ---
 title: "Quickstart"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-09"
+updatedAt: "2025-02-15"
 summary: "Get started with Pynions in 60 seconds - perfect for marketers!"
 kind: "detailed"
 ---

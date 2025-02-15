@@ -1,7 +1,7 @@
 ---
 title: "Project Structure"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-09"
+updatedAt: "2025-02-15"
 summary: "Simple guide to Pynions project organization"
 kind: "detailed"
 ---
