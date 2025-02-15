@@ -126,5 +126,3 @@ my-pynions/
 │
 └── README.md                   # Documentation
 ```
-
-Need more examples? Check our [example workflows](https://docs.pynions.dev/examples) or join our [Discord](https://discord.gg/pynions)!

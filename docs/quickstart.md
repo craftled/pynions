@@ -117,10 +117,8 @@ python workflows/content_ideas.py
    - SEO optimization
 
 3. **Read the Docs**
-   Visit our [documentation](https://docs.pynions.dev) for more examples and guides.
+   Visit [Pynions documentation](https://pynions.com/docs) for more examples and guides.
 
 ## Need Help?
-
-- Join our [Discord community](https://discord.gg/pynions)
-- Check [common issues](https://docs.pynions.dev/debugging)
-- Email us: support@pynions.dev
+- Check [common issues](https://pynions.com/docs/debugging)
+- Email us: support@pynions.com
