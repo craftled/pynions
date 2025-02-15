@@ -1,20 +1,22 @@
 ---
 title: "Workers"
 publishedAt: "2024-11-10"
-updatedAt: "2024-11-10"
+updatedAt: "2025-02-15"
 summary: "Standalone task executors that combine multiple plugins for specific data extraction needs."
 kind: "detailed"
 ---
 
 ## Overview
-Workers are specialized task executors that combine multiple plugins to perform specific data extraction and analysis tasks. Unlike workflows that chain multiple steps together, workers are focused on single, well-defined tasks that require coordination between multiple plugins.
+Workers are specialized task executors that combine multiple plugins to perform specific data extraction and analysis tasks.
+
+Unlike workflows that chain multiple steps together, workers are focused on single, well-defined tasks that require coordination between multiple plugins.
 
 ## Features
-- 🎯 Task-specific implementations
-- 🔄 Automated data extraction
-- 📊 Structured output
-- 🛠 Plugin integration
-- ⚡ Efficient processing
+- Task-specific implementations
+- Automated data extraction
+- Structured output
+- Plugin integration
+- Efficient processing
 
 ## Available Workers
 
@@ -100,4 +102,4 @@ pass
 - Data validation errors
 - Network timeouts
 
-Need help? Check our [Debugging Guide](debugging.md) for solutions.
+Need help? Check our [debugging guide](https://pynions.com/docs/debugging) for solutions.
