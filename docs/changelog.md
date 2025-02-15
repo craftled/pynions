@@ -1,7 +1,7 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2024-02-15"
+updatedAt: "2025-02-15"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
