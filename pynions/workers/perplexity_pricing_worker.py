@@ -67,7 +67,8 @@ class PerplexityPricingWorker(Worker):
     def validate_pricing_data(self, data: Dict) -> bool:
         """Validate the structure and content of pricing data"""
         try:
-            print(f"{CYAN}🔍 Validating pricing data structure...{RESET}")
+            print(f"{CYAN}🔍 Validating pricing data structure and sources...{RESET}")
+
             # Check required top-level keys
             required_keys = ["plans", "pricing", "currency", "sources"]
             if not all(key in data for key in required_keys):
@@ -88,24 +89,42 @@ class PerplexityPricingWorker(Worker):
                 print(f"{RED}❌ Invalid pricing structure{RESET}")
                 return False
 
-            # Check each plan has required structure
+            # Check each plan has required structure and source verification
             for plan_name in data["plans"]:
                 if plan_name not in pricing:
                     print(f"{RED}❌ Missing pricing data for plan: {plan_name}{RESET}")
                     return False
+
                 plan = pricing[plan_name]
                 if not isinstance(plan, dict):
                     print(f"{RED}❌ Invalid plan structure for: {plan_name}{RESET}")
                     return False
 
-                # At least one price type should be present
-                if not any(key in plan for key in ["monthly_price", "annual_price"]):
-                    print(
-                        f"{RED}❌ No pricing information found for plan: {plan_name}{RESET}"
-                    )
-                    return False
+                # Validate features have source information
+                if "features" in plan:
+                    for feature in plan["features"]:
+                        if not all(
+                            key in feature
+                            for key in ["name", "source_url", "source_quote"]
+                        ):
+                            print(
+                                f"{RED}❌ Missing source verification for feature in plan: {plan_name}{RESET}"
+                            )
+                            return False
 
-            # Validate sources structure
+                # Validate limits have source information
+                if "limits" in plan:
+                    for limit_name, limit_data in plan["limits"].items():
+                        if not all(
+                            key in limit_data
+                            for key in ["value", "source_url", "source_quote"]
+                        ):
+                            print(
+                                f"{RED}❌ Missing source verification for limit in plan: {plan_name}{RESET}"
+                            )
+                            return False
+
+            # Validate sources structure with enhanced verification
             sources = data["sources"]
             if not isinstance(sources, dict):
                 print(f"{RED}❌ Invalid sources structure{RESET}")
@@ -117,35 +136,47 @@ class PerplexityPricingWorker(Worker):
                 return False
 
             primary = sources["primary"]
-            if (
-                not isinstance(primary, dict)
-                or "url" not in primary
-                or "last_checked" not in primary
+            if not all(
+                key in primary for key in ["url", "last_checked", "content_hash"]
             ):
-                print(f"{RED}❌ Invalid primary source structure{RESET}")
+                print(
+                    f"{RED}❌ Invalid primary source structure - missing verification data{RESET}"
+                )
                 return False
 
-            # Check additional sources
+            # Verify all sources are official
             if "additional" in sources:
                 if not isinstance(sources["additional"], list):
                     print(f"{RED}❌ Invalid additional sources structure{RESET}")
                     return False
+
                 for idx, source in enumerate(sources["additional"]):
-                    if (
-                        not isinstance(source, dict)
-                        or "url" not in source
-                        or "type" not in source
+                    if not all(
+                        key in source
+                        for key in [
+                            "url",
+                            "type",
+                            "section",
+                            "last_checked",
+                            "content_hash",
+                        ]
                     ):
                         print(
                             f"{RED}❌ Invalid structure for additional source {idx + 1}{RESET}"
                         )
                         return False
 
-            print(f"{GREEN}✅ Pricing data structure is valid{RESET}")
+                    if source["type"] != "official":
+                        print(
+                            f"{RED}❌ Non-official source detected: {source['url']}{RESET}"
+                        )
+                        return False
+
+            print(f"{GREEN}✅ Pricing data structure and sources verified{RESET}")
             print(f"{BLUE}🔗 Primary source: {sources['primary']['url']}{RESET}")
             if sources.get("additional"):
                 print(
-                    f"{BLUE}📚 Additional sources: {len(sources['additional'])}{RESET}"
+                    f"{BLUE}📚 Additional official sources: {len(sources['additional'])}{RESET}"
                 )
 
             return True
@@ -172,46 +203,63 @@ class PerplexityPricingWorker(Worker):
             messages = [
                 {
                     "role": "system",
-                    "content": """Extract pricing information from the company's website and return in JSON format.
-                    Focus on:
-                    1. Find official pricing pages (direct URLs)
-                    2. Extract pricing from first-party sources first
-                    3. Cross-reference with other trusted sources
-                    4. Current pricing plans and tiers
-                    5. Monthly and annual pricing per plan
-                    6. Key features and limits
-                    7. Only include explicitly stated information
+                    "content": """Extract pricing information from the company's website with strict first-party verification.
 
-                    Output Format:
-                    {
-                        "plans": ["plan names"],
-                        "pricing": {
-                            "plan_name": {
-                                "monthly_price": number_or_string,
-                                "annual_price": number_or_string,
-                                "features": ["feature 1", "feature 2"],
-                                "limits": {"limit_name": "value"}
-                            }
-                        },
-                        "currency": "USD",
-                        "sources": {
-                            "primary": {
-                                "url": "direct link to official pricing page",
-                                "last_checked": "YYYY-MM-DD"
-                            },
-                            "additional": [
-                                {
-                                    "url": "link to additional pricing page or source",
-                                    "type": "official|third_party",
-                                    "last_checked": "YYYY-MM-DD"
-                                }
-                            ]
-                        }
-                    }""",
+Requirements:
+1. ONLY use official company sources (help center, docs, pricing pages)
+2. For each fact or number, include the exact source URL and relevant quote
+3. Cross-reference all information within official documentation
+4. Note any conditions or exceptions that apply to limits/features
+5. Include full context for any limitations or restrictions
+6. Maintain precise wording from source material
+
+Output Format:
+{
+    "plans": ["plan names"],
+    "pricing": {
+        "plan_name": {
+            "monthly_price": number_or_string,
+            "annual_price": number_or_string,
+            "features": [
+                {
+                    "name": "feature name",
+                    "description": "exact feature description from source",
+                    "source_url": "direct link to feature documentation",
+                    "source_quote": "exact quote from documentation"
+                }
+            ],
+            "limits": {
+                "limit_name": {
+                    "value": "exact limit value",
+                    "conditions": ["any conditions that apply"],
+                    "source_url": "direct link to limit documentation",
+                    "source_quote": "exact quote describing the limit"
+                }
+            }
+        }
+    },
+    "currency": "USD",
+    "sources": {
+        "primary": {
+            "url": "direct link to official pricing page",
+            "last_checked": "YYYY-MM-DD",
+            "content_hash": "hash of page content for verification"
+        },
+        "additional": [
+            {
+                "url": "link to official documentation page",
+                "type": "official",
+                "section": "specific section or heading",
+                "last_checked": "YYYY-MM-DD",
+                "content_hash": "hash of page content"
+            }
+        ]
+    }
+}""",
                 },
                 {
                     "role": "user",
-                    "content": f"Research and analyze the current pricing structure for {domain}. Find the official pricing page first, then cross-reference with other sources. Return the data in the specified JSON format with all source URLs.",
+                    "content": f"Research and analyze the current pricing structure for {domain}. ONLY use official company sources (pricing pages, help center, documentation). For each fact, feature, or limit, include the exact source URL and quote. Return the data in the specified JSON format.",
                 },
             ]
 

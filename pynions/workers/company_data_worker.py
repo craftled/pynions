@@ -178,7 +178,7 @@ if __name__ == "__main__":
         worker = CompanyDataWorker()  # Create worker instance
         test_cases = [
             {"domain": "klaviyo.com", "data_type": "pricing"},
-            {"domain": "mailchimp.com", "data_type": "features"},
+            {"domain": "notion.so", "data_type": "features"},
             {"domain": "hubspot.com", "data_type": "integrations"},
             {"domain": "resend.com", "data_type": "about"},
         ]
