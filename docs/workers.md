@@ -1,7 +1,7 @@
 ---
 title: "Workers"
 publishedAt: "2024-11-10"
-updatedAt: "2025-02-15"
+updatedAt: "2025-02-17"
 summary: "Standalone task executors that combine multiple plugins for specific data extraction needs."
 kind: "detailed"
 ---
@@ -58,6 +58,65 @@ print(json.dumps(result, indent=2))
 }
 ```
 
+### PerplexityPricingWorker
+Advanced pricing data extraction using Perplexity AI's research capabilities:
+1. **Direct URL Analysis**: Finds and validates official pricing pages
+2. **First-Party Data**: Prioritizes data from official sources
+3. **Cross-Reference**: Validates with trusted third-party sources
+4. **Structured Output**: Clean, validated JSON with source tracking
+
+#### Usage
+
+```python
+from pynions.workers import PerplexityPricingWorker
+
+async def analyze_pricing():
+    worker = PerplexityPricingWorker()
+    result = await worker.execute({"domain": "example.com"})
+    print(json.dumps(result, indent=2))
+```
+
+#### Output Structure
+
+```json
+{
+    "domain": "example.com",
+    "pricing": {
+        "plans": ["plan names"],
+        "pricing": {
+            "plan_name": {
+                "monthly_price": number_or_string,
+                "annual_price": number_or_string,
+                "features": ["feature list"],
+                "limits": {"limit_name": "value"}
+            }
+        },
+        "currency": "USD",
+        "sources": {
+            "primary": {
+                "url": "official pricing page URL",
+                "last_checked": "YYYY-MM-DD"
+            },
+            "additional": [
+                {
+                    "url": "additional source URL",
+                    "type": "official|third_party",
+                    "last_checked": "YYYY-MM-DD"
+                }
+            ]
+        }
+    },
+    "metadata": {
+        "timestamp": unix_timestamp,
+        "model": "model_name",
+        "token_usage": {
+            "prompt_tokens": number,
+            "completion_tokens": number,
+            "total_tokens": number
+        }
+    }
+}
+```
 
 ## Creating Custom Workers
 

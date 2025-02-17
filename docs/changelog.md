@@ -1,10 +1,29 @@
 ---
 title: "Changelog"
 publishedAt: "2024-11-03"
-updatedAt: "2025-02-15"
+updatedAt: "2025-02-17"
 summary: "Updates, bug fixes and improvements."
 kind: "detailed"
 ---
+
+## v0.2.34 - Feb 17, 2025
+
+### Added
+
+- New Perplexity AI integration
+  - Added PerplexityAPI plugin for advanced research
+  - Added PerplexityPricingWorker for enhanced pricing analysis
+  - Comprehensive test suite for Perplexity functionality
+  - Source URL tracking and validation
+  - First-party data prioritization
+
+### Changed
+
+- Enhanced pricing research capabilities
+  - Added source validation and tracking
+  - Improved data structure validation
+  - Added support for multiple pricing sources
+  - Enhanced progress feedback with colored output
 
 ## v0.2.33 - Feb 15, 2025
 

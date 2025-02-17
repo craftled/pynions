@@ -1,7 +1,7 @@
 ---
 title: "Plugin Development"
 publishedAt: "2024-10-30"
-updatedAt: "2024-11-08"
+updatedAt: "2025-02-17"
 summary: "Learn how to create custom plugins to extend Pynions with new capabilities and integrate additional tools into your marketing automation workflows."
 kind: "detailed"
 ---
@@ -108,6 +108,45 @@ result = await frase.execute({
 "serp_urls": ["url1", "url2"]
 })
 ```
+
+### 6. Perplexity Plugin (AI Research & Analysis)
+
+```python
+from pynions.plugins.perplexity import PerplexityAPI
+
+perplexity = PerplexityAPI({
+    "model": "sonar-reasoning-pro",  # Default model
+    "temperature": 0.2,              # Lower for more focused responses
+    "max_tokens": 2000,              # Adjust based on needs
+    "return_related_questions": False # Optional feature
+})
+
+# Execute research query
+response = await perplexity.execute({
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a research assistant. Provide factual information."
+        },
+        {
+            "role": "user",
+            "content": "Research query here"
+        }
+    ]
+})
+
+# Response includes:
+# - Choices with generated content
+# - Citations from sources
+# - Token usage statistics
+```
+
+Key features:
+- Real-time web research capabilities
+- Source citations and references
+- Structured data output support
+- Temperature and token control
+- Multiple model options
 
 ## Creating Custom Plugins
 
