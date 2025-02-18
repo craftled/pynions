@@ -73,6 +73,6 @@ if __name__ == "__main__":
 
     async def test():
         worker = PerplexityIntegrationsWorker()
-        result = await worker.execute({"domain": "notion.so"})
+        result = await worker.execute({"domain": "rewardful.com"})
 
     asyncio.run(test())

@@ -47,9 +47,28 @@ class PerplexityAboutWorker(Worker):
                 {
                     "messages": [
                         {
+                            "role": "system",
+                            "content": """You are a company research expert. When analyzing companies:
+1. Prioritize CURRENT information over historical data
+2. Verify leadership information from the most recent sources
+3. Note any acquisitions or ownership changes
+4. Check for recent press releases about leadership changes
+5. Cross-reference information across multiple sources
+6. Indicate when information might be outdated""",
+                        },
+                        {
                             "role": "user",
-                            "content": f"What is the company background and key information about {domain}? Include company history, mission, key team members, notable achievements, and funding if available. Only use official sources and recent reliable news.",
-                        }
+                            "content": f"""Research current company information for {domain}. Focus on:
+
+1. Current ownership status (independent/acquired/public)
+2. Current leadership team (CEO, key executives)
+3. Company history and major milestones
+4. Recent developments (last 12 months)
+5. Mission and values
+6. Notable achievements and metrics
+
+Prioritize official sources (company website, press releases) and recent news. If you find conflicting information about leadership or ownership, note this and provide dates for the information.""",
+                        },
                     ]
                 }
             )
@@ -73,6 +92,6 @@ if __name__ == "__main__":
 
     async def test():
         worker = PerplexityAboutWorker()
-        result = await worker.execute({"domain": "notion.so"})
+        result = await worker.execute({"domain": "rewardful.com"})
 
     asyncio.run(test())
