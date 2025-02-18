@@ -2,60 +2,55 @@
 title: "Workers"
 publishedAt: "2024-11-10"
 updatedAt: "2025-02-17"
-summary: "Standalone task executors that combine multiple plugins for specific data extraction needs."
+summary: "Standalone task executors that perform single, focused operations using plugins."
 kind: "detailed"
 ---
 
 ## Overview
-Workers are specialized task executors that combine multiple plugins to perform specific data extraction and analysis tasks.
+Workers are specialized task executors that follow the single responsibility principle. Each worker is designed to do one thing and do it well, making them reliable, maintainable, and easily testable.
 
-Unlike workflows that chain multiple steps together, workers are focused on single, well-defined tasks that require coordination between multiple plugins.
+Unlike workflows that chain multiple steps together, workers are focused on a single, specific task. This makes them:
+- More reliable (fewer points of failure)
+- Easier to test and debug
+- More maintainable over time
+- Reusable across different workflows
 
-## Features
-- Task-specific implementations
-- Automated data extraction
-- Structured output
-- Plugin integration
-- Efficient processing
+## Key Principles
+1. **Single Responsibility**
+   - Each worker does exactly one thing
+   - Clear, focused purpose
+   - No task overlap between workers
+
+2. **Independence**
+   - Workers operate independently
+   - No direct dependencies on other workers
+   - Self-contained functionality
+
+3. **Reliability**
+   - Focused scope means fewer failure points
+   - Easier to test and validate
+   - Clear success/failure conditions
+
+4. **Reusability**
+   - Can be used in multiple workflows
+   - Consistent interface
+   - Well-defined inputs and outputs
 
 ## Available Workers
 
-### PricingResearchWorker
-Extracts structured pricing data from any SaaS website by combining:
-1. **Serper Web Search**: Finds pricing pages
-2. **Jina AI Reader**: Extracts clean content
-3. **LiteLLM**: Analyzes and structures pricing data
+### PerplexityFeaturesWorker
+Extracts feature information using Perplexity AI:
+- Single focus: Feature extraction
+- Uses official sources
+- Saves raw responses for verification
 
 #### Usage
-
 ```python
-from pynions.workers import PricingResearchWorker
-async def analyze_pricing():
-worker = PricingResearchWorker()
-result = await worker.execute({"domain": "example.com"})
-print(json.dumps(result, indent=2))
-```
+from pynions.workers import PerplexityFeaturesWorker
 
-
-#### Output Structure
-
-```json
-{
-"domain": "example.com",
-"source": "https://example.com/pricing",
-"pricing": {
-"plans": ["plan names"],
-    "pricing": {
-        "plan_name": {
-            "monthly_price": 0.0,
-            "annual_price": 0.0,
-"features": ["feature list"],
-"limits": {"limit_type": "limit value"}
-}
-    },
-    "currency": "USD"
-    }
-}
+async def analyze_features():
+    worker = PerplexityFeaturesWorker()
+    result = await worker.execute({"domain": "example.com"})
 ```
 
 ### PerplexityPricingWorker
@@ -66,99 +61,58 @@ Advanced pricing data extraction using Perplexity AI's research capabilities:
 4. **Structured Output**: Clean, validated JSON with source tracking
 
 #### Usage
-
 ```python
 from pynions.workers import PerplexityPricingWorker
 
 async def analyze_pricing():
     worker = PerplexityPricingWorker()
     result = await worker.execute({"domain": "example.com"})
-    print(json.dumps(result, indent=2))
-```
-
-#### Output Structure
-
-```json
-{
-    "domain": "example.com",
-    "pricing": {
-        "plans": ["plan names"],
-        "pricing": {
-            "plan_name": {
-                "monthly_price": number_or_string,
-                "annual_price": number_or_string,
-                "features": ["feature list"],
-                "limits": {"limit_name": "value"}
-            }
-        },
-        "currency": "USD",
-        "sources": {
-            "primary": {
-                "url": "official pricing page URL",
-                "last_checked": "YYYY-MM-DD"
-            },
-            "additional": [
-                {
-                    "url": "additional source URL",
-                    "type": "official|third_party",
-                    "last_checked": "YYYY-MM-DD"
-                }
-            ]
-        }
-    },
-    "metadata": {
-        "timestamp": unix_timestamp,
-        "model": "model_name",
-        "token_usage": {
-            "prompt_tokens": number,
-            "completion_tokens": number,
-            "total_tokens": number
-        }
-    }
-}
 ```
 
 ## Creating Custom Workers
 
 1. Inherit from base Worker class
 ```python
-from pynions.core import Worker
-class CustomWorker(Worker):
-def init(self):
-# Initialize required plugins
-self.plugin1 = Plugin1()
-self.plugin2 = Plugin2()
-async def execute(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
-# Implement your worker logic
-pass
+from pynions import Worker
 
+class CustomWorker(Worker):
+    """Worker with a single, focused purpose"""
+    
+    def __init__(self):
+        # Initialize required plugin
+        self.plugin = Plugin()
+
+    async def execute(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
+        # Implement single focused task
+        pass
+```
 
 ## Best Practices
 
-1. **Plugin Integration**
-   - Initialize plugins in constructor
-   - Handle plugin errors gracefully
-   - Validate plugin responses
+1. **Single Purpose**
+   - One clear task per worker
+   - Avoid feature creep
+   - Clear documentation of purpose
 
-2. **Data Processing**
-   - Use structured input/output
-   - Validate extracted data
-   - Clean and normalize output
+2. **Error Handling**
+   - Handle errors specific to the task
+   - Clear error messages
+   - Proper error propagation
 
-3. **Error Handling**
-   - Handle network timeouts
-   - Validate input parameters
-   - Provide meaningful error messages
+3. **Data Management**
+   - Save raw responses
+   - Clear data structure
+   - Proper file organization
 
-4. **Performance**
-   - Minimize API calls
-   - Process only required data
-   - Use efficient data structures
+4. **Testing**
+   - Test single responsibility
+   - Verify error cases
+   - Validate output format
 
 ## Common Issues
-- API rate limits
-- Content extraction failures
-- Data validation errors
-- Network timeouts
+- Scope creep (trying to do too much)
+- Unclear responsibility boundaries
+- Insufficient error handling
+- Poor data organization
 
 Need help? Check our [debugging guide](https://pynions.com/docs/debugging) for solutions.
